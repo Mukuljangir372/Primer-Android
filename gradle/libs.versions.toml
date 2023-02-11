@@ -1,0 +1,165 @@
+[versions]
+android_compile_sdk = "33"
+android_target_sdk = "33"
+android_min_sdk = "24"
+android_app_version_name = "1.0"
+android_app_version_code = "1"
+
+gradle = "7.4.1"
+kotlin = "1.7.10"
+koin_androidx = "2.1.6"
+androidx_core_ktx = "1.9.0"
+androidx_appcompat = "1.5.1"
+androidx_activity = "1.6.1"
+androidx_fragment = "1.5.4"
+androidx_lifecycle = "2.5.1"
+androidx_lifecycle_extensions = "2.2.0"
+androidx_datastore = "1.1.0-alpha01"
+androidx_room = "2.4.3"
+androidx_paging = "3.1.1"
+androidx_paging_compose = "1.0.0-alpha16"
+androidx_navigation = "2.5.3"
+androidx_constraint_layout = "2.1.4"
+androidx_arch_testing = "2.1.0"
+android_coroutines = "1.6.4"
+android_retrofit = "2.9.0"
+android_okhttp = "4.10.0"
+android_stetho = "1.5.1"
+android_aws = "2.17.1"
+android_material = "1.6.1"
+android_flexbox = "2.0.1"
+android_swiperefreshlayout = "1.0.0"
+android_shimmer = "0.5.0"
+junit = "4.13.2"
+android_junit = "1.1.3"
+android_test_runner = "1.2.0"
+robolectric = "4.9"
+mockito = "3.2.0"
+mockito_inline = "2.13.0"
+mockk = "1.13.2"
+mock_web_server = "4.10.0"
+truth = "1.1.3"
+timber = "4.7.1"
+androidx_macrobenchmark = "1.1.1"
+androidx_profile = "1.3.0-alpha02"
+android_compose = "1.2.1"
+android_compose_compiler = "1.3.0"
+android_compose_activity = "1.5.1"
+android_compose_coil = "2.2.1"
+android_compose_navigation = "2.5.1"
+android_custom_view = "1.2.0-alpha01"
+android_custom_view_container = "1.0.0"
+android_accompanist = "0.25.1"
+android_scogo_media_picker = "1.1.2"
+android_workmanager = "2.7.1"
+android_file_uploader = "4.5.1"
+glide = "4.13.2"
+okio = "3.2.0"
+
+[libraries]
+gradle = { module = "com.android.tools.build:gradle", version.ref = "gradle" }
+kotlin_gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+androidx_core_ktx = { module = "androidx.core:core-ktx", version.ref = "androidx_core_ktx" }
+androidx_activity_ktx = { module = "androidx.activity:activity-ktx", version.ref = "androidx_activity" }
+androidx_appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx_appcompat" }
+androidx_fragment_ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "androidx_fragment" }
+androidx_lifecycle_runtime_ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidx_lifecycle" }
+androidx_lifecycle_common = { module = "androidx.lifecycle:lifecycle-common-java8", version.ref = "androidx_lifecycle" }
+androidx_lifecycle_vm_ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "androidx_lifecycle" }
+androidx_lifecycle_extensions = { module = "androidx.lifecycle:lifecycle-extensions", version.ref = "androidx_lifecycle_extensions" }
+androidx_datastore_pref = { module = "androidx.datastore:datastore-preferences", version.ref = "androidx_datastore" }
+androidx_datastore = { module = "androidx.datastore:datastore", version.ref = "androidx_datastore" }
+androidx_room = { module = "androidx.room:room-runtime", version.ref = "androidx_room" }
+androidx_room_compiler = { module = "androidx.room:room-compiler", version.ref = "androidx_room" }
+androidx_room_ktx = { module = "androidx.room:room-ktx", version.ref = "androidx_room" }
+androidx_room_paging = { module = "androidx.room:room-paging", version.ref = "androidx_room" }
+androidx_paging = { module = "androidx.paging:paging-runtime-ktx", version.ref = "androidx_paging" }
+androidx_nav_fragment_ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "androidx_navigation" }
+androidx_nav_ui_ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "androidx_navigation" }
+androidx_constraint_layout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "androidx_constraint_layout" }
+androidx_arch_testing = { module = "androidx.arch.core:core-testing", version.ref = "androidx_arch_testing" }
+android_coroutines_core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "android_coroutines" }
+android_coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "android_coroutines" }
+android_coroutines_test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "android_coroutines" }
+android_koin_scope = { module = "org.koin:koin-androidx-scope", version.ref = "koin_androidx" }
+android_koin_viewmodel = { module = "org.koin:koin-androidx-viewmodel", version.ref = "koin_androidx" }
+android_koin_fragment = { module = "org.koin:koin-androidx-fragment", version.ref = "koin_androidx" }
+android_retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "android_retrofit" }
+android_retrofit_gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "android_retrofit" }
+android_retrofit_scalars = { module = "com.squareup.retrofit2:converter-scalars", version.ref = "android_retrofit" }
+android_okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "android_okhttp" }
+android_okhttp_logging_inter = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "android_okhttp" }
+android_stetho = { module = "com.facebook.stetho:stetho-okhttp3", version.ref = "android_stetho" }
+android_aws_logs = { module = "com.amazonaws:aws-android-sdk-logs", version.ref = "android_aws" }
+android_material = { module = "com.google.android.material:material", version.ref = "android_material" }
+android_flexbox = { module = "com.google.android:flexbox", version.ref = "android_flexbox" }
+android_swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "android_swiperefreshlayout" }
+android_shimmer = { module = "com.facebook.shimmer:shimmer", version.ref = "android_shimmer" }
+junit = { module = "junit:junit", version.ref = "junit" }
+androidx_junit = { module = "androidx.test.ext:junit", version.ref = "android_junit" }
+androidx_test_runner = { module = "androidx.test:runner", version.ref = "android_test_runner" }
+robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
+mockito = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockito" }
+mockito_android = { module = "org.mockito:mockito-android", version.ref = "mockito" }
+mockito_inline = { module = "org.mockito:mockito-inline", version.ref = "mockito_inline" }
+mock_android = { module = "io.mockk:mockk-android", version.ref = "mockk" }
+mock_agent = { module = "io.mockk:mockk-agent", version.ref = "mockk" }
+mock_web_server = { module = "com.squareup.okhttp3:mockwebserver", version.ref = "mock_web_server" }
+truth = { module = "com.google.truth:truth", version.ref = "truth" }
+timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
+androidx_macrobenchmark = { module = "androidx.benchmark:benchmark-macro-junit4", version.ref = "androidx_macrobenchmark" }
+androidx_profile = { module = "androidx.profileinstaller:profileinstaller", version.ref = "androidx_profile" }
+android_compose_ui = { module = "androidx.compose.ui:ui", version.ref = "android_compose" }
+android_compose_ui_util = { module = "androidx.compose.ui:ui-util", version.ref = "android_compose" }
+android_compose_activity = { module = "androidx.activity:activity-compose", version.ref = "android_compose_activity" }
+android_compose_material = { module = "androidx.compose.material:material", version.ref = "android_compose" }
+android_compose_material_icons = { module = "androidx.compose.material:material-icons-extended", version.ref = "android_compose" }
+android_compose_animation_graphics = { module = "androidx.compose.animation:animation-graphics", version.ref = "android_compose" }
+android_compose_preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "android_compose" }
+android_compose_tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "android_compose" }
+android_compose_coil = { module = "io.coil-kt:coil-compose", version.ref = "android_compose_coil" }
+android_compose_navigation = { module = "androidx.navigation:navigation-compose", version.ref = "android_compose_navigation" }
+android_custom_view = { module = "androidx.customview:customview", version.ref = "android_custom_view" }
+android_custom_view_container = { module = "androidx.customview:customview-poolingcontainer", version.ref = "android_custom_view_container" }
+android_compose_test_manifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "android_compose" }
+android_accompanist_permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "android_accompanist" }
+android_accompanist_system_ui = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "android_accompanist" }
+android_accompanist_pager = { module = "com.google.accompanist:accompanist-pager", version.ref = "android_accompanist" }
+android_compose_paging = { module = "androidx.paging:paging-compose", version.ref = "androidx_paging_compose" }
+android_scogo_media_picker = { module = "com.gitlab.scogo:scogo_media_picker_library", version.ref = "android_scogo_media_picker" }
+android_workmanager = { module = "androidx.work:work-runtime-ktx", version.ref = "android_workmanager" }
+android_file_uploader = { module = "net.gotev:uploadservice", version.ref = "android_file_uploader" }
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
+glide_compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "glide" }
+okio = { module = "com.squareup.okio:okio", version.ref = "okio" }
+
+[bundles]
+androidx_ktx = ["androidx_core_ktx", "androidx_activity_ktx", "androidx_fragment_ktx", "androidx_lifecycle_runtime_ktx", "androidx_lifecycle_common", "androidx_lifecycle_vm_ktx", "androidx_lifecycle_extensions"]
+androidx_datastore = ["androidx_datastore", "androidx_datastore_pref"]
+androidx_nav = ["androidx_nav_fragment_ktx", "androidx_nav_ui_ktx"]
+androidx_room = ["androidx_room", "androidx_room_ktx", "androidx_room_paging"]
+android_koin = ["android_koin_scope", "android_koin_viewmodel", "android_koin_fragment"]
+android_retrofit = ["android_retrofit", "android_retrofit_gson", "android_retrofit_scalars"]
+android_okhttp = ["android_okhttp", "android_okhttp_logging_inter"]
+android_coroutines = ["android_coroutines_core", "android_coroutines", "android_coroutines_test"]
+android_mockito = ["mockito", "mock_android", "mock_agent"]
+android_compose = ["android_compose_ui", "android_compose_ui_util", "android_compose_material", "android_compose_preview", "android_compose_activity", "android_compose_animation_graphics", "android_compose_navigation"]
+android_compose_debug = ["android_compose_tooling", "android_compose_test_manifest", "android_custom_view", "android_custom_view_container"]
+android_accompanist = ["android_accompanist_permissions", "android_accompanist_system_ui", "android_accompanist_pager"]
+
+[plugins]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
