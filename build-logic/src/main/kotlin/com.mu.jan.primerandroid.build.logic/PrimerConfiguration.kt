@@ -1,10 +1,11 @@
 package com.mu.jan.primerandroid.build.logic
 
+import com.android.build.api.dsl.VariantDimension
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
-import org.gradle.kotlin.dsl.extra
 import org.gradle.api.Project
-import org.gradle.kotlin.dsl.project
 import org.gradle.kotlin.dsl.dependencies
+import org.gradle.kotlin.dsl.extra
+import org.gradle.kotlin.dsl.project
 
 @Suppress("UnstableApiUsage")
 fun BaseAppModuleExtension.configureProductFlavors(project: Project) {
@@ -13,10 +14,12 @@ fun BaseAppModuleExtension.configureProductFlavors(project: Project) {
         create("dev") {
             dimension = "env"
             extra.set("appIdSuffix", ".dev")
+            buildDevConfigFields(project)
         }
         create("prod") {
             dimension = "env"
             extra.set("appIdSuffix", ".prod")
+            buildProdConfigFields(project)
         }
 
         val flavors = getPrimerFlavors()
@@ -48,4 +51,14 @@ fun BaseAppModuleExtension.configureProductFlavors(project: Project) {
 
 internal fun Project.isApplicationProject(): Boolean {
     return name.javaClass.simpleName.startsWith("BaseAppModuleExtension")
+}
+
+@Suppress("UnstableApiUsage")
+internal fun VariantDimension.buildDevConfigFields(project: Project) {
+    buildConfigField("String", "ENV", "\"Dev\"")
+}
+
+@Suppress("UnstableApiUsage")
+internal fun VariantDimension.buildProdConfigFields(project: Project) {
+    buildConfigField("String", "ENV", "\"Prod\"")
 }
