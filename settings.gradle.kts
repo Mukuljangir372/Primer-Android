@@ -33,3 +33,5 @@ include(":common-models")
 
 include(":flavor-full")
 include(":feature-full")
+include(":feature-onboarding")
+include(":flavor-onboarding")
