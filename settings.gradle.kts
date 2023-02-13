@@ -22,3 +22,5 @@ includeBuild("build-logic") {
 
 rootProject.name = "PrimerAndroid"
 include(":app")
+include(":flavor-full")
+include(":feature-full")
