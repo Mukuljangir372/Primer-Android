@@ -7,5 +7,7 @@ internal data class ProductFlavor(
 )
 
 internal fun getPrimerFlavors(): List<ProductFlavor> {
-    return listOf()
+    return listOf(
+        ProductFlavor(name = "full", module = ":flavor-full", useSeparatePackage = false)
+    )
 }
