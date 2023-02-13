@@ -22,7 +22,13 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/base" />
+            <option value="$PROJECT_DIR$/base-database" />
+            <option value="$PROJECT_DIR$/base-network" />
+            <option value="$PROJECT_DIR$/base-preferences" />
+            <option value="$PROJECT_DIR$/base-ui" />
             <option value="$PROJECT_DIR$/build-logic" />
+            <option value="$PROJECT_DIR$/common-models" />
             <option value="$PROJECT_DIR$/feature-full" />
             <option value="$PROJECT_DIR$/flavor-full" />
           </set>
