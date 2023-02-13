@@ -30,8 +30,10 @@
             <option value="$PROJECT_DIR$/build-logic" />
             <option value="$PROJECT_DIR$/common-models" />
             <option value="$PROJECT_DIR$/feature-full" />
+            <option value="$PROJECT_DIR$/feature-login" />
             <option value="$PROJECT_DIR$/feature-onboarding" />
             <option value="$PROJECT_DIR$/flavor-full" />
+            <option value="$PROJECT_DIR$/flavor-login" />
             <option value="$PROJECT_DIR$/flavor-onboarding" />
           </set>
         </option>
