@@ -45,6 +45,10 @@
             <option value="$PROJECT_DIR$/data-message/api" />
             <option value="$PROJECT_DIR$/data-message/impl" />
             <option value="$PROJECT_DIR$/data-message/test" />
+            <option value="$PROJECT_DIR$/data-status" />
+            <option value="$PROJECT_DIR$/data-status/api" />
+            <option value="$PROJECT_DIR$/data-status/impl" />
+            <option value="$PROJECT_DIR$/data-status/test" />
             <option value="$PROJECT_DIR$/domain-ai" />
             <option value="$PROJECT_DIR$/domain-conversation" />
             <option value="$PROJECT_DIR$/domain-login" />

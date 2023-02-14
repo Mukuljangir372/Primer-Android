@@ -64,3 +64,7 @@ include(":flavor-onboarding")
 
 include(":flavor-login")
 include(":feature-login")
+include(":data-status")
+include(":data-status:api")
+include(":data-status:impl")
+include(":data-status:test")
