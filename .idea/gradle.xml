@@ -53,6 +53,7 @@
             <option value="$PROJECT_DIR$/domain-conversation" />
             <option value="$PROJECT_DIR$/domain-login" />
             <option value="$PROJECT_DIR$/domain-message" />
+            <option value="$PROJECT_DIR$/domain-status" />
             <option value="$PROJECT_DIR$/feature-full" />
             <option value="$PROJECT_DIR$/feature-login" />
             <option value="$PROJECT_DIR$/feature-onboarding" />

@@ -35,6 +35,7 @@ include(":domain-ai")
 include(":domain-conversation")
 include(":domain-login")
 include(":domain-message")
+include(":domain-status")
 
 include(":data-ai")
 include(":data-ai:api")
@@ -56,6 +57,11 @@ include(":data-message:api")
 include(":data-message:impl")
 include(":data-message:test")
 
+include(":data-status")
+include(":data-status:api")
+include(":data-status:impl")
+include(":data-status:test")
+
 include(":flavor-full")
 include(":feature-full")
 
@@ -64,7 +70,3 @@ include(":flavor-onboarding")
 
 include(":flavor-login")
 include(":feature-login")
-include(":data-status")
-include(":data-status:api")
-include(":data-status:impl")
-include(":data-status:test")
