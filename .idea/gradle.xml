@@ -22,6 +22,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/backend" />
             <option value="$PROJECT_DIR$/base" />
             <option value="$PROJECT_DIR$/base-database" />
             <option value="$PROJECT_DIR$/base-network" />

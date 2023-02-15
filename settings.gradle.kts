@@ -22,6 +22,7 @@ includeBuild("build-logic") {
 
 rootProject.name = "PrimerAndroid"
 include(":app")
+include(":backend")
 
 include(":base")
 include(":base-ui")
