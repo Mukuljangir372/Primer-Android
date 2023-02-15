@@ -1,5 +1,6 @@
 @file:Suppress("UnstableApiUsage")
 
+import com.mu.jan.primerandroid.build.logic.configureAppDefaultConfigs
 import com.mu.jan.primerandroid.build.logic.configureProductFlavors
 
 plugins {
@@ -24,6 +25,8 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        configureAppDefaultConfigs(project)
     }
 
     configureProductFlavors(project)
