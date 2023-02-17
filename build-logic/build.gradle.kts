@@ -23,5 +23,9 @@ gradlePlugin {
             id = "primer_android_lib",
             className = "com.mu.jan.primerandroid.build.logic.PrimerAndroidLibPlugin"
         )
+        create(
+            id = "primer_android_hilt_lib",
+            className = "com.mu.jan.primerandroid.build.logic.PrimerAndroidHiltLibPlugin"
+        )
     }
 }
