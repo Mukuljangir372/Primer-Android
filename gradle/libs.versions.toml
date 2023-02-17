@@ -53,6 +53,7 @@ android_accompanist = "0.25.1"
 android_scogo_media_picker = "1.1.2"
 android_workmanager = "2.7.1"
 android_file_uploader = "4.5.1"
+android_hilt = "2.44"
 glide = "4.13.2"
 okio = "3.2.0"
 realm = "1.6.0"
@@ -130,6 +131,8 @@ android_compose_paging = { module = "androidx.paging:paging-compose", version.re
 android_scogo_media_picker = { module = "com.gitlab.scogo:scogo_media_picker_library", version.ref = "android_scogo_media_picker" }
 android_workmanager = { module = "androidx.work:work-runtime-ktx", version.ref = "android_workmanager" }
 android_file_uploader = { module = "net.gotev:uploadservice", version.ref = "android_file_uploader" }
+android_hilt = { module = "com.google.dagger:hilt-android", version.ref = "android_hilt" }
+android_hilt_compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "android_hilt" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 glide_compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "glide" }
 okio = { module = "com.squareup.okio:okio", version.ref = "okio" }
