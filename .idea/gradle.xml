@@ -28,6 +28,9 @@
             <option value="$PROJECT_DIR$/base-preferences" />
             <option value="$PROJECT_DIR$/base-ui" />
             <option value="$PROJECT_DIR$/build-logic" />
+            <option value="$PROJECT_DIR$/common" />
+            <option value="$PROJECT_DIR$/common-local" />
+            <option value="$PROJECT_DIR$/common-network" />
             <option value="$PROJECT_DIR$/data-ai" />
             <option value="$PROJECT_DIR$/data-ai/api" />
             <option value="$PROJECT_DIR$/data-ai/impl" />
