@@ -8,6 +8,7 @@ plugins {
     kotlin("android")
     id("kotlin-android")
     id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -67,8 +68,10 @@ kapt {
     correctErrorTypes = true
 }
 dependencies {
-    implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
+    implementation(libs.bundles.androidx.ktx)
+    implementation(libs.android.hilt)
+    kapt(libs.android.hilt.compiler)
+
     implementation("androidx.activity:activity-compose:1.6.1")
     implementation("androidx.compose.ui:ui:${rootProject.extra["compose_ui_version"]}")
     implementation("androidx.compose.ui:ui-tooling-preview:${rootProject.extra["compose_ui_version"]}")
