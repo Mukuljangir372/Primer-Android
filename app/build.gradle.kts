@@ -68,14 +68,12 @@ kapt {
     correctErrorTypes = true
 }
 dependencies {
+    implementation(project(":common"))
+
     implementation(libs.bundles.androidx.ktx)
     implementation(libs.android.hilt)
     kapt(libs.android.hilt.compiler)
-
-    implementation("androidx.activity:activity-compose:1.6.1")
-    implementation("androidx.compose.ui:ui:${rootProject.extra["compose_ui_version"]}")
-    implementation("androidx.compose.ui:ui-tooling-preview:${rootProject.extra["compose_ui_version"]}")
-    implementation("androidx.compose.material:material:1.3.1")
-    debugImplementation("androidx.compose.ui:ui-tooling:${rootProject.extra["compose_ui_version"]}")
-    debugImplementation("androidx.compose.ui:ui-test-manifest:${rootProject.extra["compose_ui_version"]}")
+    implementation(libs.android.coroutines.core)
+    implementation(libs.bundles.android.compose)
+    debugImplementation(libs.bundles.android.compose.debug)
 }
