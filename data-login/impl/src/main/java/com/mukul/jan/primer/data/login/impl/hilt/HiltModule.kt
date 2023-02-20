@@ -1,9 +1,9 @@
-package com.mukul.jan.primer.data.login.api.hilt
+package com.mukul.jan.primer.data.login.impl.hilt
 
 import com.mukul.jan.primer.data.login.api.AuthApi
-import com.mukul.jan.primer.data.login.api.AuthApiImpl
 import com.mukul.jan.primer.data.login.api.RealmAppApi
-import com.mukul.jan.primer.data.login.api.RealmAppApiImpl
+import com.mukul.jan.primer.data.login.impl.AuthApiImpl
+import com.mukul.jan.primer.data.login.impl.RealmAppApiImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
