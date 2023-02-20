@@ -9,6 +9,9 @@ import io.realm.kotlin.mongodb.User
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
+/**
+ * Auth - necessary to making a universal app auth
+ */
 class AuthApiImpl @Inject constructor(
     @RealmAuthApiQualifier private val realmAuthApi: String,
     private val realmAppApi: RealmAppApi,
