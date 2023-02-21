@@ -1,5 +1,7 @@
 package com.mukul.jan.primer.data.login.api
 
 interface LoginUserApi {
-    fun login(key: String, password: String)
+    //returns logged in user id
+    @Throws
+    suspend fun login(key: String, password: String): String
 }

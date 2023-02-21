@@ -9,3 +9,7 @@ annotation class RealmAppIdQualifier
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
 annotation class RealmAuthApiQualifier
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class RealmAppUserDomain

@@ -2,6 +2,7 @@ package com.mukul.jan.primerandroid.hilt
 
 import com.mu.jan.primer.common.AppCoroutineDispatcher
 import com.mu.jan.primer.common.RealmAppIdQualifier
+import com.mu.jan.primer.common.RealmAppUserDomain
 import com.mu.jan.primer.common.RealmAuthApiQualifier
 import com.mukul.jan.primerandroid.BuildConfig
 import dagger.Module
@@ -24,6 +25,12 @@ object AppHiltModule {
     @Provides
     fun provideRealmAuthApi(): String {
         return BuildConfig.APP_MONGO_REALM_AUTH_API
+    }
+
+    @RealmAppUserDomain
+    @Provides
+    fun provideRealmAppUserDomain(): String {
+        return BuildConfig.APP_MONGO_REALM_APP_USER_DOMAIN
     }
 
     @Provides
