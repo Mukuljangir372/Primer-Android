@@ -3,7 +3,11 @@ plugins {
 }
 android {
     namespace = "com.mukul.jan.primer.base.ui"
+    buildFeatures {
+        compose = true
+    }
 }
 dependencies {
     implementation(libs.androidx.core.ktx)
+    implementation(libs.bundles.android.compose)
 }
