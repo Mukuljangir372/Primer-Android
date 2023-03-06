@@ -12,6 +12,7 @@ class RegisterUserApiImpl @Inject constructor(
     @RealmAppUserDomain private val userDomain: String,
     private val dispatchers: AppCoroutineDispatcher,
 ) : RegisterUserApi {
+    @Throws
     override suspend fun register(key: String, password: String) {
         return withContext(dispatchers.io) {
             realmAppApi.getApp()
