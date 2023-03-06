@@ -9,6 +9,11 @@ internal data class ProductFlavor(
 internal fun getPrimerFlavors(): List<ProductFlavor> {
     return listOf(
         ProductFlavor(name = "full", module = ":flavor-full", useSeparatePackage = false),
-        ProductFlavor(name = "onboarding", module = ":flavor-onboarding", useSeparatePackage = true)
+        ProductFlavor(
+            name = "onboarding",
+            module = ":flavor-onboarding",
+            useSeparatePackage = true
+        ),
+        ProductFlavor(name = "login", module = ":flavor-login", useSeparatePackage = true),
     )
 }
