@@ -20,7 +20,9 @@ import com.mukul.jan.primer.base.ui.design.PrimerTheme
 
 @Composable
 fun PrimaryLoginScreen() {
-    PrimaryLoginScreenContent()
+    PrimerTheme {
+        PrimaryLoginScreenContent()
+    }
 }
 
 @Composable
