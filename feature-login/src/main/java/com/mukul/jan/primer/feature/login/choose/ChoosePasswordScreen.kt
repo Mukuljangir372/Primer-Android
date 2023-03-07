@@ -7,6 +7,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -16,29 +18,45 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.mu.jan.primer.common.ui.compose.PrimaryRoundButton
 import com.mu.jan.primer.common.ui.compose.PrimaryTextField
 import com.mukul.jan.primer.base.ui.Dimens
 import com.mukul.jan.primer.base.ui.design.PrimerTheme
 import com.mukul.jan.primer.feature.login.R
+import kotlinx.coroutines.flow.filterIsInstance
 
 @Composable
 fun ChoosePasswordScreen(
     onBack: () -> Unit,
     onNext: () -> Unit,
 ) {
-    ChoosePasswordScreenContent(
-        onBackPress = onBack,
-        onNextClick = onNext,
-        onPasswordInputValueChange = {},
-        onConfirmPasswordInputValueChange = {},
-    )
+    val viewModel: ChoosePasswordViewModel = hiltViewModel()
+    val uiState by viewModel.uiState.filterIsInstance<ChoosePasswordViewModel.UiState.ChoosePassword>()
+        .collectAsState(null)
+
+    uiState?.let {
+        ChoosePasswordScreenContent(
+            onBackPress = onBack,
+            onNextClick = onNext,
+            passwordInputInitialValue = it.password,
+            confirmPasswordInputInitialValue = it.confirmPassword,
+            onPasswordInputValueChange = { value ->
+                viewModel.onPasswordChanged(value)
+            },
+            onConfirmPasswordInputValueChange = { value ->
+                viewModel.onConfirmPasswordChange(value)
+            },
+        )
+    }
 }
 
 @Composable
 private fun ChoosePasswordScreenContent(
     onBackPress: () -> Unit,
     onNextClick: () -> Unit,
+    passwordInputInitialValue: String,
+    confirmPasswordInputInitialValue: String,
     onPasswordInputValueChange: (String) -> Unit,
     onConfirmPasswordInputValueChange: (String) -> Unit,
 ) {
@@ -74,7 +92,7 @@ private fun ChoosePasswordScreenContent(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = Dimens.THREE.dp),
-                value = "",
+                value = passwordInputInitialValue,
                 onValueChange = onPasswordInputValueChange,
                 label = { Text(text = stringResource(id = R.string.password)) },
                 placeholder = { Text(text = stringResource(id = R.string.password)) },
@@ -86,7 +104,7 @@ private fun ChoosePasswordScreenContent(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = Dimens.THREE.dp),
-                value = "",
+                value = confirmPasswordInputInitialValue,
                 onValueChange = onConfirmPasswordInputValueChange,
                 label = { Text(text = stringResource(id = R.string.confirm_password)) },
                 placeholder = { Text(text = stringResource(id = R.string.confirm_password)) },
@@ -117,6 +135,8 @@ private fun ChoosePasswordScreenPreview() {
         ChoosePasswordScreenContent(
             onBackPress = {},
             onNextClick = {},
+            passwordInputInitialValue = "",
+            confirmPasswordInputInitialValue = "",
             onPasswordInputValueChange = {},
             onConfirmPasswordInputValueChange = {},
         )
