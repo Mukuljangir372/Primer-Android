@@ -20,21 +20,24 @@ import com.mukul.jan.primer.base.ui.design.PrimerTheme
 import com.mukul.jan.primer.feature.login.R
 
 @Composable
-fun ChooseUsernameScreen() {
+fun ChooseUsernameScreen(
+    onBack: () -> Unit,
+    onNext: () -> Unit,
+) {
     ChooseUsernameScreenContent(
-        onBackPress = {},
+        onBackPress = onBack,
+        onNextClick = onNext,
         nameInputInitialValue = "",
         onNameInputValueChange = {},
-        onNextClick = {}
     )
 }
 
 @Composable
 private fun ChooseUsernameScreenContent(
     onBackPress: () -> Unit,
+    onNextClick: () -> Unit,
     nameInputInitialValue: String,
     onNameInputValueChange: (String) -> Unit,
-    onNextClick: () -> Unit,
 ) {
     Scaffold(modifier = Modifier.fillMaxSize(), topBar = {
         TopAppBar(title = { Text(text = "") }, navigationIcon = {

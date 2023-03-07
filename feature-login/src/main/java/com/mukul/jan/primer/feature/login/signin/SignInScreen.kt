@@ -23,10 +23,13 @@ import com.mukul.jan.primer.base.ui.design.PrimerTheme
 import com.mukul.jan.primer.feature.login.R
 
 @Composable
-fun SignInScreen() {
+fun SignInScreen(
+    onBack: () -> Unit,
+    onLogin: () -> Unit,
+) {
     SignInScreenContent(
-        onBackPress = {},
-        onLoginClick = {},
+        onBackPress = onBack,
+        onLoginClick = onLogin,
         privateKeyInputInitialValue = " ",
         onPrivateKeyInputValueChange = {},
         passwordInputInitialValue = " ",

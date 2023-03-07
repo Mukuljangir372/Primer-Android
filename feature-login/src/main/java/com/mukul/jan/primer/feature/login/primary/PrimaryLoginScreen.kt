@@ -24,10 +24,13 @@ import com.mukul.jan.primer.base.ui.design.PrimerTheme
 import com.mukul.jan.primer.feature.login.R
 
 @Composable
-fun PrimaryLoginScreen() {
+fun PrimaryLoginScreen(
+    onSignUp: () -> Unit,
+    onSignIn: () -> Unit,
+) {
     PrimaryLoginScreenContent(
-        onSignUpClick = {},
-        onLoginClick = {},
+        onSignUpClick = onSignUp,
+        onLoginClick = onSignIn,
     )
 }
 
