@@ -36,7 +36,7 @@ fun BaseAppModuleExtension.configureProductFlavors(project: Project) {
             buildProdConfigFields(project)
         }
 
-        val flavors = getPrimerFlavors()
+        val flavors = PrimerFlavorContainer().getPrimerFlavors()
         if (flavors.isNotEmpty()) {
             flavorDimensions.add("scope")
             flavors.forEach { flavor ->

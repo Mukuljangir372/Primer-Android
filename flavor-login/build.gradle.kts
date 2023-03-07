@@ -3,8 +3,14 @@ plugins {
 }
 android {
     namespace = "com.mukul.jan.primer.flavor.login"
+    buildFeatures {
+        compose = true
+    }
 }
 dependencies {
     implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.bundles.android.compose)
+
     implementation(project(":feature-login"))
 }
