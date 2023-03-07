@@ -24,7 +24,11 @@
     <string name="choose_your_password_description">You should choose a secure password with mix of special chars. If you forgot your password, You will never be able to recover your account in any manner.</string>
 
     <!-- LOGIN DETAILS SCREEN -->
-    <string name="save_your_details">😎 Save Your Details</string>
+    <string name="save_your_details">🙌 Save Your Details</string>
     <string name="save_your_details_description">You must save your details because if your forgot, you will never able to recover your account in any manner.</string>
 
+    <!-- SIGN IN SCREEN -->
+    <string name="welcome_back">Welcome back! 🙌</string>
+    <string name="enter_your_private_key_and_password">Enter your private key and password</string>
+    <string name="lets_talk_with_friends">Let\'s talk with friends.</string>
 </resources>
