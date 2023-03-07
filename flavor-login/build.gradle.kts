@@ -1,5 +1,5 @@
 plugins {
-    id("primer_android_lib")
+    id("primer_android_hilt_lib")
 }
 android {
     namespace = "com.mukul.jan.primer.flavor.login"
@@ -11,7 +11,6 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.bundles.android.compose)
-
     implementation(project(":base-ui"))
     implementation(project(":feature-login"))
 }

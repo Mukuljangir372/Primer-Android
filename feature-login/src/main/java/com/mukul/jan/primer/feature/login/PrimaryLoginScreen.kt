@@ -1,4 +1,4 @@
-package com.mukul.jan.primer.feature.login.primary
+package com.mukul.jan.primer.feature.login
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -18,10 +18,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.mu.jan.primer.common.ui.PrimaryRoundButton
+import com.mu.jan.primer.common.ui.compose.PrimaryRoundButton
 import com.mukul.jan.primer.base.ui.Dimens
 import com.mukul.jan.primer.base.ui.design.PrimerTheme
-import com.mukul.jan.primer.feature.login.R
 
 @Composable
 fun PrimaryLoginScreen(
