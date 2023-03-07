@@ -10,4 +10,5 @@ android {
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.bundles.android.compose)
+    implementation(libs.bundles.android.accompanist)
 }
