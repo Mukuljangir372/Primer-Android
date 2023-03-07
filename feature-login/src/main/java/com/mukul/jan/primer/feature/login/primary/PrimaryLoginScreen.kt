@@ -67,7 +67,7 @@ private fun PrimaryLoginScreenContent(
             Spacer(modifier = Modifier.height(Dimens.FIVE.dp))
             PrimaryRoundButton(onClick = onSignUpClick) {
                 Row(
-                    modifier = Modifier.padding(horizontal = Dimens.ONE.dp),
+                    modifier = Modifier.padding(horizontal = Dimens.TWO.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Text(
