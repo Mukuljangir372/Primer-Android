@@ -8,6 +8,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -18,6 +19,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.mu.jan.primer.common.ui.ErrorMessage
 import com.mu.jan.primer.common.ui.compose.PrimaryRoundButton
 import com.mu.jan.primer.common.ui.compose.PrimaryTextField
 import com.mukul.jan.primer.base.ui.Dimens
@@ -35,13 +37,21 @@ fun ChooseUsernameScreen(
         .collectAsState(null)
 
     uiState?.let {
+        LaunchedEffect(it.usernameValidated) {
+            if (it.usernameValidated) {
+                onNext.invoke()
+                viewModel.onUsernameValidationComplete()
+            }
+        }
+
         ChooseUsernameScreenContent(
             onBackPress = onBack,
-            onNextClick = onNext,
+            onNextClick = viewModel::validateUsername,
             nameInputInitialValue = it.username,
-            onNameInputValueChange = { name ->
-                viewModel.onNameChange(name)
-            },
+            onNameInputValueChange = viewModel::onNameChange,
+            errorMessages = it.errorMessages,
+            onErrorMessageShown = viewModel::onErrorMessageShown,
+            scaffoldState = rememberScaffoldState(),
         )
     }
 }
@@ -52,15 +62,21 @@ private fun ChooseUsernameScreenContent(
     onNextClick: () -> Unit,
     nameInputInitialValue: String,
     onNameInputValueChange: (String) -> Unit,
+    errorMessages: List<ErrorMessage>,
+    onErrorMessageShown: (Long) -> Unit,
+    scaffoldState: ScaffoldState,
 ) {
-    Scaffold(modifier = Modifier.fillMaxSize(), topBar = {
-        TopAppBar(title = { Text(text = "") }, navigationIcon = {
-            IconButton(onClick = onBackPress) {
-                Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = "back")
-            }
-        }, backgroundColor = MaterialTheme.colors.background, elevation = Dimens.ZERO.dp
-        )
-    }) {
+    Scaffold(
+        modifier = Modifier.fillMaxSize(),
+        scaffoldState = scaffoldState,
+        topBar = {
+            TopAppBar(title = { Text(text = "") }, navigationIcon = {
+                IconButton(onClick = onBackPress) {
+                    Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = "back")
+                }
+            }, backgroundColor = MaterialTheme.colors.background, elevation = Dimens.ZERO.dp
+            )
+        }) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -103,15 +119,34 @@ private fun ChooseUsernameScreenContent(
             }
         }
     }
+
+    if (errorMessages.isNotEmpty()) {
+        val errorMessage = errorMessages.first()
+        val errorMessageText = when (errorMessage) {
+            is ErrorMessage.StringIdType -> stringResource(id = errorMessage.resId)
+            is ErrorMessage.StringType -> errorMessage.message
+        }
+        LaunchedEffect(errorMessageText) {
+            scaffoldState.snackbarHostState.showSnackbar(
+                message = errorMessageText,
+            )
+            onErrorMessageShown(errorMessage.id)
+        }
+    }
 }
 
 @Preview
 @Composable
 private fun ChooseUsernameScreenPreview() {
     PrimerTheme {
-        ChooseUsernameScreenContent(onBackPress = {},
+        ChooseUsernameScreenContent(
+            onBackPress = {},
             nameInputInitialValue = "Mukul Jangir",
             onNameInputValueChange = {},
-            onNextClick = {})
+            onNextClick = {},
+            errorMessages = emptyList(),
+            onErrorMessageShown = {},
+            scaffoldState = rememberScaffoldState(),
+        )
     }
 }

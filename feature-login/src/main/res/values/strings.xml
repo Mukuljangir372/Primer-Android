@@ -18,6 +18,7 @@
     <!-- CHOOSE USERNAME SCREEN -->
     <string name="choose_your_name">👋 Choose your name</string>
     <string name="choose_your_name_description">Choose your name and create your account in few steps without sharing your private data.</string>
+    <string name="please_enter_your_name">Please enter your name</string>
 
     <!-- CHOOSE PASSWORD SCREEN -->
     <string name="choose_your_password">👋 Choose your password</string>

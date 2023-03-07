@@ -3,8 +3,10 @@ package com.mukul.jan.primer.feature.login.choose
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mu.jan.primer.common.ui.ErrorMessage
+import com.mukul.jan.primer.feature.login.R
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -13,12 +15,14 @@ class ChooseUsernameViewModel @Inject constructor() : ViewModel() {
         val isLoading: Boolean,
         val errorMessages: List<ErrorMessage>,
         val username: String,
+        val usernameValidated: Boolean
     ) {
         companion object {
             val EMPTY = State(
                 isLoading = false,
                 errorMessages = emptyList(),
-                username = ""
+                username = "",
+                usernameValidated = false,
             )
         }
 
@@ -26,7 +30,8 @@ class ChooseUsernameViewModel @Inject constructor() : ViewModel() {
             return UiState.ChooseName(
                 isLoading = isLoading,
                 errorMessages = errorMessages,
-                username = username
+                username = username,
+                usernameValidated = usernameValidated
             )
         }
     }
@@ -39,6 +44,7 @@ class ChooseUsernameViewModel @Inject constructor() : ViewModel() {
             override val isLoading: Boolean,
             override val errorMessages: List<ErrorMessage>,
             val username: String,
+            val usernameValidated: Boolean,
         ) : UiState
     }
 
@@ -57,6 +63,38 @@ class ChooseUsernameViewModel @Inject constructor() : ViewModel() {
         }
     }
 
+    fun onErrorMessageShown(id: Long) {
+        state.getAndUpdate {
+            it.copy(errorMessages = it.errorMessages.filterNot { msg -> msg.id == id })
+        }
+    }
+
+    fun onUsernameValidationComplete() {
+        state.update {
+            it.copy(usernameValidated = false)
+        }
+    }
+
+    private fun showErrorMessage(msg: ErrorMessage) {
+        state.getAndUpdate {
+            it.copy(errorMessages = it.errorMessages + msg)
+        }
+    }
+
+    fun validateUsername() {
+        val username = (uiState.value as UiState.ChooseName).username //guaranteed cast
+        if (username.trim().isEmpty()) {
+            val msg = ErrorMessage.StringIdType(
+                id = UUID.randomUUID().mostSignificantBits,
+                resId = R.string.please_enter_your_name
+            )
+            showErrorMessage(msg)
+        } else {
+            state.update {
+                it.copy(usernameValidated = true)
+            }
+        }
+    }
 }
 
 
