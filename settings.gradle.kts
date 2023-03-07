@@ -71,5 +71,3 @@ include(":flavor-onboarding")
 
 include(":flavor-login")
 include(":feature-login")
-
-
