@@ -1,10 +1,14 @@
 package com.mukul.jan.primer.data.login.api
 
-interface UserDataApi {
-    data class Save(
-        val username: String,
-        val userKey: String,
-    )
+import com.mukul.jan.primer.data.login.api.model.UserRealmModel
 
-    suspend fun save(userId: String, save: Save)
+interface UserDataApi {
+    @Throws
+    suspend fun getLoggedInUser(): UserRealmModel
+
+    @Throws
+    suspend fun getUser(id: String): UserRealmModel
+
+    @Throws
+    suspend fun insertOrUpdateUser(model: UserRealmModel)
 }
