@@ -1,4 +1,4 @@
-package com.mu.jan.primer.common.ui
+package com.mu.jan.primer.common.ui.compose
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button

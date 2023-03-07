@@ -14,6 +14,7 @@ class PrimerAndroidHiltLibPlugin : Plugin<Project> {
         val catalog = target.extensions.getByType<VersionCatalogsExtension>().named("libs")
         target.dependencies {
             add("implementation", (catalog.findLibrary("android_hilt").get()))
+            add("implementation", (catalog.findLibrary("android_hilt_nav_compose").get()))
             add("kapt", (catalog.findLibrary("android_hilt_compiler").get()))
         }
     }

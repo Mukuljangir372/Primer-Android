@@ -1,5 +1,5 @@
 plugins {
-    id("primer_android_lib")
+    id("primer_android_hilt_lib")
 }
 android {
     namespace = "com.mukul.jan.primer.feature.login"
