@@ -11,7 +11,7 @@ class KeyApiImpl @Inject constructor(
 ) : KeyApi {
     override suspend fun generate(): String {
         return withContext(dispatchers.io) {
-            UUID.randomUUID()
+            "0x1" + UUID.randomUUID()
                 .toString()
                 .replace("-", "0")
         }

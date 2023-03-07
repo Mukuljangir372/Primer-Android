@@ -4,10 +4,10 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import com.mukul.jan.primer.feature.login.PrimaryLoginScreen
 import com.mukul.jan.primer.feature.login.choose.ChoosePasswordScreen
 import com.mukul.jan.primer.feature.login.choose.ChooseUsernameScreen
 import com.mukul.jan.primer.feature.login.detail.LoginDetailScreen
-import com.mukul.jan.primer.feature.login.primary.PrimaryLoginScreen
 import com.mukul.jan.primer.feature.login.signin.SignInScreen
 
 
