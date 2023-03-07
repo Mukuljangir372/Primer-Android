@@ -23,10 +23,13 @@ import com.mukul.jan.primer.base.ui.design.PrimerTheme
 import com.mukul.jan.primer.feature.login.R
 
 @Composable
-fun ChoosePasswordScreen() {
+fun ChoosePasswordScreen(
+    onBack: () -> Unit,
+    onNext: () -> Unit,
+) {
     ChoosePasswordScreenContent(
-        onBackPress = {},
-        onNextClick = {},
+        onBackPress = onBack,
+        onNextClick = onNext,
         onPasswordInputValueChange = {},
         onConfirmPasswordInputValueChange = {},
     )

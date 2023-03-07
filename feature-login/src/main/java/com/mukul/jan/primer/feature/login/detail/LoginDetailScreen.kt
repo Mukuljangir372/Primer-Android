@@ -20,10 +20,13 @@ import com.mukul.jan.primer.base.ui.design.PrimerTheme
 import com.mukul.jan.primer.feature.login.R
 
 @Composable
-fun LoginDetailScreen() {
+fun LoginDetailScreen(
+    onBack: () -> Unit,
+    onFinish: () -> Unit,
+) {
     LoginDetailScreenContent(
-        onBackPress = {},
-        onFinishClick = {},
+        onBackPress = onBack,
+        onFinishClick = onFinish,
         nameInputValue = " ",
         privateKeyInputValue = " ",
         publicKeyInputValue = " "
