@@ -28,9 +28,10 @@ include(":base-network")
 include(":base-database")
 include(":base-preferences")
 
+include(":common")
+include(":common-ui")
 include(":common-local")
 include(":common-network")
-include(":common")
 
 include(":domain-ai")
 include(":domain-conversation")

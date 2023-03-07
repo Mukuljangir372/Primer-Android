@@ -30,6 +30,7 @@
             <option value="$PROJECT_DIR$/common" />
             <option value="$PROJECT_DIR$/common-local" />
             <option value="$PROJECT_DIR$/common-network" />
+            <option value="$PROJECT_DIR$/common-ui" />
             <option value="$PROJECT_DIR$/data-ai" />
             <option value="$PROJECT_DIR$/data-ai/api" />
             <option value="$PROJECT_DIR$/data-ai/impl" />

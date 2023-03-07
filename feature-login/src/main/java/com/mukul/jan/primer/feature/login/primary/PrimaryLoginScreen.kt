@@ -1,9 +1,12 @@
 package com.mukul.jan.primer.feature.login.primary
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.runtime.Composable
@@ -15,20 +18,26 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.mu.jan.primer.common.ui.PrimaryRoundButton
 import com.mukul.jan.primer.base.ui.Dimens
 import com.mukul.jan.primer.base.ui.design.PrimerTheme
 import com.mukul.jan.primer.feature.login.R
 
 @Composable
 fun PrimaryLoginScreen() {
-    PrimaryLoginScreenContent()
+    PrimaryLoginScreenContent(
+        onSignUpClick = {},
+        onLoginClick = {},
+    )
 }
 
 @Composable
-private fun PrimaryLoginScreenContent() {
+private fun PrimaryLoginScreenContent(
+    onSignUpClick: () -> Unit,
+    onLoginClick: () -> Unit,
+) {
     Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colors.background
+        modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background
     ) {
         Column(
             modifier = Modifier
@@ -56,15 +65,13 @@ private fun PrimaryLoginScreenContent() {
                 textAlign = TextAlign.Center
             )
             Spacer(modifier = Modifier.height(Dimens.FIVE.dp))
-            Button(shape = RoundedCornerShape(Dimens.FIVE.dp), onClick = {
-
-            }) {
+            PrimaryRoundButton(onClick = onSignUpClick) {
                 Row(
-                    verticalAlignment = Alignment.CenterVertically
+                    modifier = Modifier.padding(horizontal = Dimens.ONE.dp),
+                    verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Text(
                         text = stringResource(id = R.string.sign_up),
-                        style = MaterialTheme.typography.button,
                         fontWeight = FontWeight.Bold
                     )
                     Icon(imageVector = Icons.Default.ArrowForward, contentDescription = "next")
@@ -72,9 +79,11 @@ private fun PrimaryLoginScreenContent() {
             }
             Spacer(modifier = Modifier.height(Dimens.ONE.dp))
             Text(
+                modifier = Modifier.clickable {
+                    onLoginClick.invoke()
+                },
                 text = stringResource(id = R.string.log_in),
                 color = MaterialTheme.colors.primary,
-                style = MaterialTheme.typography.button,
                 fontWeight = FontWeight.Bold
             )
         }
@@ -85,6 +94,9 @@ private fun PrimaryLoginScreenContent() {
 @Composable
 private fun PrimaryLoginScreenPreview() {
     PrimerTheme(darkTheme = false) {
-        PrimaryLoginScreen()
+        PrimaryLoginScreenContent(
+            onSignUpClick = {},
+            onLoginClick = {},
+        )
     }
 }

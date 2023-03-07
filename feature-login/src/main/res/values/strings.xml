@@ -3,4 +3,8 @@
     <string name="chat_description">👋 Chat with friends and family, join clubs, talk with AI, end-to-end secure messaging, fun and secure.</string>
     <string name="log_in">log in</string>
     <string name="sign_up">👋 Sign up</string>
+    <string name="choose_your_name">👋 Choose your name</string>
+    <string name="choose_your_name_description">Choose your name and create your account in few steps without sharing your private data.</string>
+    <string name="name">Name</string>
+    <string name="next">next</string>
 </resources>
