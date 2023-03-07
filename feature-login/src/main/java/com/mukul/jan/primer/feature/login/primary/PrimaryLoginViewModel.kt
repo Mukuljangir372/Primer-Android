@@ -1,4 +1,4 @@
-package com.mukul.jan.primer.feature.login
+package com.mukul.jan.primer.feature.login.primary
 
 import androidx.lifecycle.ViewModel
 

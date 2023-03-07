@@ -1,4 +1,4 @@
-package com.mukul.jan.primer.feature.login
+package com.mukul.jan.primer.feature.login.primary
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -17,12 +17,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mukul.jan.primer.base.ui.Dimens
 import com.mukul.jan.primer.base.ui.design.PrimerTheme
+import com.mukul.jan.primer.feature.login.R
 
 @Composable
 fun PrimaryLoginScreen() {
-    PrimerTheme {
-        PrimaryLoginScreenContent()
-    }
+    PrimaryLoginScreenContent()
 }
 
 @Composable
@@ -65,7 +64,7 @@ private fun PrimaryLoginScreenContent() {
                 ) {
                     Text(
                         text = stringResource(id = R.string.sign_up),
-                        style = MaterialTheme.typography.h5,
+                        style = MaterialTheme.typography.button,
                         fontWeight = FontWeight.Bold
                     )
                     Icon(imageVector = Icons.Default.ArrowForward, contentDescription = "next")
@@ -75,7 +74,7 @@ private fun PrimaryLoginScreenContent() {
             Text(
                 text = stringResource(id = R.string.log_in),
                 color = MaterialTheme.colors.primary,
-                style = MaterialTheme.typography.h6,
+                style = MaterialTheme.typography.button,
                 fontWeight = FontWeight.Bold
             )
         }
