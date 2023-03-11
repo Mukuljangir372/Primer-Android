@@ -7,9 +7,8 @@ import com.mukul.jan.primer.data.login.api.exception.UserNotFoundException
 import com.mukul.jan.primer.data.login.api.exception.UserNotLoggedInException
 import com.mukul.jan.primer.data.login.api.model.UserRealmModel
 import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
-class UserDataApiImpl @Inject constructor(
+class UserDataApiImpl constructor(
     private val realmAppApi: RealmAppApi,
     private val dispatchers: AppCoroutineDispatcher,
 ) : UserDataApi {

@@ -1,7 +1,6 @@
 package com.mukul.jan.primer.data.login.impl
 
 import com.mu.jan.primer.common.AppCoroutineDispatcher
-import com.mu.jan.primer.common.RealmAppIdQualifier
 import com.mukul.jan.primer.data.login.api.RealmAppApi
 import com.mukul.jan.primer.data.login.api.exception.UserNotLoggedInException
 import io.realm.kotlin.Realm
@@ -10,10 +9,9 @@ import io.realm.kotlin.mongodb.App
 import io.realm.kotlin.mongodb.AppConfiguration
 import io.realm.kotlin.mongodb.sync.SyncConfiguration
 import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
-class RealmAppApiImpl @Inject constructor(
-    @RealmAppIdQualifier private val appId: String,
+class RealmAppApiImpl constructor(
+    private val appId: String,
     private val dispatchers: AppCoroutineDispatcher,
 ) : RealmAppApi {
     @Throws

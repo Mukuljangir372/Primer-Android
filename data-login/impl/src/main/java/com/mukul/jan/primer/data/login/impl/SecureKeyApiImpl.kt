@@ -4,9 +4,8 @@ import com.mu.jan.primer.common.AppCoroutineDispatcher
 import com.mukul.jan.primer.data.login.api.SecureKeyApi
 import kotlinx.coroutines.withContext
 import java.util.*
-import javax.inject.Inject
 
-class SecureKeyApiImpl @Inject constructor(
+class SecureKeyApiImpl constructor(
     private val dispatchers: AppCoroutineDispatcher
 ) : SecureKeyApi {
     override suspend fun generate(): String {
