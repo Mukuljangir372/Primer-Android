@@ -22,7 +22,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.mu.jan.primer.common.ui.ErrorMessage
+import com.mu.jan.primer.common.Message
 import com.mu.jan.primer.common.ui.compose.PrimaryRoundButton
 import com.mu.jan.primer.common.ui.compose.PrimaryTextField
 import com.mukul.jan.primer.base.ui.Dimens
@@ -69,7 +69,7 @@ private fun ChoosePasswordScreenContent(
     confirmPasswordInputInitialValue: String,
     onPasswordInputValueChange: (String) -> Unit,
     onConfirmPasswordInputValueChange: (String) -> Unit,
-    errorMessages: List<ErrorMessage>,
+    errorMessages: List<Message>,
     onErrorMessageShown: (Long) -> Unit,
     scaffoldState: ScaffoldState,
     context: Context,
@@ -144,8 +144,8 @@ private fun ChoosePasswordScreenContent(
         if (errorMessages.isNotEmpty()) {
             val errorMessage = errorMessages.first()
             val errorMessageText = when (errorMessage) {
-                is ErrorMessage.StringIdType -> context.getString(errorMessage.resId)
-                is ErrorMessage.StringType -> errorMessage.message
+                is Message.StringResType -> context.getString(errorMessage.resId)
+                is Message.StringType -> errorMessage.message
             }
             scaffoldState.snackbarHostState.showSnackbar(
                 message = errorMessageText,

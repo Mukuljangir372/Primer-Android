@@ -9,6 +9,7 @@ android {
 }
 dependencies {
     implementation(project(":base-ui"))
+    implementation(project(":common"))
     implementation(project(":common-ui"))
     implementation(project(":domain-login"))
 

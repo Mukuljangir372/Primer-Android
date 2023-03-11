@@ -2,7 +2,7 @@ package com.mukul.jan.primer.feature.login.choose
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mu.jan.primer.common.ui.ErrorMessage
+import com.mu.jan.primer.common.Message
 import com.mukul.jan.primer.domain.container.SignInLocalDataContainer
 import com.mukul.jan.primer.feature.login.R
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,7 +16,7 @@ class ChooseUsernameViewModel @Inject constructor(
 ) : ViewModel() {
     data class State(
         val isLoading: Boolean,
-        val errorMessages: List<ErrorMessage>,
+        val errorMessages: List<Message>,
         val username: String,
         val usernameValidated: Boolean
     ) {
@@ -41,11 +41,11 @@ class ChooseUsernameViewModel @Inject constructor(
 
     sealed interface UiState {
         val isLoading: Boolean
-        val errorMessages: List<ErrorMessage>
+        val errorMessages: List<Message>
 
         data class ChooseName(
             override val isLoading: Boolean,
-            override val errorMessages: List<ErrorMessage>,
+            override val errorMessages: List<Message>,
             val username: String,
             val usernameValidated: Boolean,
         ) : UiState
@@ -72,7 +72,7 @@ class ChooseUsernameViewModel @Inject constructor(
         state.update { it.copy(errorMessages = it.errorMessages.filterNot { msg -> msg.id == id }) }
     }
 
-    private fun showErrorMessage(msg: ErrorMessage) {
+    private fun showErrorMessage(msg: Message) {
         state.update { it.copy(errorMessages = listOf(msg)) }
     }
 
@@ -83,11 +83,12 @@ class ChooseUsernameViewModel @Inject constructor(
     fun validateUsername() {
         val username = state.value.username
         if (username.trim().isEmpty()) {
-            val msg = ErrorMessage.StringIdType(
-                id = UUID.randomUUID().mostSignificantBits,
-                resId = R.string.please_enter_your_name
+            showErrorMessage(
+                Message.StringResType(
+                    id = UUID.randomUUID().mostSignificantBits,
+                    resId = R.string.please_enter_your_name
+                )
             )
-            showErrorMessage(msg)
             return
         }
         clearErrorMessages()
