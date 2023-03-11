@@ -2,7 +2,7 @@ package com.mukul.jan.primer.data.login.api
 
 import com.mukul.jan.primer.data.login.api.model.UserRealmModel
 
-interface UserDataApi {
+interface UserApi {
     @Throws
     suspend fun getLoggedInUser(): UserRealmModel
 

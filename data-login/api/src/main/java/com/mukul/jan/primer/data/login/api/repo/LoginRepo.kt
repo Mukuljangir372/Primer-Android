@@ -1,4 +1,7 @@
 package com.mukul.jan.primer.data.login.api.repo
 
-class LoginRepo {
+interface LoginRepo {
+    fun isLoggedIn()
+    fun signIn()
+    fun signUp()
 }

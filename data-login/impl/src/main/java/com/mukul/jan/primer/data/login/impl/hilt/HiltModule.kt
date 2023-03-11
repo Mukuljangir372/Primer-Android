@@ -22,16 +22,11 @@ abstract class HiltModule {
 
     @Singleton
     @Binds
-    abstract fun loginUserApi(impl: LoginUserApiImpl): LoginUserApi
+    abstract fun loginUserApi(impl: LoginApiImpl): LoginApi
 
     @Singleton
     @Binds
-    abstract fun registerUserApi(impl: RegisterUserApiImpl): RegisterUserApi
-
-
-    @Singleton
-    @Binds
-    abstract fun userDataApi(impl: UserDataApiImpl): UserDataApi
+    abstract fun userDataApi(impl: UserApiImpl): UserApi
 
     @Singleton
     @Binds
