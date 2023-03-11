@@ -8,10 +8,12 @@ android {
     }
 }
 dependencies {
+    implementation(project(":base-ui"))
+    implementation(project(":common-ui"))
+    implementation(project(":domain-login"))
+
+    platform(libs.android.compose.bom)
     implementation(libs.androidx.core.ktx)
     implementation(libs.bundles.android.compose)
     debugImplementation(libs.bundles.android.compose.debug)
-
-    implementation(project(":base-ui"))
-    implementation(project(":common-ui"))
 }

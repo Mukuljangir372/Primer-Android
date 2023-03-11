@@ -5,7 +5,7 @@ import io.realm.kotlin.types.RealmObject
 import io.realm.kotlin.types.annotations.PrimaryKey
 
 @Suppress("DEPRECATION")
-class UserRealmModel : RealmObject {
+class UserRealmModel: RealmObject {
     @PrimaryKey
     var _id: ObjectId = ObjectId.create()
     var username: String = ""

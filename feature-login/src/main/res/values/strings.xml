@@ -23,6 +23,9 @@
     <!-- CHOOSE PASSWORD SCREEN -->
     <string name="choose_your_password">👋 Choose your password</string>
     <string name="choose_your_password_description">You should choose a secure password with mix of special chars. If you forgot your password, You will never be able to recover your account in any manner.</string>
+    <string name="please_enter_password">Please enter password</string>
+    <string name="please_enter_confirm_password">Please enter confirm password</string>
+    <string name="password_not_match">Password not match</string>
 
     <!-- LOGIN DETAILS SCREEN -->
     <string name="save_your_details">🙌 Save Your Details</string>

@@ -1,5 +1,5 @@
 package com.mukul.jan.primer.data.login.api
 
-interface KeyApi {
+interface SecureKeyApi {
     suspend fun generate(): String
 }

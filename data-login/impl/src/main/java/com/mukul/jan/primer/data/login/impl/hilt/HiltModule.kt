@@ -1,11 +1,11 @@
 package com.mukul.jan.primer.data.login.impl.hilt
 
-import com.mukul.jan.primer.data.login.api.AuthApi
-import com.mukul.jan.primer.data.login.api.RealmAppApi
-import com.mukul.jan.primer.data.login.impl.AuthApiImpl
-import com.mukul.jan.primer.data.login.impl.RealmAppApiImpl
+import com.mu.jan.primer.common.AppCoroutineDispatcher
+import com.mukul.jan.primer.data.login.api.*
+import com.mukul.jan.primer.data.login.impl.*
 import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
@@ -23,8 +23,25 @@ abstract class HiltModule {
 
     @Singleton
     @Binds
-    abstract fun bindLoginApi(
+    abstract fun bindAuthApi(
         impl: AuthApiImpl
     ): AuthApi
 
+    @Singleton
+    @Binds
+    abstract fun bindLoginUserApi(
+        impl: LoginUserApiImpl
+    ): LoginUserApi
+
+    @Singleton
+    @Binds
+    abstract fun bindRegisterUserApi(
+        impl: RegisterUserApiImpl
+    ): RegisterUserApi
+
+    @Singleton
+    @Binds
+    abstract fun bindUserDataApi(
+        impl: UserDataApiImpl
+    ): UserDataApi
 }

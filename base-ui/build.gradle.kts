@@ -8,6 +8,7 @@ android {
     }
 }
 dependencies {
+    platform(libs.android.compose.bom)
     implementation(libs.androidx.core.ktx)
     implementation(libs.bundles.android.compose)
     implementation(libs.bundles.android.accompanist)

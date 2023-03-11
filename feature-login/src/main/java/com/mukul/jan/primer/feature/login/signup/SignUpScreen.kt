@@ -1,4 +1,4 @@
-package com.mukul.jan.primer.feature.login.detail
+package com.mukul.jan.primer.feature.login.signup
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -6,6 +6,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -13,35 +16,56 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.mu.jan.primer.common.ui.ErrorMessage
 import com.mu.jan.primer.common.ui.compose.PrimaryRoundButton
 import com.mu.jan.primer.common.ui.compose.PrimaryTextField
 import com.mukul.jan.primer.base.ui.Dimens
 import com.mukul.jan.primer.base.ui.design.PrimerTheme
 import com.mukul.jan.primer.feature.login.R
+import kotlinx.coroutines.flow.filterIsInstance
 
 @Composable
-fun LoginDetailScreen(
+fun SignUpScreen(
     onBack: () -> Unit,
     onFinish: () -> Unit,
 ) {
-    LoginDetailScreenContent(
-        onBackPress = onBack,
-        onFinishClick = onFinish,
-        nameInputValue = " ",
-        privateKeyInputValue = " ",
-        publicKeyInputValue = " "
-    )
+    val viewModel: SignUpViewModel = hiltViewModel()
+    val uiState by viewModel.uiState.filterIsInstance<SignUpViewModel.UiState.Details>()
+        .collectAsState(null)
+
+    uiState?.let {
+        LaunchedEffect(it.signUp) {
+            if (it.signUp) {
+                onFinish.invoke()
+                viewModel.onSignUpRevert()
+            }
+        }
+        SignUpScreenContent(
+            onBackPress = onBack,
+            onFinishClick = viewModel::validateAndSignUp,
+            nameInputValue = it.username,
+            privateKeyInputValue = it.privateKey,
+            publicKeyInputValue = it.publicKey,
+            errorMessages = it.errorMessages,
+            onErrorMessageShown = viewModel::onErrorMessageShown,
+            scaffoldState = rememberScaffoldState()
+        )
+    }
 }
 
 @Composable
-private fun LoginDetailScreenContent(
+private fun SignUpScreenContent(
     onBackPress: () -> Unit,
     onFinishClick: () -> Unit,
     nameInputValue: String,
     privateKeyInputValue: String,
     publicKeyInputValue: String,
+    errorMessages: List<ErrorMessage>,
+    onErrorMessageShown: (Long) -> Unit,
+    scaffoldState: ScaffoldState
 ) {
-    Scaffold(modifier = Modifier.fillMaxSize(), topBar = {
+    Scaffold(modifier = Modifier.fillMaxSize(), scaffoldState = scaffoldState, topBar = {
         TopAppBar(title = { Text(text = "") }, navigationIcon = {
             IconButton(onClick = onBackPress) {
                 Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = "back")
@@ -80,10 +104,9 @@ private fun LoginDetailScreenContent(
                 enabled = false
             )
             Spacer(modifier = Modifier.height(Dimens.HALF.dp))
-            PrimaryTextField(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = Dimens.THREE.dp),
+            PrimaryTextField(modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = Dimens.THREE.dp),
                 value = privateKeyInputValue,
                 onValueChange = {},
                 label = { Text(text = stringResource(id = R.string.private_key)) },
@@ -95,13 +118,11 @@ private fun LoginDetailScreenContent(
                         fontWeight = FontWeight.Bold,
                         text = stringResource(id = R.string.copy)
                     )
-                }
-            )
+                })
             Spacer(modifier = Modifier.height(Dimens.HALF.dp))
-            PrimaryTextField(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = Dimens.THREE.dp),
+            PrimaryTextField(modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = Dimens.THREE.dp),
                 value = publicKeyInputValue,
                 onValueChange = {},
                 label = { Text(text = stringResource(id = R.string.public_key)) },
@@ -113,8 +134,7 @@ private fun LoginDetailScreenContent(
                         fontWeight = FontWeight.Bold,
                         text = stringResource(id = R.string.copy)
                     )
-                }
-            )
+                })
             Spacer(modifier = Modifier.height(Dimens.FOUR.dp))
             PrimaryRoundButton(onClick = onFinishClick) {
                 Row(
@@ -122,26 +142,42 @@ private fun LoginDetailScreenContent(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Text(
-                        text = stringResource(id = R.string.finish),
-                        fontWeight = FontWeight.Bold
+                        text = stringResource(id = R.string.finish), fontWeight = FontWeight.Bold
                     )
                     Icon(imageVector = Icons.Default.ArrowForward, contentDescription = "next")
                 }
             }
         }
     }
+
+    if (errorMessages.isNotEmpty()) {
+        val errorMessage = errorMessages.first()
+        val errorMessageText = when (errorMessage) {
+            is ErrorMessage.StringIdType -> stringResource(id = errorMessage.resId)
+            is ErrorMessage.StringType -> errorMessage.message
+        }
+        LaunchedEffect(errorMessageText) {
+            scaffoldState.snackbarHostState.showSnackbar(
+                message = errorMessageText,
+            )
+            onErrorMessageShown(errorMessage.id)
+        }
+    }
 }
 
 @Preview
 @Composable
-private fun LoginDetailScreenPreview() {
+private fun SignUpScreenPreview() {
     PrimerTheme {
-        LoginDetailScreenContent(
+        SignUpScreenContent(
             onBackPress = {},
             onFinishClick = {},
             nameInputValue = "",
             privateKeyInputValue = "",
-            publicKeyInputValue = ""
+            publicKeyInputValue = "",
+            errorMessages = emptyList(),
+            onErrorMessageShown = {},
+            scaffoldState = rememberScaffoldState()
         )
     }
 }

@@ -7,6 +7,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -19,6 +20,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.mu.jan.primer.common.ui.ErrorMessage
 import com.mu.jan.primer.common.ui.compose.PrimaryRoundButton
 import com.mu.jan.primer.common.ui.compose.PrimaryTextField
 import com.mukul.jan.primer.base.ui.Dimens
@@ -36,17 +38,22 @@ fun ChoosePasswordScreen(
         .collectAsState(null)
 
     uiState?.let {
+        LaunchedEffect(it.passwordValidated) {
+            if (it.passwordValidated) {
+                onNext.invoke()
+                viewModel.onPasswordValidationRevert()
+            }
+        }
         ChoosePasswordScreenContent(
             onBackPress = onBack,
-            onNextClick = onNext,
+            onNextClick = viewModel::validate,
             passwordInputInitialValue = it.password,
             confirmPasswordInputInitialValue = it.confirmPassword,
-            onPasswordInputValueChange = { value ->
-                viewModel.onPasswordChanged(value)
-            },
-            onConfirmPasswordInputValueChange = { value ->
-                viewModel.onConfirmPasswordChange(value)
-            },
+            onPasswordInputValueChange = viewModel::onPasswordChanged,
+            onConfirmPasswordInputValueChange = viewModel::onConfirmPasswordChange,
+            errorMessages = it.errorMessages,
+            onErrorMessageShown = viewModel::onErrorMessageShown,
+            scaffoldState = rememberScaffoldState(),
         )
     }
 }
@@ -59,8 +66,11 @@ private fun ChoosePasswordScreenContent(
     confirmPasswordInputInitialValue: String,
     onPasswordInputValueChange: (String) -> Unit,
     onConfirmPasswordInputValueChange: (String) -> Unit,
+    errorMessages: List<ErrorMessage>,
+    onErrorMessageShown: (Long) -> Unit,
+    scaffoldState: ScaffoldState,
 ) {
-    Scaffold(modifier = Modifier.fillMaxSize(), topBar = {
+    Scaffold(scaffoldState = scaffoldState, modifier = Modifier.fillMaxSize(), topBar = {
         TopAppBar(title = { Text(text = "") }, navigationIcon = {
             IconButton(onClick = onBackPress) {
                 Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = "back")
@@ -118,12 +128,25 @@ private fun ChoosePasswordScreenContent(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Text(
-                        text = stringResource(id = R.string.next),
-                        fontWeight = FontWeight.Bold
+                        text = stringResource(id = R.string.next), fontWeight = FontWeight.Bold
                     )
                     Icon(imageVector = Icons.Default.ArrowForward, contentDescription = "next")
                 }
             }
+        }
+    }
+
+    if (errorMessages.isNotEmpty()) {
+        val errorMessage = errorMessages.first()
+        val errorMessageText = when (errorMessage) {
+            is ErrorMessage.StringIdType -> stringResource(id = errorMessage.resId)
+            is ErrorMessage.StringType -> errorMessage.message
+        }
+        LaunchedEffect(errorMessageText) {
+            scaffoldState.snackbarHostState.showSnackbar(
+                message = errorMessageText,
+            )
+            onErrorMessageShown(errorMessage.id)
         }
     }
 }
@@ -139,6 +162,9 @@ private fun ChoosePasswordScreenPreview() {
             confirmPasswordInputInitialValue = "",
             onPasswordInputValueChange = {},
             onConfirmPasswordInputValueChange = {},
+            errorMessages = emptyList(),
+            onErrorMessageShown = {},
+            scaffoldState = rememberScaffoldState()
         )
     }
 }

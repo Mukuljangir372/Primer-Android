@@ -55,7 +55,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.3.0"
+        kotlinCompilerExtensionVersion = "1.4.0-alpha01"
     }
     testOptions {
         animationsDisabled = true
@@ -70,6 +70,7 @@ kapt {
 dependencies {
     implementation(project(":common"))
 
+    platform(libs.android.compose.bom)
     implementation(libs.bundles.androidx.ktx)
     implementation(libs.android.hilt)
     kapt(libs.android.hilt.compiler)
