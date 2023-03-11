@@ -1,5 +1,6 @@
 package com.mukul.jan.primer.feature.login.choose
 
+import android.content.Context
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -13,6 +14,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -51,6 +53,7 @@ fun ChooseUsernameScreen(
             errorMessages = it.errorMessages,
             onErrorMessageShown = viewModel::onErrorMessageShown,
             scaffoldState = rememberScaffoldState(),
+            context = LocalContext.current
         )
     }
 }
@@ -64,6 +67,7 @@ private fun ChooseUsernameScreenContent(
     errorMessages: List<ErrorMessage>,
     onErrorMessageShown: (Long) -> Unit,
     scaffoldState: ScaffoldState,
+    context: Context,
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -119,13 +123,13 @@ private fun ChooseUsernameScreenContent(
         }
     }
 
-    if (errorMessages.isNotEmpty()) {
-        val errorMessage = errorMessages.first()
-        val errorMessageText = when (errorMessage) {
-            is ErrorMessage.StringIdType -> stringResource(id = errorMessage.resId)
-            is ErrorMessage.StringType -> errorMessage.message
-        }
-        LaunchedEffect(errorMessageText) {
+    LaunchedEffect(errorMessages) {
+        if (errorMessages.isNotEmpty()) {
+            val errorMessage = errorMessages.first()
+            val errorMessageText = when (errorMessage) {
+                is ErrorMessage.StringIdType -> context.getString(errorMessage.resId)
+                is ErrorMessage.StringType -> errorMessage.message
+            }
             scaffoldState.snackbarHostState.showSnackbar(
                 message = errorMessageText,
             )
@@ -146,6 +150,7 @@ private fun ChooseUsernameScreenPreview() {
             errorMessages = emptyList(),
             onErrorMessageShown = {},
             scaffoldState = rememberScaffoldState(),
+            context = LocalContext.current
         )
     }
 }

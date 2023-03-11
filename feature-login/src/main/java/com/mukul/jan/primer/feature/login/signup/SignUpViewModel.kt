@@ -78,7 +78,11 @@ class SignUpViewModel @Inject constructor(
     }
 
     private fun showErrorMessage(msg: ErrorMessage) {
-        state.update { it.copy(errorMessages = it.errorMessages + msg) }
+        state.update { it.copy(errorMessages = listOf(msg)) }
+    }
+
+    private fun clearErrorMessages() {
+        state.update { it.copy(errorMessages = emptyList()) }
     }
 
     init {
@@ -99,7 +103,8 @@ class SignUpViewModel @Inject constructor(
             container.update { it.copy(publicKey = key) }
             key
         }
-        state.getAndUpdate {
+        clearErrorMessages()
+        state.update {
             it.copy(
                 username = details.username,
                 publicKey = publicKey,

@@ -7,7 +7,7 @@ import com.mukul.jan.primer.domain.container.SignInLocalDataContainer
 import com.mukul.jan.primer.feature.login.R
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
-import java.util.UUID
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -78,7 +78,11 @@ class ChoosePasswordViewModel @Inject constructor(
     }
 
     private fun showErrorMessage(message: ErrorMessage) {
-        state.update { it.copy(errorMessages = it.errorMessages + message) }
+        state.update { it.copy(errorMessages = listOf(message)) }
+    }
+
+    private fun clearErrorMessages() {
+        state.update { it.copy(errorMessages = emptyList()) }
     }
 
     fun validate() {
@@ -97,6 +101,7 @@ class ChoosePasswordViewModel @Inject constructor(
             showErrorMessage(msg)
             return
         }
+        clearErrorMessages()
         state.update { it.copy(errorMessages = emptyList(), passwordValidated = true) }
         container.update { it.copy(password = password) }
     }
