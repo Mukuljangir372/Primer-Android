@@ -1,5 +1,6 @@
 package com.mukul.jan.primer.feature.login.signin
 
+import android.content.Context
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
@@ -12,6 +13,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -50,7 +52,8 @@ fun SignInScreen(
             privateKeyInputInitialValue = it.privateKey,
             onPrivateKeyInputValueChange = viewModel::onPrivateKeyChange,
             passwordInputInitialValue = it.password,
-            onPasswordInputValueChange = viewModel::onPasswordChange
+            onPasswordInputValueChange = viewModel::onPasswordChange,
+            context = LocalContext.current
         )
     }
 }
@@ -63,6 +66,7 @@ private fun SignInScreenContent(
     onPrivateKeyInputValueChange: (String) -> Unit,
     passwordInputInitialValue: String,
     onPasswordInputValueChange: (String) -> Unit,
+    context: Context
 ) {
     Scaffold(modifier = Modifier.fillMaxSize(), topBar = {
         TopAppBar(title = { Text(text = "") }, navigationIcon = {
@@ -148,7 +152,8 @@ private fun SignInScreenPreview() {
             privateKeyInputInitialValue = "",
             onPrivateKeyInputValueChange = {},
             passwordInputInitialValue = "",
-            onPasswordInputValueChange = {}
+            onPasswordInputValueChange = {},
+            context = LocalContext.current
         )
     }
 }

@@ -2,9 +2,7 @@ package com.mu.jan.primer.common.ui.compose
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
-import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -37,7 +35,9 @@ fun PrimaryTextField(
         colors = TextFieldDefaults.textFieldColors(
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
-            disabledIndicatorColor = Color.Transparent
+            disabledIndicatorColor = Color.Transparent,
+            disabledLabelColor = MaterialTheme.colors.primary,
+            disabledTextColor = LocalContentColor.current
         ),
         shape = RoundedCornerShape(Dimens.HALF.dp),
         keyboardOptions = keyboardOptions,

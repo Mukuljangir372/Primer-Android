@@ -1,16 +1,19 @@
 package com.mukul.jan.primer.feature.login.signup
 
+import android.content.Context
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.filled.Send
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -49,7 +52,8 @@ fun SignUpScreen(
             publicKeyInputValue = it.publicKey,
             errorMessages = it.errorMessages,
             onErrorMessageShown = viewModel::onErrorMessageShown,
-            scaffoldState = rememberScaffoldState()
+            scaffoldState = rememberScaffoldState(),
+            context = LocalContext.current
         )
     }
 }
@@ -63,7 +67,8 @@ private fun SignUpScreenContent(
     publicKeyInputValue: String,
     errorMessages: List<ErrorMessage>,
     onErrorMessageShown: (Long) -> Unit,
-    scaffoldState: ScaffoldState
+    scaffoldState: ScaffoldState,
+    context: Context
 ) {
     Scaffold(modifier = Modifier.fillMaxSize(), scaffoldState = scaffoldState, topBar = {
         TopAppBar(title = { Text(text = "") }, navigationIcon = {
@@ -113,11 +118,7 @@ private fun SignUpScreenContent(
                 placeholder = { Text(text = stringResource(id = R.string.private_key)) },
                 enabled = false,
                 trailingIcon = {
-                    Text(
-                        modifier = Modifier.padding(horizontal = Dimens.ONE.dp),
-                        fontWeight = FontWeight.Bold,
-                        text = stringResource(id = R.string.copy)
-                    )
+                    Icon(Icons.Default.Send, contentDescription = null)
                 })
             Spacer(modifier = Modifier.height(Dimens.HALF.dp))
             PrimaryTextField(modifier = Modifier
@@ -129,11 +130,7 @@ private fun SignUpScreenContent(
                 placeholder = { Text(text = stringResource(id = R.string.public_key)) },
                 enabled = false,
                 trailingIcon = {
-                    Text(
-                        modifier = Modifier.padding(horizontal = Dimens.ONE.dp),
-                        fontWeight = FontWeight.Bold,
-                        text = stringResource(id = R.string.copy)
-                    )
+                    Icon(Icons.Default.Send, contentDescription = null)
                 })
             Spacer(modifier = Modifier.height(Dimens.FOUR.dp))
             PrimaryRoundButton(onClick = onFinishClick) {
@@ -150,13 +147,13 @@ private fun SignUpScreenContent(
         }
     }
 
-    if (errorMessages.isNotEmpty()) {
-        val errorMessage = errorMessages.first()
-        val errorMessageText = when (errorMessage) {
-            is ErrorMessage.StringIdType -> stringResource(id = errorMessage.resId)
-            is ErrorMessage.StringType -> errorMessage.message
-        }
-        LaunchedEffect(errorMessageText) {
+    LaunchedEffect(errorMessages) {
+        if (errorMessages.isNotEmpty()) {
+            val errorMessage = errorMessages.first()
+            val errorMessageText = when (errorMessage) {
+                is ErrorMessage.StringIdType -> context.getString(errorMessage.resId)
+                is ErrorMessage.StringType -> errorMessage.message
+            }
             scaffoldState.snackbarHostState.showSnackbar(
                 message = errorMessageText,
             )
@@ -177,7 +174,8 @@ private fun SignUpScreenPreview() {
             publicKeyInputValue = "",
             errorMessages = emptyList(),
             onErrorMessageShown = {},
-            scaffoldState = rememberScaffoldState()
+            scaffoldState = rememberScaffoldState(),
+            context = LocalContext.current
         )
     }
 }

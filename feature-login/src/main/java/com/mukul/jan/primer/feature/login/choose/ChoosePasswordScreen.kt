@@ -1,5 +1,6 @@
 package com.mukul.jan.primer.feature.login.choose
 
+import android.content.Context
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
@@ -12,6 +13,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -54,6 +56,7 @@ fun ChoosePasswordScreen(
             errorMessages = it.errorMessages,
             onErrorMessageShown = viewModel::onErrorMessageShown,
             scaffoldState = rememberScaffoldState(),
+            context = LocalContext.current
         )
     }
 }
@@ -69,6 +72,7 @@ private fun ChoosePasswordScreenContent(
     errorMessages: List<ErrorMessage>,
     onErrorMessageShown: (Long) -> Unit,
     scaffoldState: ScaffoldState,
+    context: Context,
 ) {
     Scaffold(scaffoldState = scaffoldState, modifier = Modifier.fillMaxSize(), topBar = {
         TopAppBar(title = { Text(text = "") }, navigationIcon = {
@@ -136,13 +140,13 @@ private fun ChoosePasswordScreenContent(
         }
     }
 
-    if (errorMessages.isNotEmpty()) {
-        val errorMessage = errorMessages.first()
-        val errorMessageText = when (errorMessage) {
-            is ErrorMessage.StringIdType -> stringResource(id = errorMessage.resId)
-            is ErrorMessage.StringType -> errorMessage.message
-        }
-        LaunchedEffect(errorMessageText) {
+    LaunchedEffect(errorMessages) {
+        if (errorMessages.isNotEmpty()) {
+            val errorMessage = errorMessages.first()
+            val errorMessageText = when (errorMessage) {
+                is ErrorMessage.StringIdType -> context.getString(errorMessage.resId)
+                is ErrorMessage.StringType -> errorMessage.message
+            }
             scaffoldState.snackbarHostState.showSnackbar(
                 message = errorMessageText,
             )
@@ -164,7 +168,8 @@ private fun ChoosePasswordScreenPreview() {
             onConfirmPasswordInputValueChange = {},
             errorMessages = emptyList(),
             onErrorMessageShown = {},
-            scaffoldState = rememberScaffoldState()
+            scaffoldState = rememberScaffoldState(),
+            context = LocalContext.current
         )
     }
 }

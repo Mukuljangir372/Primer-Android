@@ -61,27 +61,23 @@ class ChooseUsernameViewModel @Inject constructor(
         )
 
     fun onNameChange(_value: String) {
-        state.update {
-            it.copy(username = _value)
-        }
-    }
-
-    fun onErrorMessageShown(id: Long) {
-        state.getAndUpdate {
-            it.copy(errorMessages = it.errorMessages.filterNot { msg -> msg.id == id })
-        }
+        state.update { it.copy(username = _value) }
     }
 
     fun onUsernameValidationRevert() {
-        state.update {
-            it.copy(usernameValidated = false)
-        }
+        state.update { it.copy(usernameValidated = false) }
+    }
+
+    fun onErrorMessageShown(id: Long) {
+        state.update { it.copy(errorMessages = it.errorMessages.filterNot { msg -> msg.id == id }) }
     }
 
     private fun showErrorMessage(msg: ErrorMessage) {
-        state.getAndUpdate {
-            it.copy(errorMessages = it.errorMessages + msg)
-        }
+        state.update { it.copy(errorMessages = listOf(msg)) }
+    }
+
+    private fun clearErrorMessages() {
+        state.update { it.copy(errorMessages = emptyList()) }
     }
 
     fun validateUsername() {
@@ -94,6 +90,7 @@ class ChooseUsernameViewModel @Inject constructor(
             showErrorMessage(msg)
             return
         }
+        clearErrorMessages()
         state.update { it.copy(usernameValidated = true) }
         container.update { it.copy(username = username) }
     }
