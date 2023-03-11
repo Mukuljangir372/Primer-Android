@@ -8,9 +8,11 @@ android {
     }
 }
 dependencies {
+    implementation(project(":base-ui"))
+    implementation(project(":feature-login"))
+
+    platform(libs.android.compose.bom)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.bundles.android.compose)
-    implementation(project(":base-ui"))
-    implementation(project(":feature-login"))
 }

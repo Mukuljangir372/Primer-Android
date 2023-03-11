@@ -8,9 +8,10 @@ android {
     }
 }
 dependencies {
+    implementation(project(":base-ui"))
+
+    platform(libs.android.compose.bom)
     implementation(libs.androidx.core.ktx)
     implementation(libs.bundles.android.compose)
     debugImplementation(libs.bundles.android.compose.debug)
-
-    implementation(project(":base-ui"))
 }

@@ -7,6 +7,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -16,25 +19,40 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.mu.jan.primer.common.ui.compose.PrimaryRoundButton
 import com.mu.jan.primer.common.ui.compose.PrimaryTextField
 import com.mukul.jan.primer.base.ui.Dimens
 import com.mukul.jan.primer.base.ui.design.PrimerTheme
 import com.mukul.jan.primer.feature.login.R
+import kotlinx.coroutines.flow.filterIsInstance
 
 @Composable
 fun SignInScreen(
     onBack: () -> Unit,
-    onLogin: () -> Unit,
+    onLoginSuccess: () -> Unit,
 ) {
-    SignInScreenContent(
-        onBackPress = onBack,
-        onLoginClick = onLogin,
-        privateKeyInputInitialValue = " ",
-        onPrivateKeyInputValueChange = {},
-        passwordInputInitialValue = " ",
-        onPasswordInputValueChange = {}
-    )
+    val viewModel: SignInViewModel = hiltViewModel()
+    val uiState by viewModel.uiState.filterIsInstance<SignInViewModel.UiState.SignIn>()
+        .collectAsState(initial = null)
+
+    uiState?.let {
+        LaunchedEffect(it.isLoggedIn) {
+            if(it.isLoggedIn) {
+                onLoginSuccess.invoke()
+                viewModel.onLoggedInSuccess()
+            }
+        }
+
+        SignInScreenContent(
+            onBackPress = onBack,
+            onLoginClick = viewModel::signIn,
+            privateKeyInputInitialValue = it.privateKey,
+            onPrivateKeyInputValueChange = viewModel::onPrivateKeyChange,
+            passwordInputInitialValue = it.password,
+            onPasswordInputValueChange = viewModel::onPasswordChange
+        )
+    }
 }
 
 @Composable

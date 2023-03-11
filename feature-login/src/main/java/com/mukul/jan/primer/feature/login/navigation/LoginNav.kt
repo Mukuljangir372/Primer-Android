@@ -7,7 +7,7 @@ import androidx.navigation.navigation
 import com.mukul.jan.primer.feature.login.PrimaryLoginScreen
 import com.mukul.jan.primer.feature.login.choose.ChoosePasswordScreen
 import com.mukul.jan.primer.feature.login.choose.ChooseUsernameScreen
-import com.mukul.jan.primer.feature.login.detail.LoginDetailScreen
+import com.mukul.jan.primer.feature.login.signup.SignUpScreen
 import com.mukul.jan.primer.feature.login.signin.SignInScreen
 
 
@@ -60,10 +60,10 @@ object LoginNav {
                     })
                 }
                 composable(NavScreen.LoginDetail.createRoute(root)) {
-                    LoginDetailScreen(onFinish = {}, onBack = { navController.navigateUp() })
+                    SignUpScreen(onFinish = {}, onBack = { navController.navigateUp() })
                 }
                 composable(NavScreen.SignIn.createRoute(root)) {
-                    SignInScreen(onLogin = {}, onBack = { navController.navigateUp() })
+                    SignInScreen(onLoginSuccess = {}, onBack = { navController.navigateUp() })
                 }
             }
         }

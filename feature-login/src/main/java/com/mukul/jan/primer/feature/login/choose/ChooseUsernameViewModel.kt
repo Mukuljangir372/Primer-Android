@@ -3,6 +3,7 @@ package com.mukul.jan.primer.feature.login.choose
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mu.jan.primer.common.ui.ErrorMessage
+import com.mukul.jan.primer.domain.container.SignInLocalDataContainer
 import com.mukul.jan.primer.feature.login.R
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -10,7 +11,9 @@ import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
-class ChooseUsernameViewModel @Inject constructor() : ViewModel() {
+class ChooseUsernameViewModel @Inject constructor(
+    private val container: SignInLocalDataContainer
+) : ViewModel() {
     data class State(
         val isLoading: Boolean,
         val errorMessages: List<ErrorMessage>,
@@ -69,7 +72,7 @@ class ChooseUsernameViewModel @Inject constructor() : ViewModel() {
         }
     }
 
-    fun onUsernameValidationComplete() {
+    fun onUsernameValidationRevert() {
         state.update {
             it.copy(usernameValidated = false)
         }
@@ -82,18 +85,17 @@ class ChooseUsernameViewModel @Inject constructor() : ViewModel() {
     }
 
     fun validateUsername() {
-        val username = (uiState.value as UiState.ChooseName).username //guaranteed cast
+        val username = state.value.username
         if (username.trim().isEmpty()) {
             val msg = ErrorMessage.StringIdType(
                 id = UUID.randomUUID().mostSignificantBits,
                 resId = R.string.please_enter_your_name
             )
             showErrorMessage(msg)
-        } else {
-            state.update {
-                it.copy(usernameValidated = true)
-            }
+            return
         }
+        state.update { it.copy(usernameValidated = true) }
+        container.update { it.copy(username = username) }
     }
 }
 

@@ -40,10 +40,9 @@ fun ChooseUsernameScreen(
         LaunchedEffect(it.usernameValidated) {
             if (it.usernameValidated) {
                 onNext.invoke()
-                viewModel.onUsernameValidationComplete()
+                viewModel.onUsernameValidationRevert()
             }
         }
-
         ChooseUsernameScreenContent(
             onBackPress = onBack,
             onNextClick = viewModel::validateUsername,
