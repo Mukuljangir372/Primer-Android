@@ -2,7 +2,7 @@ package com.mukul.jan.primer.feature.login.choose
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mu.jan.primer.common.ui.ErrorMessage
+import com.mu.jan.primer.common.Message
 import com.mukul.jan.primer.domain.container.SignInLocalDataContainer
 import com.mukul.jan.primer.feature.login.R
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,7 +16,7 @@ class ChoosePasswordViewModel @Inject constructor(
 ) : ViewModel() {
     data class State(
         val isLoading: Boolean,
-        val errorMessages: List<ErrorMessage>,
+        val errorMessages: List<Message>,
         val password: String,
         val confirmPassword: String,
         val passwordValidated: Boolean,
@@ -44,11 +44,11 @@ class ChoosePasswordViewModel @Inject constructor(
 
     sealed interface UiState {
         val isLoading: Boolean
-        val errorMessages: List<ErrorMessage>
+        val errorMessages: List<Message>
 
         data class ChoosePassword(
             override val isLoading: Boolean,
-            override val errorMessages: List<ErrorMessage>,
+            override val errorMessages: List<Message>,
             val password: String,
             val confirmPassword: String,
             val passwordValidated: Boolean,
@@ -77,7 +77,7 @@ class ChoosePasswordViewModel @Inject constructor(
         state.update { it.copy(errorMessages = it.errorMessages.filterNot { i -> i.id != id }) }
     }
 
-    private fun showErrorMessage(message: ErrorMessage) {
+    private fun showErrorMessage(message: Message) {
         state.update { it.copy(errorMessages = listOf(message)) }
     }
 
@@ -95,10 +95,12 @@ class ChoosePasswordViewModel @Inject constructor(
             else -> 0
         }
         if (error != 0) {
-            val msg = ErrorMessage.StringIdType(
-                id = UUID.randomUUID().mostSignificantBits, resId = error
+            showErrorMessage(
+                Message.StringResType(
+                    id = UUID.randomUUID().mostSignificantBits,
+                    resId = error
+                )
             )
-            showErrorMessage(msg)
             return
         }
         clearErrorMessages()

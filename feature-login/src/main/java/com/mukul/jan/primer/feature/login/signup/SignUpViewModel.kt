@@ -3,7 +3,7 @@ package com.mukul.jan.primer.feature.login.signup
 import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mu.jan.primer.common.ui.ErrorMessage
+import com.mu.jan.primer.common.Message
 import com.mukul.jan.primer.domain.container.SignInLocalDataContainer
 import com.mukul.jan.primer.domain.generator.SecureKeyGenerator
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,7 +19,7 @@ class SignUpViewModel @Inject constructor(
 ) : ViewModel() {
     data class State(
         val isLoading: Boolean,
-        val errorMessages: List<ErrorMessage>,
+        val errorMessages: List<Message>,
         val username: String,
         val publicKey: String,
         val privateKey: String,
@@ -50,11 +50,11 @@ class SignUpViewModel @Inject constructor(
 
     sealed interface UiState {
         val isLoading: Boolean
-        val errorMessages: List<ErrorMessage>
+        val errorMessages: List<Message>
 
         data class Details(
             override val isLoading: Boolean,
-            override val errorMessages: List<ErrorMessage>,
+            override val errorMessages: List<Message>,
             val username: String,
             val privateKey: String,
             val publicKey: String,
@@ -77,7 +77,7 @@ class SignUpViewModel @Inject constructor(
 
     fun showErrorMessage(@StringRes msg: Int) {
         showErrorMessage(
-            ErrorMessage.StringIdType(
+            Message.StringResType(
                 id = UUID.randomUUID().mostSignificantBits,
                 resId = msg
             )
@@ -88,7 +88,7 @@ class SignUpViewModel @Inject constructor(
         state.update { it.copy(errorMessages = it.errorMessages.filterNot { i -> i.id == id }) }
     }
 
-    private fun showErrorMessage(msg: ErrorMessage) {
+    private fun showErrorMessage(msg: Message) {
         state.update { it.copy(errorMessages = listOf(msg)) }
     }
 
@@ -125,7 +125,11 @@ class SignUpViewModel @Inject constructor(
     }
 
     fun validateAndSignUp() {
+        val details = container.signInDetail.value
 
+        check(details.username.trim().isEmpty()) { "Username can't empty" }
+        check(details.privateKey.trim().isEmpty()) { "Private key can't empty" }
+        check(details.publicKey.trim().isEmpty()) { "Public key can't empty" }
     }
 
 }

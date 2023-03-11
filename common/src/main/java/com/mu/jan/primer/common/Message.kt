@@ -1,15 +1,15 @@
-package com.mu.jan.primer.common.ui
+package com.mu.jan.primer.common
 
 import androidx.annotation.StringRes
 
-sealed interface ErrorMessage {
+sealed interface Message {
     val id: Long
 
     data class StringType(
         override val id: Long, val message: String
-    ) : ErrorMessage
+    ) : Message
 
-    data class StringIdType(
+    data class StringResType(
         override val id: Long, @StringRes val resId: Int
-    ) : ErrorMessage
+    ) : Message
 }

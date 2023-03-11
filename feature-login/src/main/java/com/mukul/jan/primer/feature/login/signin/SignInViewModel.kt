@@ -2,13 +2,13 @@ package com.mukul.jan.primer.feature.login.signin
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mu.jan.primer.common.ui.ErrorMessage
+import com.mu.jan.primer.common.Message
 import kotlinx.coroutines.flow.*
 
 class SignInViewModel : ViewModel() {
     data class State(
         val isLoading: Boolean,
-        val errorMessages: List<ErrorMessage>,
+        val errorMessages: List<Message>,
         val privateKey: String,
         val password: String,
         val isLoggedIn: Boolean,
@@ -36,11 +36,11 @@ class SignInViewModel : ViewModel() {
 
     sealed interface UiState {
         val isLoading: Boolean
-        val errorMessages: List<ErrorMessage>
+        val errorMessages: List<Message>
 
         data class SignIn(
             override val isLoading: Boolean,
-            override val errorMessages: List<ErrorMessage>,
+            override val errorMessages: List<Message>,
             val privateKey: String,
             val password: String,
             val isLoggedIn: Boolean,
