@@ -1,5 +1,6 @@
 package com.mukul.jan.primer.feature.login.signup
 
+import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mu.jan.primer.common.ui.ErrorMessage
@@ -8,6 +9,7 @@ import com.mukul.jan.primer.domain.generator.SecureKeyGenerator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -71,6 +73,15 @@ class SignUpViewModel @Inject constructor(
 
     fun onSignUpRevert() {
         state.update { it.copy(signUp = false) }
+    }
+
+    fun showErrorMessage(@StringRes msg: Int) {
+        showErrorMessage(
+            ErrorMessage.StringIdType(
+                id = UUID.randomUUID().mostSignificantBits,
+                resId = msg
+            )
+        )
     }
 
     fun onErrorMessageShown(id: Long) {
