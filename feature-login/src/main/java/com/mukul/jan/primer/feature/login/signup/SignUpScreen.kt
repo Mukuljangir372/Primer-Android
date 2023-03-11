@@ -1,20 +1,23 @@
 package com.mukul.jan.primer.feature.login.signup
 
 import android.content.Context
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowForward
-import androidx.compose.material.icons.filled.Send
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -37,6 +40,8 @@ fun SignUpScreen(
     val uiState by viewModel.uiState.filterIsInstance<SignUpViewModel.UiState.Details>()
         .collectAsState(null)
 
+    val clipboard = LocalClipboardManager.current
+
     uiState?.let {
         LaunchedEffect(it.signUp) {
             if (it.signUp) {
@@ -44,8 +49,7 @@ fun SignUpScreen(
                 viewModel.onSignUpRevert()
             }
         }
-        SignUpScreenContent(
-            onBackPress = onBack,
+        SignUpScreenContent(onBackPress = onBack,
             onFinishClick = viewModel::validateAndSignUp,
             nameInputValue = it.username,
             privateKeyInputValue = it.privateKey,
@@ -53,8 +57,11 @@ fun SignUpScreen(
             errorMessages = it.errorMessages,
             onErrorMessageShown = viewModel::onErrorMessageShown,
             scaffoldState = rememberScaffoldState(),
-            context = LocalContext.current
-        )
+            context = LocalContext.current,
+            onCopyClick = {
+                clipboard.setText(buildAnnotatedString { append(it) })
+                viewModel.showErrorMessage(R.string.copied)
+            })
     }
 }
 
@@ -62,13 +69,14 @@ fun SignUpScreen(
 private fun SignUpScreenContent(
     onBackPress: () -> Unit,
     onFinishClick: () -> Unit,
+    onCopyClick: (String) -> Unit,
     nameInputValue: String,
     privateKeyInputValue: String,
     publicKeyInputValue: String,
     errorMessages: List<ErrorMessage>,
     onErrorMessageShown: (Long) -> Unit,
     scaffoldState: ScaffoldState,
-    context: Context
+    context: Context,
 ) {
     Scaffold(modifier = Modifier.fillMaxSize(), scaffoldState = scaffoldState, topBar = {
         TopAppBar(title = { Text(text = "") }, navigationIcon = {
@@ -118,7 +126,13 @@ private fun SignUpScreenContent(
                 placeholder = { Text(text = stringResource(id = R.string.private_key)) },
                 enabled = false,
                 trailingIcon = {
-                    Icon(Icons.Default.Send, contentDescription = null)
+                    Icon(
+                        modifier = Modifier.clickable {
+                            onCopyClick.invoke(privateKeyInputValue)
+                        },
+                        painter = painterResource(id = com.mukul.jan.primer.base.ui.R.drawable.baseline_content_copy_24),
+                        contentDescription = null
+                    )
                 })
             Spacer(modifier = Modifier.height(Dimens.HALF.dp))
             PrimaryTextField(modifier = Modifier
@@ -130,7 +144,13 @@ private fun SignUpScreenContent(
                 placeholder = { Text(text = stringResource(id = R.string.public_key)) },
                 enabled = false,
                 trailingIcon = {
-                    Icon(Icons.Default.Send, contentDescription = null)
+                    Icon(
+                        modifier = Modifier.clickable {
+                            onCopyClick.invoke(publicKeyInputValue)
+                        },
+                        painter = painterResource(id = com.mukul.jan.primer.base.ui.R.drawable.baseline_content_copy_24),
+                        contentDescription = null
+                    )
                 })
             Spacer(modifier = Modifier.height(Dimens.FOUR.dp))
             PrimaryRoundButton(onClick = onFinishClick) {
@@ -166,8 +186,7 @@ private fun SignUpScreenContent(
 @Composable
 private fun SignUpScreenPreview() {
     PrimerTheme {
-        SignUpScreenContent(
-            onBackPress = {},
+        SignUpScreenContent(onBackPress = {},
             onFinishClick = {},
             nameInputValue = "",
             privateKeyInputValue = "",
@@ -175,7 +194,7 @@ private fun SignUpScreenPreview() {
             errorMessages = emptyList(),
             onErrorMessageShown = {},
             scaffoldState = rememberScaffoldState(),
-            context = LocalContext.current
-        )
+            context = LocalContext.current,
+            onCopyClick = {})
     }
 }

@@ -9,6 +9,7 @@
     <string name="password">Password</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="copy">Copy</string>
+    <string name="copied">Copied</string>
 
     <!-- PRIMARY SCREEN -->
     <string name="chat_description">👋 Chat with friends and family, join clubs, talk with AI, end-to-end secure messaging, fun and secure.</string>
