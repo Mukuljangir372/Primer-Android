@@ -4,7 +4,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.getAndUpdate
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class SignInLocalDataContainer @Inject constructor() {
     data class SignInDetail(
         val username: String,

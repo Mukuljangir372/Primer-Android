@@ -6,6 +6,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.filled.Send
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -117,11 +118,7 @@ private fun SignUpScreenContent(
                 placeholder = { Text(text = stringResource(id = R.string.private_key)) },
                 enabled = false,
                 trailingIcon = {
-                    Text(
-                        modifier = Modifier.padding(horizontal = Dimens.ONE.dp),
-                        fontWeight = FontWeight.Bold,
-                        text = stringResource(id = R.string.copy)
-                    )
+                    Icon(Icons.Default.Send, contentDescription = null)
                 })
             Spacer(modifier = Modifier.height(Dimens.HALF.dp))
             PrimaryTextField(modifier = Modifier
@@ -133,11 +130,7 @@ private fun SignUpScreenContent(
                 placeholder = { Text(text = stringResource(id = R.string.public_key)) },
                 enabled = false,
                 trailingIcon = {
-                    Text(
-                        modifier = Modifier.padding(horizontal = Dimens.ONE.dp),
-                        fontWeight = FontWeight.Bold,
-                        text = stringResource(id = R.string.copy)
-                    )
+                    Icon(Icons.Default.Send, contentDescription = null)
                 })
             Spacer(modifier = Modifier.height(Dimens.FOUR.dp))
             PrimaryRoundButton(onClick = onFinishClick) {
