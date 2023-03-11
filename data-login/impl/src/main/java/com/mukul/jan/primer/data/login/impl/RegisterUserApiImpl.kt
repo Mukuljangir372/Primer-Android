@@ -1,13 +1,15 @@
 package com.mukul.jan.primer.data.login.impl
 
 import com.mu.jan.primer.common.AppCoroutineDispatcher
+import com.mu.jan.primer.common.RealmAppUserDomain
 import com.mukul.jan.primer.data.login.api.RealmAppApi
 import com.mukul.jan.primer.data.login.api.RegisterUserApi
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class RegisterUserApiImpl constructor(
+class RegisterUserApiImpl @Inject constructor(
     private val realmAppApi: RealmAppApi,
-    private val userDomain: String,
+    @RealmAppUserDomain private val userDomain: String,
     private val dispatchers: AppCoroutineDispatcher,
 ) : RegisterUserApi {
     @Throws
