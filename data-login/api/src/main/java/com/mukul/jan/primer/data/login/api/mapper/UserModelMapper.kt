@@ -2,6 +2,7 @@ package com.mukul.jan.primer.data.login.api.mapper
 
 import com.mukul.jan.primer.data.login.api.api.model.UserRealmModel
 import com.mukul.jan.primer.data.login.api.network.model.UserNetworkModel
+import com.mukul.jan.primer.data.login.api.repo.model.RegisterUserActionDataModel
 import com.mukul.jan.primer.data.login.api.repo.model.UserModel
 import io.realm.kotlin.types.ObjectId
 
@@ -40,6 +41,16 @@ fun UserModel.toUserNetworkModel(): UserNetworkModel {
     val source = this
     return UserNetworkModel(
         _id = source._id,
+        username = source.username,
+        privateKey = source.privateKey,
+        publicKey = source.publicKey
+    )
+}
+
+fun RegisterUserActionDataModel.toUserNetworkModel(id: String): UserNetworkModel {
+    val source = this
+    return UserNetworkModel(
+        _id = id,
         username = source.username,
         privateKey = source.privateKey,
         publicKey = source.publicKey

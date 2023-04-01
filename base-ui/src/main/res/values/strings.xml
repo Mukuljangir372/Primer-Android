@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- APP -->
     <string name="primer">Primer</string>
+
+    <!-- COMMON -->
+    <string name="something_went_wrong">Something went wrong, please try again!</string>
+
+    <!-- SIGN UP -->
+    <string name="user_register_successfully">User register successfully!</string>
 </resources>

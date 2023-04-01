@@ -4,8 +4,10 @@ import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mu.jan.primer.common.Message
+import com.mu.jan.primer.common.Resource
+import com.mukul.jan.primer.domain.RegisterUserUseCase
+import com.mukul.jan.primer.domain.SecureKeyGenerateUseCase
 import com.mukul.jan.primer.domain.container.SignInLocalDataContainer
-import com.mukul.jan.primer.domain.generator.SecureKeyGenerator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -15,7 +17,8 @@ import javax.inject.Inject
 @HiltViewModel
 class SignUpViewModel @Inject constructor(
     private val container: SignInLocalDataContainer,
-    private val keyGenerator: SecureKeyGenerator
+    private val secureKeyGenerateUseCase: SecureKeyGenerateUseCase,
+    private val registerUserUseCase: RegisterUserUseCase,
 ) : ViewModel() {
     data class State(
         val isLoading: Boolean,
@@ -64,12 +67,9 @@ class SignUpViewModel @Inject constructor(
 
     private val state = MutableStateFlow(State.EMPTY)
 
-    val uiState = state.map(State::toUiState)
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.Eagerly,
-            initialValue = state.value
-        )
+    val uiState = state.map(State::toUiState).stateIn(
+        scope = viewModelScope, started = SharingStarted.Eagerly, initialValue = state.value
+    )
 
     fun onSignUpRevert() {
         state.update { it.copy(signUp = false) }
@@ -78,8 +78,7 @@ class SignUpViewModel @Inject constructor(
     fun showErrorMessage(@StringRes msg: Int) {
         showErrorMessage(
             Message.StringResType(
-                id = UUID.randomUUID().mostSignificantBits,
-                resId = msg
+                id = UUID.randomUUID().mostSignificantBits, resId = msg
             )
         )
     }
@@ -92,44 +91,70 @@ class SignUpViewModel @Inject constructor(
         state.update { it.copy(errorMessages = listOf(msg)) }
     }
 
-    private fun clearErrorMessages() {
-        state.update { it.copy(errorMessages = emptyList()) }
+    private fun showLoading() {
+        state.update { it.copy(isLoading = true) }
+    }
+
+    private fun hideLoading() {
+        state.update { it.copy(isLoading = false) }
     }
 
     init {
-        viewModelScope.launch {
-            prepareAndMutateDetails()
-        }
+        shakeDetails()
     }
 
-    private suspend fun prepareAndMutateDetails() {
-        val details = container.signInDetail.value
-        val privateKey = details.privateKey.ifEmpty {
-            val key = keyGenerator.generate()
-            container.update { it.copy(privateKey = key) }
-            key
-        }
-        val publicKey = details.publicKey.ifEmpty {
-            val key = keyGenerator.generate()
-            container.update { it.copy(publicKey = key) }
-            key
-        }
-        clearErrorMessages()
-        state.update {
-            it.copy(
-                username = details.username,
-                publicKey = publicKey,
-                privateKey = privateKey
-            )
+    private fun shakeDetails() {
+        viewModelScope.launch {
+            combine(
+                secureKeyGenerateUseCase.invoke(SecureKeyGenerateUseCase.Params()),
+                secureKeyGenerateUseCase.invoke(SecureKeyGenerateUseCase.Params()),
+            ) { privateKey, publicKey ->
+                val details = container.shake(generatePrivateKey = {
+                    privateKey
+                }, generatePublicKey = {
+                    publicKey
+                })
+                state.update {
+                    it.copy(
+                        username = details.username,
+                        publicKey = details.publicKey,
+                        privateKey = details.privateKey
+                    )
+                }
+            }
         }
     }
 
     fun validateAndSignUp() {
-        val details = container.signInDetail.value
+        viewModelScope.launch {
+            val details = container.signInDetail.value
+            registerUserUseCase.invoke(
+                RegisterUserUseCase.Params(
+                    username = details.username,
+                    password = details.password,
+                    privateKey = details.privateKey,
+                    publicKey = details.publicKey
+                )
+            ).collectLatest {
+                bindResource(it)
+            }
+        }
+    }
 
-        check(details.username.trim().isEmpty()) { "Username can't empty" }
-        check(details.privateKey.trim().isEmpty()) { "Private key can't empty" }
-        check(details.publicKey.trim().isEmpty()) { "Public key can't empty" }
+    private fun bindResource(resource: Resource<*>) {
+        val loading = resource is Resource.Loading
+        val errorMessage = when (resource) {
+            is Resource.Failure -> resource.msg
+            is Resource.Success -> resource.msg
+            else -> null
+        }
+
+        if (loading) showLoading()
+        else hideLoading()
+
+        if (errorMessage != null) {
+            showErrorMessage(errorMessage)
+        }
     }
 
 }

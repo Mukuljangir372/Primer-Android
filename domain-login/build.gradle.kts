@@ -5,6 +5,7 @@ android {
     namespace = "com.mukul.jan.primer.domain.login"
 }
 dependencies {
+    implementation(project(":base-ui"))
     implementation(project(":common"))
     api(project(":data-login:api"))
     api(project(":data-login:impl"))
