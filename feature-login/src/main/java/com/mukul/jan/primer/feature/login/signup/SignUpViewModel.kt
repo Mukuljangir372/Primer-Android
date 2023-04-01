@@ -105,22 +105,21 @@ class SignUpViewModel @Inject constructor(
 
     private fun shakeDetails() {
         viewModelScope.launch {
-            combine(
-                secureKeyGenerateUseCase.invoke(SecureKeyGenerateUseCase.Params()),
-                secureKeyGenerateUseCase.invoke(SecureKeyGenerateUseCase.Params()),
-            ) { privateKey, publicKey ->
-                val details = container.shake(generatePrivateKey = {
-                    privateKey
-                }, generatePublicKey = {
-                    publicKey
-                })
-                state.update {
-                    it.copy(
-                        username = details.username,
-                        publicKey = details.publicKey,
-                        privateKey = details.privateKey
-                    )
-                }
+            val privateKey =
+                secureKeyGenerateUseCase.invoke(SecureKeyGenerateUseCase.Params()).first()
+            val publicKey =
+                secureKeyGenerateUseCase.invoke(SecureKeyGenerateUseCase.Params()).first()
+            val details = container.shake(generatePrivateKey = {
+                privateKey
+            }, generatePublicKey = {
+                publicKey
+            })
+            state.update {
+                it.copy(
+                    username = details.username,
+                    publicKey = details.publicKey,
+                    privateKey = details.privateKey
+                )
             }
         }
     }

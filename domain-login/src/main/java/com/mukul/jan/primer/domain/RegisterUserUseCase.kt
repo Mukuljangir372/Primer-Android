@@ -37,10 +37,12 @@ class RegisterUserUseCase @Inject constructor(
                 emit(Resource.Loading())
             }.catch {
                 emit(Resource.Failure(msg = Message.StringResType.new(resId = R.string.something_went_wrong)))
-            }.map {
-                Resource.Success(
-                    data = it,
-                    msg = Message.StringResType.new(resId = R.string.user_register_successfully)
+            }.collectLatest {
+                emit(
+                    Resource.Success(
+                        data = it,
+                        msg = Message.StringResType.new(resId = R.string.user_register_successfully)
+                    )
                 )
             }
         }.catch {
