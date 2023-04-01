@@ -1,4 +1,4 @@
-package com.mukul.jan.primer.data.login.api
+package com.mukul.jan.primer.data.login.api.api
 
 import io.realm.kotlin.mongodb.User
 
