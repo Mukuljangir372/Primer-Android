@@ -1,9 +1,9 @@
-package com.mukul.jan.primer.data.login.impl
+package com.mukul.jan.primer.data.login.impl.api
 
 import com.mu.jan.primer.common.AppCoroutineDispatcher
 import com.mu.jan.primer.common.RealmAppUserDomain
-import com.mukul.jan.primer.data.login.api.LoginApi
-import com.mukul.jan.primer.data.login.api.RealmAppApi
+import com.mukul.jan.primer.data.login.api.api.LoginApi
+import com.mukul.jan.primer.data.login.api.api.RealmAppApi
 import io.realm.kotlin.mongodb.Credentials
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -29,6 +29,13 @@ class LoginApiImpl @Inject constructor(
                 .emailPasswordAuth
                 .registerUser(key + userDomain, password)
             key
+        }
+    }
+
+    @Throws
+    override suspend fun isLoggedIn(): Boolean {
+        return withContext(dispatchers.io) {
+            !realmAppApi.getApp().currentUser?.id.isNullOrEmpty()
         }
     }
 }

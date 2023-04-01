@@ -1,7 +1,9 @@
 package com.mukul.jan.primer.data.login.api.repo
 
+import kotlinx.coroutines.flow.Flow
+
 interface LoginRepo {
-    fun isLoggedIn()
-    fun signIn()
-    fun signUp()
+    suspend fun signIn(key: String, password: String): Flow<String>
+    suspend fun signUp(key: String, password: String): Flow<String>
+    suspend fun isLoggedIn(): Flow<Boolean>
 }

@@ -1,6 +1,6 @@
-package com.mukul.jan.primer.data.login.api
+package com.mukul.jan.primer.data.login.api.api
 
-import com.mukul.jan.primer.data.login.api.model.UserRealmModel
+import com.mukul.jan.primer.data.login.api.api.model.UserRealmModel
 
 interface UserApi {
     @Throws

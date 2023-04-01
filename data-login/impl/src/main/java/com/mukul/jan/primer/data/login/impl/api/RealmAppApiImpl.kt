@@ -1,8 +1,8 @@
-package com.mukul.jan.primer.data.login.impl
+package com.mukul.jan.primer.data.login.impl.api
 
 import com.mu.jan.primer.common.AppCoroutineDispatcher
 import com.mu.jan.primer.common.RealmAppIdQualifier
-import com.mukul.jan.primer.data.login.api.RealmAppApi
+import com.mukul.jan.primer.data.login.api.api.RealmAppApi
 import com.mukul.jan.primer.data.login.api.exception.UserNotLoggedInException
 import io.realm.kotlin.Realm
 import io.realm.kotlin.log.LogLevel
@@ -29,7 +29,7 @@ class RealmAppApiImpl @Inject constructor(
     }
 
     @Throws
-    override suspend fun getOpenSyncRealm(): Realm {
+    override suspend fun getOpenedSyncRealm(): Realm {
         return withContext(dispatchers.io) {
             val user = getApp().currentUser ?: throw UserNotLoggedInException()
             val config = SyncConfiguration.Builder(user, appId, setOf()).build()

@@ -1,4 +1,4 @@
-package com.mukul.jan.primer.data.login.api.model
+package com.mukul.jan.primer.data.login.api.api.model
 
 import io.realm.kotlin.types.ObjectId
 import io.realm.kotlin.types.RealmObject

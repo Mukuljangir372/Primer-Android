@@ -1,7 +1,9 @@
 package com.mukul.jan.primer.data.login.impl.hilt
 
 import com.mukul.jan.primer.data.login.api.*
+import com.mukul.jan.primer.data.login.api.api.*
 import com.mukul.jan.primer.data.login.impl.*
+import com.mukul.jan.primer.data.login.impl.api.*
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -10,7 +12,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class HiltModule {
+abstract class ApiHiltModule {
 
     @Singleton
     @Binds

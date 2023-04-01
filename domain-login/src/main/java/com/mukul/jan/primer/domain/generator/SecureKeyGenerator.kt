@@ -1,6 +1,6 @@
 package com.mukul.jan.primer.domain.generator
 
-import com.mukul.jan.primer.data.login.api.SecureKeyApi
+import com.mukul.jan.primer.data.login.api.api.SecureKeyApi
 import javax.inject.Inject
 
 interface SecureKeyGenerator {
