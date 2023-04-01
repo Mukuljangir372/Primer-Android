@@ -6,6 +6,7 @@ import com.mukul.jan.primer.data.login.api.api.UserApi
 import com.mukul.jan.primer.data.login.api.api.model.UserRealmModel
 import com.mukul.jan.primer.data.login.api.exception.UserNotFoundException
 import com.mukul.jan.primer.data.login.api.exception.UserNotLoggedInException
+import io.realm.kotlin.UpdatePolicy
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
@@ -42,7 +43,7 @@ class UserApiImpl @Inject constructor(
             if (loggedInUserId.isNullOrEmpty()) throw UserNotLoggedInException()
             val realm = realmAppApi.getOpenedSyncRealm()
             realm.writeBlocking {
-                copyToRealm(model)
+                copyToRealm(instance = model, updatePolicy = UpdatePolicy.ALL)
             }
         }
     }
