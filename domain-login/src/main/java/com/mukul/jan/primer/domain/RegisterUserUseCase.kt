@@ -53,9 +53,9 @@ class RegisterUserUseCase @Inject constructor(
     @Throws
     private fun checkForValidation(params: Params) {
         check(params.username.trim().isNotEmpty()) { "Username can't empty" }
-        check(params.password.trim().isEmpty()) { "Password can't empty" }
-        check(params.password.trim().length <= 6) { "Password length must be greater then 6 chars" }
-        check(params.password.trim().length > 12) { "Password length must be lower then 12 chars" }
+        check(params.password.trim().isNotEmpty()) { "Password can't empty" }
+        check(params.password.trim().length > 6) { "Password length must be greater then 6 chars" }
+        check(params.password.trim().length <= 12) { "Password length must be lower then 12 chars" }
         check(params.privateKey.trim().isNotEmpty()) { "Private key can't empty" }
         check(params.publicKey.trim().isNotEmpty()) { "Public key can't empty" }
     }
