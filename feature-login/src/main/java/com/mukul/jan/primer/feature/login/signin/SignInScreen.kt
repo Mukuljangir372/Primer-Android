@@ -22,8 +22,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.mu.jan.primer.common.Message
 import com.mu.jan.primer.common.ui.compose.PrimaryRoundButton
 import com.mu.jan.primer.common.ui.compose.PrimaryTextField
+import com.mu.jan.primer.common.ui.compose.PrimerCircularLoader
 import com.mukul.jan.primer.base.ui.Dimens
 import com.mukul.jan.primer.base.ui.design.PrimerTheme
 import com.mukul.jan.primer.feature.login.R
@@ -40,7 +42,7 @@ fun SignInScreen(
 
     uiState?.let {
         LaunchedEffect(it.isLoggedIn) {
-            if(it.isLoggedIn) {
+            if (it.isLoggedIn) {
                 onLoginSuccess.invoke()
                 viewModel.onLoggedInSuccess()
             }
@@ -53,7 +55,11 @@ fun SignInScreen(
             onPrivateKeyInputValueChange = viewModel::onPrivateKeyChange,
             passwordInputInitialValue = it.password,
             onPasswordInputValueChange = viewModel::onPasswordChange,
-            context = LocalContext.current
+            context = LocalContext.current,
+            loading = it.isLoading,
+            errorMessages = it.errorMessages,
+            onErrorMessageShown = viewModel::onErrorMessageShown,
+            scaffoldState = rememberScaffoldState()
         )
     }
 }
@@ -66,9 +72,13 @@ private fun SignInScreenContent(
     onPrivateKeyInputValueChange: (String) -> Unit,
     passwordInputInitialValue: String,
     onPasswordInputValueChange: (String) -> Unit,
-    context: Context
+    context: Context,
+    loading: Boolean,
+    errorMessages: List<Message>,
+    onErrorMessageShown: (Long) -> Unit,
+    scaffoldState: ScaffoldState
 ) {
-    Scaffold(modifier = Modifier.fillMaxSize(), topBar = {
+    Scaffold(modifier = Modifier.fillMaxSize(), scaffoldState = scaffoldState, topBar = {
         TopAppBar(title = { Text(text = "") }, navigationIcon = {
             IconButton(onClick = onBackPress) {
                 Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = "back")
@@ -127,17 +137,36 @@ private fun SignInScreenContent(
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
             )
             Spacer(modifier = Modifier.height(Dimens.FOUR.dp))
-            PrimaryRoundButton(onClick = onLoginClick) {
-                Row(
-                    modifier = Modifier.padding(horizontal = Dimens.TWO.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Text(
-                        text = stringResource(id = R.string.log_in), fontWeight = FontWeight.Bold
-                    )
-                    Icon(imageVector = Icons.Default.ArrowForward, contentDescription = "next")
+            if (!loading) {
+                PrimaryRoundButton(onClick = onLoginClick) {
+                    Row(
+                        modifier = Modifier.padding(horizontal = Dimens.TWO.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Text(
+                            text = stringResource(id = R.string.log_in),
+                            fontWeight = FontWeight.Bold
+                        )
+                        Icon(imageVector = Icons.Default.ArrowForward, contentDescription = "next")
+                    }
                 }
+            } else {
+                PrimerCircularLoader(modifier = Modifier)
             }
+        }
+    }
+
+    LaunchedEffect(errorMessages) {
+        if (errorMessages.isNotEmpty()) {
+            val errorMessage = errorMessages.first()
+            val errorMessageText = when (errorMessage) {
+                is Message.StringResType -> context.getString(errorMessage.resId)
+                is Message.StringType -> errorMessage.message
+            }
+            scaffoldState.snackbarHostState.showSnackbar(
+                message = errorMessageText,
+            )
+            onErrorMessageShown(errorMessage.id)
         }
     }
 }
@@ -153,7 +182,11 @@ private fun SignInScreenPreview() {
             onPrivateKeyInputValueChange = {},
             passwordInputInitialValue = "",
             onPasswordInputValueChange = {},
-            context = LocalContext.current
+            context = LocalContext.current,
+            loading = false,
+            errorMessages = emptyList(),
+            onErrorMessageShown = {},
+            scaffoldState = rememberScaffoldState()
         )
     }
 }

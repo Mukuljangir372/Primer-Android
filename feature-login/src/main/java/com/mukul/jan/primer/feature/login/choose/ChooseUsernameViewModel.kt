@@ -7,7 +7,6 @@ import com.mukul.jan.primer.domain.container.SignInLocalDataContainer
 import com.mukul.jan.primer.feature.login.R
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
-import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -83,12 +82,7 @@ class ChooseUsernameViewModel @Inject constructor(
     fun validateUsername() {
         val username = state.value.username
         if (username.trim().isEmpty()) {
-            showErrorMessage(
-                Message.StringResType(
-                    id = UUID.randomUUID().mostSignificantBits,
-                    resId = R.string.please_enter_your_name
-                )
-            )
+            showErrorMessage(Message.StringResType.new(R.string.please_enter_your_name))
             return
         }
         clearErrorMessages()

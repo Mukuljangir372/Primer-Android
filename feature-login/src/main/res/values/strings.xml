@@ -38,4 +38,5 @@
     <string name="welcome_back">Welcome back! 🙌</string>
     <string name="enter_your_private_key_and_password">Enter your private key and password</string>
     <string name="lets_talk_with_friends">Let\'s talk with friends.</string>
+    <string name="please_enter_valid_private_key">Please enter valid private key</string>
 </resources>
