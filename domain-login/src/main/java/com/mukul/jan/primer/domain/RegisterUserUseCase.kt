@@ -31,14 +31,14 @@ class RegisterUserUseCase @Inject constructor(
     }
 
     override suspend fun doWork(params: Params): Flow<Resource<UserModel>> {
-        return flow<Resource<UserModel>> {
+        return channelFlow<Resource<UserModel>> {
             checkForValidation(params)
             repo.register(model = params.toDataModel()).onStart {
-                emit(Resource.Loading())
+                send(Resource.Loading())
             }.catch {
-                emit(Resource.Failure(msg = Message.StringResType.new(resId = R.string.something_went_wrong)))
+                throw it
             }.collectLatest {
-                emit(
+                send(
                     Resource.Success(
                         data = it,
                         msg = Message.StringResType.new(resId = R.string.user_register_successfully)
@@ -52,8 +52,11 @@ class RegisterUserUseCase @Inject constructor(
 
     @Throws
     private fun checkForValidation(params: Params) {
-        check(params.username.trim().isEmpty()) { "Username can't empty" }
-        check(params.privateKey.trim().isEmpty()) { "Private key can't empty" }
-        check(params.publicKey.trim().isEmpty()) { "Public key can't empty" }
+        check(params.username.trim().isNotEmpty()) { "Username can't empty" }
+        check(params.password.trim().isEmpty()) { "Password can't empty" }
+        check(params.password.trim().length <= 6) { "Password length must be greater then 6 chars" }
+        check(params.password.trim().length > 12) { "Password length must be lower then 12 chars" }
+        check(params.privateKey.trim().isNotEmpty()) { "Private key can't empty" }
+        check(params.publicKey.trim().isNotEmpty()) { "Public key can't empty" }
     }
 }

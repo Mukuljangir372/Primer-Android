@@ -27,6 +27,8 @@
     <string name="please_enter_password">Please enter password</string>
     <string name="please_enter_confirm_password">Please enter confirm password</string>
     <string name="password_not_match">Password not match</string>
+    <string name="password_must_be_greater_then_6_chars">Password must be greater then 6 chars</string>
+    <string name="password_must_be_lower_then_12_chars">Password must be lower then 12 chars</string>
 
     <!-- LOGIN DETAILS SCREEN -->
     <string name="save_your_details">🙌 Save Your Details</string>
