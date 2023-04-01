@@ -29,4 +29,17 @@ class SignInLocalDataContainer @Inject constructor() {
     fun update(block: (SignInDetail) -> SignInDetail) {
         signInDetailFlow.getAndUpdate { block.invoke(it) }
     }
+
+    fun shake(
+        generatePrivateKey: () -> String,
+        generatePublicKey: () -> String
+    ): SignInDetail {
+        if (signInDetail.value.privateKey.isEmpty()) {
+            update { it.copy(privateKey = generatePrivateKey.invoke()) }
+        }
+        if (signInDetail.value.publicKey.isEmpty()) {
+            update { it.copy(publicKey = generatePublicKey.invoke()) }
+        }
+        return signInDetail.value
+    }
 }
