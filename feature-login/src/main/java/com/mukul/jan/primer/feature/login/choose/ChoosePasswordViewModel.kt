@@ -90,6 +90,8 @@ class ChoosePasswordViewModel @Inject constructor(
         val confirmPassword = state.value.confirmPassword
         val error = when {
             password.trim().isEmpty() -> R.string.please_enter_password
+            password.trim().length <= 6 -> R.string.password_must_be_greater_then_6_chars
+            password.trim().length > 12 -> R.string.password_must_be_lower_then_12_chars
             confirmPassword.trim().isEmpty() -> R.string.please_enter_confirm_password
             password.trim() != confirmPassword.trim() -> R.string.password_not_match
             else -> 0

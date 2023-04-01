@@ -26,6 +26,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.mu.jan.primer.common.Message
 import com.mu.jan.primer.common.ui.compose.PrimaryRoundButton
 import com.mu.jan.primer.common.ui.compose.PrimaryTextField
+import com.mu.jan.primer.common.ui.compose.PrimerCircularLoader
 import com.mukul.jan.primer.base.ui.Dimens
 import com.mukul.jan.primer.base.ui.design.PrimerTheme
 import com.mukul.jan.primer.feature.login.R
@@ -49,7 +50,8 @@ fun SignUpScreen(
                 viewModel.onSignUpRevert()
             }
         }
-        SignUpScreenContent(onBackPress = onBack,
+        SignUpScreenContent(
+            onBackPress = onBack,
             onFinishClick = viewModel::validateAndSignUp,
             nameInputValue = it.username,
             privateKeyInputValue = it.privateKey,
@@ -61,7 +63,9 @@ fun SignUpScreen(
             onCopyClick = {
                 clipboard.setText(buildAnnotatedString { append(it) })
                 viewModel.showErrorMessage(R.string.copied)
-            })
+            },
+            loading = it.isLoading
+        )
     }
 }
 
@@ -77,6 +81,7 @@ private fun SignUpScreenContent(
     onErrorMessageShown: (Long) -> Unit,
     scaffoldState: ScaffoldState,
     context: Context,
+    loading: Boolean,
 ) {
     Scaffold(modifier = Modifier.fillMaxSize(), scaffoldState = scaffoldState, topBar = {
         TopAppBar(title = { Text(text = "") }, navigationIcon = {
@@ -153,16 +158,21 @@ private fun SignUpScreenContent(
                     )
                 })
             Spacer(modifier = Modifier.height(Dimens.FOUR.dp))
-            PrimaryRoundButton(onClick = onFinishClick) {
-                Row(
-                    modifier = Modifier.padding(horizontal = Dimens.TWO.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Text(
-                        text = stringResource(id = R.string.finish), fontWeight = FontWeight.Bold
-                    )
-                    Icon(imageVector = Icons.Default.ArrowForward, contentDescription = "next")
+            if (!loading) {
+                PrimaryRoundButton(onClick = onFinishClick) {
+                    Row(
+                        modifier = Modifier.padding(horizontal = Dimens.TWO.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Text(
+                            text = stringResource(id = R.string.finish),
+                            fontWeight = FontWeight.Bold
+                        )
+                        Icon(imageVector = Icons.Default.ArrowForward, contentDescription = "next")
+                    }
                 }
+            } else {
+                PrimerCircularLoader(modifier = Modifier)
             }
         }
     }
@@ -187,7 +197,8 @@ private fun SignUpScreenContent(
 @Composable
 private fun SignUpScreenPreview() {
     PrimerTheme {
-        SignUpScreenContent(onBackPress = {},
+        SignUpScreenContent(
+            onBackPress = {},
             onFinishClick = {},
             nameInputValue = "",
             privateKeyInputValue = "",
@@ -196,6 +207,8 @@ private fun SignUpScreenPreview() {
             onErrorMessageShown = {},
             scaffoldState = rememberScaffoldState(),
             context = LocalContext.current,
-            onCopyClick = {})
+            onCopyClick = {},
+            loading = false,
+        )
     }
 }
