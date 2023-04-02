@@ -5,10 +5,12 @@ import androidx.lifecycle.viewModelScope
 import com.mu.jan.primer.common.Message
 import com.mu.jan.primer.common.Resource
 import com.mukul.jan.primer.domain.SignInUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class SignInViewModel @Inject constructor(
     private val signInUseCase: SignInUseCase,
 ) : ViewModel() {
