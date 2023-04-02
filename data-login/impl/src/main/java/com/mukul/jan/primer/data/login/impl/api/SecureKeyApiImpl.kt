@@ -14,7 +14,7 @@ class SecureKeyApiImpl @Inject constructor(
             "0x1" + UUID.randomUUID()
                 .toString()
                 .replace("-", "0")
-                .substring(0, 15)
+                .substring(0, 12)
         }
     }
 }
