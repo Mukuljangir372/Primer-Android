@@ -7,7 +7,6 @@ import com.mukul.jan.primer.domain.container.SignInLocalDataContainer
 import com.mukul.jan.primer.feature.login.R
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
-import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -97,12 +96,7 @@ class ChoosePasswordViewModel @Inject constructor(
             else -> 0
         }
         if (error != 0) {
-            showErrorMessage(
-                Message.StringResType(
-                    id = UUID.randomUUID().mostSignificantBits,
-                    resId = error
-                )
-            )
+            showErrorMessage(Message.StringResType.new(error))
             return
         }
         clearErrorMessages()

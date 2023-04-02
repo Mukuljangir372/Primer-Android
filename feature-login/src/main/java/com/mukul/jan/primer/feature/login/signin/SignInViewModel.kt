@@ -3,9 +3,15 @@ package com.mukul.jan.primer.feature.login.signin
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mu.jan.primer.common.Message
+import com.mu.jan.primer.common.Resource
+import com.mukul.jan.primer.domain.SignInUseCase
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SignInViewModel : ViewModel() {
+class SignInViewModel @Inject constructor(
+    private val signInUseCase: SignInUseCase,
+) : ViewModel() {
     data class State(
         val isLoading: Boolean,
         val errorMessages: List<Message>,
@@ -24,7 +30,7 @@ class SignInViewModel : ViewModel() {
         }
 
         fun toUiState(): UiState {
-            return UiState.SignIn (
+            return UiState.SignIn(
                 isLoading = isLoading,
                 errorMessages = errorMessages,
                 privateKey = privateKey,
@@ -44,17 +50,14 @@ class SignInViewModel : ViewModel() {
             val privateKey: String,
             val password: String,
             val isLoggedIn: Boolean,
-        ): UiState
+        ) : UiState
     }
 
     private val state = MutableStateFlow(State.EMPTY)
 
-    val uiState = state.map(State::toUiState)
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.Eagerly,
-            initialValue = state.value
-        )
+    val uiState = state.map(State::toUiState).stateIn(
+        scope = viewModelScope, started = SharingStarted.Eagerly, initialValue = state.value
+    )
 
     fun onPrivateKeyChange(value: String) {
         state.update { it.copy(privateKey = value) }
@@ -68,7 +71,48 @@ class SignInViewModel : ViewModel() {
         state.update { it.copy(isLoggedIn = false) }
     }
 
-    fun signIn() {
+    fun onErrorMessageShown(id: Long) {
+        state.update { it.copy(errorMessages = it.errorMessages.filterNot { i -> i.id == id }) }
+    }
 
+    private fun showErrorMessage(msg: Message) {
+        state.update { it.copy(errorMessages = listOf(msg)) }
+    }
+
+    private fun showLoading() {
+        state.update { it.copy(isLoading = true) }
+    }
+
+    private fun hideLoading() {
+        state.update { it.copy(isLoading = false) }
+    }
+
+    fun signIn() {
+        viewModelScope.launch {
+            val details = state.value
+            signInUseCase.invoke(
+                SignInUseCase.Params(
+                    privateKey = details.privateKey, password = details.password
+                )
+            ).collectLatest {
+                bindResource(it)
+            }
+        }
+    }
+
+    private fun bindResource(resource: Resource<*>) {
+        val loading = resource is Resource.Loading
+        val errorMessage = when (resource) {
+            is Resource.Failure -> resource.msg
+            is Resource.Success -> resource.msg
+            else -> null
+        }
+
+        if (loading) showLoading()
+        else hideLoading()
+
+        if (errorMessage != null) {
+            showErrorMessage(errorMessage)
+        }
     }
 }

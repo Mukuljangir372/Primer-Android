@@ -8,4 +8,8 @@
 
     <!-- SIGN UP -->
     <string name="user_register_successfully">User register successfully!</string>
+
+    <!-- SIGN IN -->
+    <string name="user_logged_in_successfully">User logged in successfully!</string>
+
 </resources>

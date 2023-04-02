@@ -11,15 +11,20 @@ import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
+@OptIn(FlowPreview::class)
 class LoginRepoImpl @Inject constructor(
     private val loginNDS: LoginNDS,
     private val userNDS: UserNDS,
 ) : LoginRepo {
-    override suspend fun signIn(key: String, password: String): Flow<String> {
+    override suspend fun signIn(key: String, password: String): Flow<UserModel> {
         return loginNDS.signIn(key = key, password = password)
+            .flatMapMerge {
+                userNDS.getUser(it)
+            }.map {
+                it.toUserModel()
+            }
     }
 
-    @OptIn(FlowPreview::class)
     override suspend fun register(model: RegisterUserActionDataModel): Flow<UserModel> {
         return loginNDS.signUp(key = model.privateKey, password = model.password)
             .flatMapMerge {

@@ -15,12 +15,12 @@ fun PrimerCircularLoader(modifier: Modifier) {
     CircularProgressIndicator(
         modifier = modifier.drawBehind {
             drawCircle(
-                color,
+                color.copy(alpha = 0.2f),
                 radius = size.width / 2 - strokeWidth.toPx() / 2,
                 style = Stroke(strokeWidth.toPx())
             )
         },
-        color = color.copy(alpha = 0.5f),
+        color = color,
         strokeWidth = strokeWidth
     )
 }
