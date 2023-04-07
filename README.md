@@ -23,7 +23,7 @@ git clone https://github.com/<username>/Primer-Android.git
 ```
 
 
-### Step 3. Setup
+### Step 2. Setup
 You need a mongodb account with sync realm app services to build the app successfully. You need to generate few keys from your mongodb project and mention them in your local.properties file.
 > local.properties
 ```groovy
@@ -32,3 +32,7 @@ APP_MONGO_REALM_APP_USER_DOMAIN = "user@primer.com"
 APP_MONGO_REALM_APP_ID = "..."
 APP_MONGO_REALM_AUTH_API = "..."
 ```
+
+### Step 3. Build
+As Primer is built on top of features and flavors. You have to be take care of which build-varient you are using. 
+
