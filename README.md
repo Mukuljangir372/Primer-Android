@@ -1,6 +1,11 @@
 # Primer-Android
 💬 Primer is a private, secure and end-to-end communication application.
 
+![Screenshot](docs/login-1.jpeg "Screenshot showing For You screen, Interests screen and Topic detail screen")
+![Screenshot](docs/login-2.jpeg "Screenshot showing For You screen, Interests screen and Topic detail screen")
+![Screenshot](docs/login-3.jpeg "Screenshot showing For You screen, Interests screen and Topic detail screen")
+
+
 ## Teck Stack
 ✅ Kotlin Coroutines\
 ✅ Jetpack Compose\
