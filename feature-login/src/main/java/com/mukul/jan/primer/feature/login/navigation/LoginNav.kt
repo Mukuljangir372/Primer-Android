@@ -60,7 +60,9 @@ object LoginNav {
                     })
                 }
                 composable(NavScreen.SignUp.createRoute(root)) {
-                    SignUpScreen(onFinish = {}, onBack = { navController.navigateUp() })
+                    SignUpScreen(onFinish = {
+                        navController.popBackStack(NavScreen.SignIn.createRoute(root), true)
+                    }, onBack = { navController.navigateUp() })
                 }
                 composable(NavScreen.SignIn.createRoute(root)) {
                     SignInScreen(onLoginSuccess = {}, onBack = { navController.navigateUp() })

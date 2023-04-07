@@ -3,10 +3,11 @@ package com.mukul.jan.primer.feature.login.signup
 import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.mu.jan.primer.common.AppCoroutineDispatcher
 import com.mu.jan.primer.common.Message
 import com.mu.jan.primer.common.Resource
-import com.mukul.jan.primer.domain.RegisterUserUseCase
 import com.mukul.jan.primer.domain.SecureKeyGenerateUseCase
+import com.mukul.jan.primer.domain.SignUpUseCase
 import com.mukul.jan.primer.domain.container.SignInLocalDataContainer
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -18,7 +19,8 @@ import javax.inject.Inject
 class SignUpViewModel @Inject constructor(
     private val container: SignInLocalDataContainer,
     private val secureKeyGenerateUseCase: SecureKeyGenerateUseCase,
-    private val registerUserUseCase: RegisterUserUseCase,
+    private val signUpUseCase: SignUpUseCase,
+    private val dispatcher: AppCoroutineDispatcher,
 ) : ViewModel() {
     data class State(
         val isLoading: Boolean,
@@ -71,10 +73,6 @@ class SignUpViewModel @Inject constructor(
         scope = viewModelScope, started = SharingStarted.Eagerly, initialValue = state.value
     )
 
-    fun onSignUpRevert() {
-        state.update { it.copy(signUp = false) }
-    }
-
     fun showErrorMessage(@StringRes msg: Int) {
         showErrorMessage(
             Message.StringResType(
@@ -100,35 +98,29 @@ class SignUpViewModel @Inject constructor(
     }
 
     init {
-        shakeDetails()
+        viewModelScope.launch(dispatcher.io) {
+            shakeDetails()
+        }
     }
 
-    private fun shakeDetails() {
-        viewModelScope.launch {
-            val privateKey =
-                secureKeyGenerateUseCase.invoke(SecureKeyGenerateUseCase.Params()).first()
-            val publicKey =
-                secureKeyGenerateUseCase.invoke(SecureKeyGenerateUseCase.Params()).first()
-            val details = container.shake(generatePrivateKey = {
-                privateKey
-            }, generatePublicKey = {
-                publicKey
-            })
-            state.update {
-                it.copy(
-                    username = details.username,
-                    publicKey = details.publicKey,
-                    privateKey = details.privateKey
-                )
-            }
+    private suspend fun shakeDetails() {
+        val privateKey = secureKeyGenerateUseCase.invoke(SecureKeyGenerateUseCase.Params()).first()
+        val publicKey = secureKeyGenerateUseCase.invoke(SecureKeyGenerateUseCase.Params()).first()
+        val details = container.shake(privateKey = privateKey, publicKey = publicKey)
+        state.update {
+            it.copy(
+                username = details.username,
+                publicKey = details.publicKey,
+                privateKey = details.privateKey
+            )
         }
     }
 
     fun validateAndSignUp() {
         viewModelScope.launch {
             val details = container.signInDetail.value
-            registerUserUseCase.invoke(
-                RegisterUserUseCase.Params(
+            signUpUseCase.invoke(
+                SignUpUseCase.Params(
                     username = details.username,
                     password = details.password,
                     privateKey = details.privateKey,

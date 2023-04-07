@@ -17,23 +17,19 @@ class LoginRepoImpl @Inject constructor(
     private val userNDS: UserNDS,
 ) : LoginRepo {
     override suspend fun signIn(key: String, password: String): Flow<UserModel> {
-        return loginNDS.signIn(key = key, password = password)
-            .flatMapMerge {
-                userNDS.getUser(it)
-            }.map {
-                it.toUserModel()
-            }
+        return loginNDS.signIn(key = key, password = password).flatMapMerge {
+            userNDS.getUser(it)
+        }.map {
+            it.toUserModel()
+        }
     }
 
-    override suspend fun register(model: RegisterUserActionDataModel): Flow<UserModel> {
-        return loginNDS.signUp(key = model.privateKey, password = model.password)
-            .flatMapMerge {
-                loginNDS.signIn(key = model.privateKey, password = model.password)
-            }.flatMapMerge {
-                userNDS.insertOrUpdateUser(user = model.toUserNetworkModel(id = it))
-            }.map {
-                it.toUserModel()
-            }
+    override suspend fun signUp(model: RegisterUserActionDataModel): Flow<UserModel> {
+        return loginNDS.signUp(key = model.privateKey, password = model.password).flatMapMerge {
+            userNDS.insertOrUpdateUser(user = model.toUserNetworkModel(id = it))
+        }.map {
+            it.toUserModel()
+        }
     }
 
     override suspend fun isLoggedIn(): Flow<Boolean> {

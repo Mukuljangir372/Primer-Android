@@ -18,22 +18,22 @@ class SignInUseCase @Inject constructor(
     )
 
     override suspend fun doWork(params: Params): Flow<Resource<UserModel>> {
-        return channelFlow<Resource<UserModel>> {
+        return repo.signIn(key = params.privateKey, password = params.password).map {
+            Resource.Success(
+                data = it,
+                msg = Message.StringResType.new(resId = R.string.user_logged_in_successfully)
+            )
+        }.filterIsInstance<Resource<UserModel>>().onStart {
             checkForValidation(params)
-            repo.signIn(key = params.privateKey, password = params.password).onStart {
-                send(Resource.Loading())
-            }.catch {
-                throw it
-            }.collectLatest {
-                send(
-                    Resource.Success(
-                        data = it,
-                        msg = Message.StringResType.new(resId = R.string.user_logged_in_successfully)
+            emit(Resource.Loading())
+        }.catch {
+            emit(
+                Resource.Failure(
+                    msg = Message.StringType.new(
+                        it.message ?: it.localizedMessage
                     )
                 )
-            }
-        }.catch {
-            emit(Resource.Failure(msg = Message.StringType.new(it.message ?: it.localizedMessage)))
+            )
         }
     }
 

@@ -47,7 +47,6 @@ fun SignUpScreen(
         LaunchedEffect(it.signUp) {
             if (it.signUp) {
                 onFinish.invoke()
-                viewModel.onSignUpRevert()
             }
         }
         SignUpScreenContent(
