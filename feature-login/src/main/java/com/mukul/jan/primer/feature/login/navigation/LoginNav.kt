@@ -10,7 +10,6 @@ import com.mukul.jan.primer.feature.login.choose.ChooseUsernameScreen
 import com.mukul.jan.primer.feature.login.signin.SignInScreen
 import com.mukul.jan.primer.feature.login.signup.SignUpScreen
 
-
 object LoginNav {
     private val root = Screen.Login
 
