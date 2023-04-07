@@ -18,6 +18,8 @@ class LoginNDSImpl @Inject constructor(
     override suspend fun signIn(key: String, password: String): Flow<String> {
         return channelFlowWithTimeout(dispatcher = dispatcher.io) {
             send(loginApi.signIn(key = key, password = password))
+        }.catch {
+            throw exceptionHandler.toReadableException(it)
         }
     }
 
