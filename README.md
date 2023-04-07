@@ -17,10 +17,18 @@
 We encourage you to participate in this open source project. We love Pull Requests, Bug Reports, ideas, (security) code reviews or any other kind of positive contribution.
 
 ### Step 1. Fork & Clone
-First, just fork it in your account. Then, run this command in your terminal to clone.
+First, just fork it in your account. Then, run this command in your terminal to clone.\
+```groovy
+git clone https://github.com/<username>/Primer-Android.git
+```
 
 
 ### Step 3. Setup
-
-You need a mongodb account with sync realm app services.
-```Hello```
+You need a mongodb account with sync realm app services to build the app successfully. You need to generate few keys from your mongodb project and mention them in your local.properties file.
+> local.properties
+```groovy
+# Mongo Realm Backend
+APP_MONGO_REALM_APP_USER_DOMAIN = "user@primer.com"
+APP_MONGO_REALM_APP_ID = "..."
+APP_MONGO_REALM_AUTH_API = "..."
+```
