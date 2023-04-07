@@ -3,8 +3,8 @@ package com.mukul.jan.primer.feature.login.choose
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mu.jan.primer.common.Message
+import com.mu.jan.primer.common.validator.PasswordValidator
 import com.mukul.jan.primer.domain.container.SignInLocalDataContainer
-import com.mukul.jan.primer.feature.login.R
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
@@ -87,18 +87,14 @@ class ChoosePasswordViewModel @Inject constructor(
     fun validate() {
         val password = state.value.password
         val confirmPassword = state.value.confirmPassword
-        val error = when {
-            password.trim().isEmpty() -> R.string.please_enter_password
-            password.trim().length <= 6 -> R.string.password_must_be_greater_then_6_chars
-            password.trim().length > 12 -> R.string.password_must_be_lower_then_12_chars
-            confirmPassword.trim().isEmpty() -> R.string.please_enter_confirm_password
-            password.trim() != confirmPassword.trim() -> R.string.password_not_match
-            else -> 0
-        }
-        if (error != 0) {
-            showErrorMessage(Message.StringResType.new(error))
+
+        val params = PasswordValidator.Params(password, confirmPassword)
+        val error = PasswordValidator().safeValidate(params)
+        if (error.isNotEmpty()) {
+            showErrorMessage(Message.StringType.new(error))
             return
         }
+
         clearErrorMessages()
         state.update { it.copy(errorMessages = emptyList(), passwordValidated = true) }
         container.update { it.copy(password = password) }
