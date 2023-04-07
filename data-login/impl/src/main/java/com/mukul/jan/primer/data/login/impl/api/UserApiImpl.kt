@@ -40,9 +40,6 @@ class UserApiImpl @Inject constructor(
     @Throws
     override suspend fun insertOrUpdateUser(model: UserRealmModel) {
         return withContext(dispatchers.io) {
-            val app = realmAppApi.getApp()
-            val loggedInUserId = app.currentUser?.id
-            if (loggedInUserId.isNullOrEmpty()) throw UserNotLoggedInException()
             val realm = realmAppApi.getOpenedSyncRealm()
             realm.writeBlocking {
                 copyToRealm(instance = model, updatePolicy = UpdatePolicy.ALL)

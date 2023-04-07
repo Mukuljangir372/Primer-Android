@@ -38,4 +38,5 @@ class LoginApiImpl @Inject constructor(
             !realmAppApi.getApp().currentUser?.id.isNullOrEmpty()
         }
     }
+
 }
