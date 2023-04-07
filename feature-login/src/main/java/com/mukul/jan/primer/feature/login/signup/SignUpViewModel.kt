@@ -104,15 +104,9 @@ class SignUpViewModel @Inject constructor(
     }
 
     private suspend fun shakeDetails() {
-        val privateKey =
-            secureKeyGenerateUseCase.invoke(SecureKeyGenerateUseCase.Params()).first()
-        val publicKey =
-            secureKeyGenerateUseCase.invoke(SecureKeyGenerateUseCase.Params()).first()
-        val details = container.shake(generatePrivateKey = {
-            privateKey
-        }, generatePublicKey = {
-            publicKey
-        })
+        val privateKey = secureKeyGenerateUseCase.invoke(SecureKeyGenerateUseCase.Params()).first()
+        val publicKey = secureKeyGenerateUseCase.invoke(SecureKeyGenerateUseCase.Params()).first()
+        val details = container.shake(privateKey = privateKey, publicKey = publicKey)
         state.update {
             it.copy(
                 username = details.username,
