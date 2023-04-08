@@ -3,6 +3,7 @@ package com.mukul.jan.primer.feature.dashboard.navigation
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
+import androidx.navigation.NavOptionsBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.mukul.jan.primer.feature.dashboard.DashboardScreenUtils
@@ -56,21 +57,38 @@ object DashboardNav {
     }
 
     fun navigate(controller: NavHostController, id: Int) {
+        fun NavOptionsBuilder.popStack() {
+            popUpTo(controller.graph.startDestinationId) {
+                saveState = true
+            }
+            launchSingleTop = true
+            restoreState = true
+        }
         when (id) {
             DashboardScreenUtils.BottomNav.chat.id -> {
-                controller.navigate(NavScreen.ChatList.createRoute(root))
+                controller.navigate(NavScreen.ChatList.createRoute(root)) {
+                    popStack()
+                }
             }
             DashboardScreenUtils.BottomNav.friends.id -> {
-                controller.navigate(NavScreen.FriendList.createRoute(root))
+                controller.navigate(NavScreen.FriendList.createRoute(root)) {
+                    popStack()
+                }
             }
             DashboardScreenUtils.BottomNav.files.id -> {
-                controller.navigate(NavScreen.FileList.createRoute(root))
+                controller.navigate(NavScreen.FileList.createRoute(root)) {
+                    popStack()
+                }
             }
             DashboardScreenUtils.BottomNav.notifications.id -> {
-                controller.navigate(NavScreen.NotificationList.createRoute(root))
+                controller.navigate(NavScreen.NotificationList.createRoute(root)) {
+                    popStack()
+                }
             }
             DashboardScreenUtils.BottomNav.settings.id -> {
-                controller.navigate(NavScreen.Settings.createRoute(root))
+                controller.navigate(NavScreen.Settings.createRoute(root)) {
+                    popStack()
+                }
             }
         }
     }
