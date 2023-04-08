@@ -11,7 +11,7 @@ import com.mukul.jan.primer.feature.login.signin.SignInScreen
 import com.mukul.jan.primer.feature.login.signup.SignUpScreen
 
 object LoginNav {
-    private val root = Screen.Login
+    val root = Screen.Login
 
     sealed class Screen(val route: String) {
         object Login : Screen(route = "login")
@@ -27,14 +27,10 @@ object LoginNav {
         object SignIn : NavScreen(route = "signIn")
     }
 
-    fun getRootRoute(): String {
-        return root.route
-    }
-
     fun addLoginNavAtTopLevel(navController: NavHostController, graph: NavGraphBuilder) {
         graph.apply {
             navigation(
-                route = getRootRoute(),
+                route = root.route,
                 startDestination = NavScreen.Primary.createRoute(root),
             ) {
                 composable(NavScreen.Primary.createRoute(root)) {

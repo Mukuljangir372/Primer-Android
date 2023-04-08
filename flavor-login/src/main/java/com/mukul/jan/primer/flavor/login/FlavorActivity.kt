@@ -24,7 +24,7 @@ class FlavorActivity : ComponentActivity() {
                 ) {
                     NavHost(
                         navController = navController,
-                        startDestination = LoginNav.getRootRoute()
+                        startDestination = LoginNav.root.route
                     ) {
                         LoginNav.addLoginNavAtTopLevel(
                             navController = navController,
