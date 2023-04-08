@@ -11,7 +11,7 @@ android {
 }
 dependencies {
     implementation(libs.androidx.core.ktx)
-    implementation(project(":feature-full"))
+    implementation(project(":feature-dashboard"))
     implementation(project(":base-ui"))
 
     platform(libs.android.compose.bom)

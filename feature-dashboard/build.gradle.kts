@@ -4,7 +4,7 @@ plugins {
     id("primer_android_hilt_lib")
 }
 android {
-    namespace = "com.mukul.jan.primer.feature.pull"
+    namespace = "com.mukul.jan.primer.feature.dashboard"
     buildFeatures {
         compose = true
     }
