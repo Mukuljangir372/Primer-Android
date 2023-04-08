@@ -25,23 +25,28 @@ class PrimerFlavorContainer {
                 useSeparatePackage = true,
             ),
             ProductFlavor(
-                name = "chat-list",
+                name = "chatList",
                 module = ":flavor-chat-list",
                 useSeparatePackage = true,
             ),
             ProductFlavor(
-                name = "file-list",
+                name = "fileList",
                 module = ":flavor-file-list",
                 useSeparatePackage = true,
             ),
             ProductFlavor(
-                name = "friend-list",
+                name = "friendList",
                 module = ":flavor-friend-list",
                 useSeparatePackage = true,
             ),
             ProductFlavor(
-                name = "notification-list",
+                name = "notificationList",
                 module = ":flavor-notification-list",
+                useSeparatePackage = true,
+            ),
+            ProductFlavor(
+                name = "settings",
+                module = ":flavor-settings",
                 useSeparatePackage = true,
             ),
         )
