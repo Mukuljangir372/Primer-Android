@@ -9,16 +9,15 @@ data class Flavor(
 )
 
 class FlavorContainer {
+    private val base = "com.mukul.jan.primer.flavor"
     private val flavors = listOf(
-        Flavor(name = "full", rootEntry = "com.mukul.jan.primer.flavor.full.RootEntry"),
-        Flavor(name = "login", rootEntry = "com.mukul.jan.primer.flavor.login.RootEntry"),
-        Flavor(name = "onboarding", rootEntry = "com.mukul.jan.primer.flavor.onboarding.RootEntry"),
-        Flavor(name = "chat-list", rootEntry = "com.mukul.jan.primer.flavor.chat.list.RootEntry"),
-        Flavor(name = "file-list", rootEntry = "com.mukul.jan.primer.flavor.file.list.RootEntry"),
-        Flavor(
-            name = "friend-list",
-            rootEntry = "com.mukul.jan.primer.flavor.friend.list.RootEntry"
-        ),
+        Flavor(name = "full", rootEntry = "$base.full.RootEntry"),
+        Flavor(name = "login", rootEntry = "$base.login.RootEntry"),
+        Flavor(name = "onboarding", rootEntry = "$base.onboarding.RootEntry"),
+        Flavor(name = "chat-list", rootEntry = "$base.chat.list.RootEntry"),
+        Flavor(name = "file-list", rootEntry = "$base.file.list.RootEntry"),
+        Flavor(name = "friend-list", rootEntry = "$base.friend.list.RootEntry"),
+        Flavor(name = "notification-list", rootEntry = "$base.notification.list.RootEntry"),
     )
 
     fun startFlavorEntry(activity: Activity) {

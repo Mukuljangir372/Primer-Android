@@ -81,3 +81,5 @@ include(":feature-friend-list")
 
 include(":feature-file-list")
 include(":flavor-file-list")
+include(":feature-notification-list")
+include(":flavor-notification-list")
