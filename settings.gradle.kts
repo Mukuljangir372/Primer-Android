@@ -65,7 +65,7 @@ include(":data-status:impl")
 include(":data-status:test")
 
 include(":flavor-full")
-include(":feature-full")
+include(":feature-dashboard")
 
 include(":flavor-onboarding")
 include(":feature-onboarding")

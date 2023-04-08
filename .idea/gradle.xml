@@ -57,9 +57,9 @@
             <option value="$PROJECT_DIR$/domain-message" />
             <option value="$PROJECT_DIR$/domain-status" />
             <option value="$PROJECT_DIR$/feature-chat-list" />
+            <option value="$PROJECT_DIR$/feature-dashboard" />
             <option value="$PROJECT_DIR$/feature-file-list" />
             <option value="$PROJECT_DIR$/feature-friend-list" />
-            <option value="$PROJECT_DIR$/feature-full" />
             <option value="$PROJECT_DIR$/feature-login" />
             <option value="$PROJECT_DIR$/feature-notification-list" />
             <option value="$PROJECT_DIR$/feature-onboarding" />
