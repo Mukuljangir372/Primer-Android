@@ -1,4 +1,4 @@
-package com.mukul.jan.primer.flavor.chat.list
+package com.mukul.jan.primer.flavor.server.list
 
 import android.app.Activity
 import android.content.Intent

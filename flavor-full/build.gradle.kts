@@ -13,7 +13,7 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(project(":base-ui"))
     implementation(project(":feature-dashboard"))
-    implementation(project(":feature-chat-list"))
+    implementation(project(":feature-server-list"))
     implementation(project(":feature-file-list"))
     implementation(project(":feature-friend-list"))
     implementation(project(":feature-login"))
