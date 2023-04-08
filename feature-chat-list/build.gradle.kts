@@ -4,7 +4,7 @@ plugins {
     id("primer_android_hilt_lib")
 }
 android {
-    namespace = "com.mukul.jan.primer.feature.chat"
+    namespace = "com.mukul.jan.primer.feature.chat.list"
     buildFeatures {
         compose = true
     }

@@ -26,7 +26,7 @@ class PrimerFlavorContainer {
             ),
             ProductFlavor(
                 name = "chat",
-                module = ":flavor-chat",
+                module = ":flavor-chat-list",
                 useSeparatePackage = true,
             )
         )
