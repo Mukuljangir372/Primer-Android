@@ -21,7 +21,7 @@ fun DashboardScreen(
     val selectedBottomItemId = remember {
         mutableStateOf(DashboardScreenUtils.bottomNavItems.first().id)
     }
-    LaunchedEffect(selectedBottomItemId) {
+    LaunchedEffect(selectedBottomItemId.value) {
         onSelectBottomNavItem.invoke(selectedBottomItemId.value)
     }
     DashboardScreenContent(
