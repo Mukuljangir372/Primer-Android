@@ -36,16 +36,19 @@ private val bottomAppBarItems: List<BottomNavItem> by lazy {
 }
 
 @Composable
-fun DashboardScreen() {
+fun DashboardScreen(content: @Composable () -> Unit) {
     val selectedBottomItemId = remember {
         mutableStateOf(bottomAppBarItems.first().id)
     }
-    DashboardScreenContent(modifier = Modifier,
+    DashboardScreenContent(
+        modifier = Modifier,
         scaffoldState = rememberScaffoldState(),
         selectedBottomItem = selectedBottomItemId.value,
         onBottomItemSelect = {
             selectedBottomItemId.value = it
-        })
+        },
+        content = content
+    )
 }
 
 @Composable
@@ -54,6 +57,7 @@ private fun DashboardScreenContent(
     scaffoldState: ScaffoldState,
     selectedBottomItem: Int,
     onBottomItemSelect: (Int) -> Unit,
+    content: @Composable () -> Unit,
 ) {
     Scaffold(modifier = modifier, scaffoldState = scaffoldState, bottomBar = {
         PrimaryBottomAppBar(modifier = Modifier, items = bottomAppBarItems, onItemClick = {
@@ -63,7 +67,7 @@ private fun DashboardScreenContent(
         Column(
             modifier = Modifier.padding(innerPadding)
         ) {
-
+            content.invoke()
         }
     }
 }
@@ -75,6 +79,7 @@ private fun DashboardScreenPreview() {
         DashboardScreenContent(modifier = Modifier,
             scaffoldState = rememberScaffoldState(),
             selectedBottomItem = 2,
-            onBottomItemSelect = {})
+            onBottomItemSelect = {},
+            content = {})
     }
 }

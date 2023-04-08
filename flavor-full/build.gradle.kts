@@ -11,8 +11,15 @@ android {
 }
 dependencies {
     implementation(libs.androidx.core.ktx)
-    implementation(project(":feature-dashboard"))
     implementation(project(":base-ui"))
+    implementation(project(":feature-dashboard"))
+    implementation(project(":feature-chat-list"))
+    implementation(project(":feature-file-list"))
+    implementation(project(":feature-friend-list"))
+    implementation(project(":feature-login"))
+    implementation(project(":feature-notification-list"))
+    implementation(project(":feature-onboarding"))
+    implementation(project(":feature-settings"))
 
     platform(libs.android.compose.bom)
     implementation(libs.androidx.core.ktx)
