@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import com.mukul.jan.primer.base.ui.design.PrimerTheme
+import com.mukul.jan.primer.feature.chat.list.PrimaryChatScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -18,7 +19,7 @@ class FlavorActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier.fillMaxSize()
                 ) {
-
+                    PrimaryChatScreen()
                 }
             }
         }
