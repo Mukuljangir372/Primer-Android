@@ -38,7 +38,12 @@ class PrimerFlavorContainer {
                 name = "friend-list",
                 module = ":flavor-friend-list",
                 useSeparatePackage = true,
-            )
+            ),
+            ProductFlavor(
+                name = "notification-list",
+                module = ":flavor-notification-list",
+                useSeparatePackage = true,
+            ),
         )
     }
 }
