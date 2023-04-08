@@ -24,13 +24,13 @@ private val bottomAppBarItems: List<BottomNavItem> by lazy {
             id = 2, label = "friends", icon = null, drawable = R.drawable.baseline_groups_24
         ),
         BottomNavItem(
-            id = 2, label = "files", icon = null, drawable = R.drawable.baseline_cloud_24
+            id = 3, label = "files", icon = null, drawable = R.drawable.baseline_cloud_24
         ),
         BottomNavItem(
-            id = 2, label = "alerts", icon = null, drawable = R.drawable.baseline_star_24
+            id = 4, label = "alerts", icon = null, drawable = R.drawable.baseline_star_24
         ),
         BottomNavItem(
-            id = 2, label = "profile", icon = null, drawable = R.drawable.baseline_person_24
+            id = 5, label = "profile", icon = null, drawable = R.drawable.baseline_person_24
         ),
     )
 }
