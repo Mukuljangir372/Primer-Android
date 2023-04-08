@@ -24,6 +24,11 @@ class PrimerFlavorContainer {
                 module = ":flavor-login",
                 useSeparatePackage = true,
             ),
+            ProductFlavor(
+                name = "chat",
+                module = ":flavor-chat",
+                useSeparatePackage = true,
+            )
         )
     }
 }

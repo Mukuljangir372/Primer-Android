@@ -12,7 +12,8 @@ class FlavorContainer {
     private val flavors = listOf(
         Flavor(name = "full", rootEntry = "com.mukul.jan.primer.flavor.full.RootEntry"),
         Flavor(name = "login", rootEntry = "com.mukul.jan.primer.flavor.login.RootEntry"),
-        Flavor(name = "onboarding", rootEntry = ""),
+        Flavor(name = "onboarding", rootEntry = "com.mukul.jan.primer.flavor.onboarding.RootEntry"),
+        Flavor(name = "chat", rootEntry = "com.mukul.jan.primer.flavor.chat.RootEntry"),
     )
 
     fun startFlavorEntry(activity: Activity) {
