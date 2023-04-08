@@ -1,4 +1,4 @@
-package com.mukul.jan.primer.feature.chat.list
+package com.mukul.jan.primer.feature.server.list
 
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable

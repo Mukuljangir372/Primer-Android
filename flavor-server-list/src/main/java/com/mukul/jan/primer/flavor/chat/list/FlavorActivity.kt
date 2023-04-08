@@ -1,4 +1,4 @@
-package com.mukul.jan.primer.flavor.chat.list
+package com.mukul.jan.primer.flavor.server.list
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.mukul.jan.primer.base.ui.design.PrimerTheme
-import com.mukul.jan.primer.feature.chat.list.navigation.ChatNav
+import com.mukul.jan.primer.feature.server.list.navigation.ChatNav
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

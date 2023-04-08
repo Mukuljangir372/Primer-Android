@@ -56,21 +56,21 @@
             <option value="$PROJECT_DIR$/domain-login" />
             <option value="$PROJECT_DIR$/domain-message" />
             <option value="$PROJECT_DIR$/domain-status" />
-            <option value="$PROJECT_DIR$/feature-chat-list" />
             <option value="$PROJECT_DIR$/feature-dashboard" />
             <option value="$PROJECT_DIR$/feature-file-list" />
             <option value="$PROJECT_DIR$/feature-friend-list" />
             <option value="$PROJECT_DIR$/feature-login" />
             <option value="$PROJECT_DIR$/feature-notification-list" />
             <option value="$PROJECT_DIR$/feature-onboarding" />
+            <option value="$PROJECT_DIR$/feature-server-list" />
             <option value="$PROJECT_DIR$/feature-settings" />
-            <option value="$PROJECT_DIR$/flavor-chat-list" />
             <option value="$PROJECT_DIR$/flavor-file-list" />
             <option value="$PROJECT_DIR$/flavor-friend-list" />
             <option value="$PROJECT_DIR$/flavor-full" />
             <option value="$PROJECT_DIR$/flavor-login" />
             <option value="$PROJECT_DIR$/flavor-notification-list" />
             <option value="$PROJECT_DIR$/flavor-onboarding" />
+            <option value="$PROJECT_DIR$/flavor-server-list" />
             <option value="$PROJECT_DIR$/flavor-settings" />
           </set>
         </option>

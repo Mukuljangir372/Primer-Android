@@ -1,10 +1,10 @@
-package com.mukul.jan.primer.feature.chat.list.navigation
+package com.mukul.jan.primer.feature.server.list.navigation
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.mukul.jan.primer.feature.chat.list.PrimaryChatScreen
+import com.mukul.jan.primer.feature.server.list.PrimaryChatScreen
 
 object ChatNav {
     val root = Screen.Chat
