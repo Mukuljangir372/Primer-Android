@@ -6,6 +6,8 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.ScaffoldState
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.mu.jan.primer.common.ui.compose.BottomNavItem
@@ -22,34 +24,41 @@ private val bottomAppBarItems: List<BottomNavItem> by lazy {
             id = 2, label = "friends", icon = null, drawable = R.drawable.baseline_groups_24
         ),
         BottomNavItem(
-            id = 2, label = "files", icon = null, drawable = R.drawable.baseline_cloud_24
+            id = 3, label = "files", icon = null, drawable = R.drawable.baseline_cloud_24
         ),
         BottomNavItem(
-            id = 2, label = "alerts", icon = null, drawable = R.drawable.baseline_star_24
+            id = 4, label = "alerts", icon = null, drawable = R.drawable.baseline_star_24
         ),
         BottomNavItem(
-            id = 2, label = "profile", icon = null, drawable = R.drawable.baseline_person_24
+            id = 5, label = "profile", icon = null, drawable = R.drawable.baseline_person_24
         ),
     )
 }
 
 @Composable
 fun DashboardScreen() {
-    DashboardScreenContent(
-        modifier = Modifier,
+    val selectedBottomItemId = remember {
+        mutableStateOf(bottomAppBarItems.first().id)
+    }
+    DashboardScreenContent(modifier = Modifier,
         scaffoldState = rememberScaffoldState(),
-    )
+        selectedBottomItem = selectedBottomItemId.value,
+        onBottomItemSelect = {
+            selectedBottomItemId.value = it
+        })
 }
 
 @Composable
 private fun DashboardScreenContent(
     modifier: Modifier,
     scaffoldState: ScaffoldState,
+    selectedBottomItem: Int,
+    onBottomItemSelect: (Int) -> Unit,
 ) {
     Scaffold(modifier = modifier, scaffoldState = scaffoldState, bottomBar = {
         PrimaryBottomAppBar(modifier = Modifier, items = bottomAppBarItems, onItemClick = {
-
-        })
+            onBottomItemSelect.invoke(it.id)
+        }, selectedItemId = selectedBottomItem)
     }) { innerPadding ->
         Column(
             modifier = Modifier.padding(innerPadding)
@@ -63,9 +72,9 @@ private fun DashboardScreenContent(
 @Composable
 private fun DashboardScreenPreview() {
     PrimerTheme {
-        DashboardScreenContent(
-            modifier = Modifier,
+        DashboardScreenContent(modifier = Modifier,
             scaffoldState = rememberScaffoldState(),
-        )
+            selectedBottomItem = 2,
+            onBottomItemSelect = {})
     }
 }
