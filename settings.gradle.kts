@@ -73,5 +73,8 @@ include(":feature-onboarding")
 include(":flavor-login")
 include(":feature-login")
 
-include(":flavor-chat")
-include(":feature-chat")
+include(":flavor-chat-list")
+include(":feature-chat-list")
+
+include(":flavor-friend-list")
+include(":feature-friend-list")

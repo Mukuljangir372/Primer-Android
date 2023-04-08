@@ -4,14 +4,14 @@ plugins {
     id("primer_android_hilt_lib")
 }
 android {
-    namespace = "com.mukul.jan.primer.flavor.chat"
+    namespace = "com.mukul.jan.primer.flavor.chat.list"
     buildFeatures {
         compose = true
     }
 }
 dependencies {
     implementation(libs.androidx.core.ktx)
-    implementation(project(":feature-chat"))
+    implementation(project(":feature-chat-list"))
     implementation(project(":base-ui"))
 
     platform(libs.android.compose.bom)
