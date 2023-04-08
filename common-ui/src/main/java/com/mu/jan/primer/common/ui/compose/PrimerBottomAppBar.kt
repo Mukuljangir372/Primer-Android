@@ -22,6 +22,7 @@ fun PrimaryBottomAppBar(
     modifier: Modifier,
     items: List<BottomNavItem>,
     onItemClick: (item: BottomNavItem) -> Unit,
+    selectedItemId: Int,
 ) {
     BottomNavigation(
         modifier = modifier,
@@ -29,14 +30,18 @@ fun PrimaryBottomAppBar(
         contentColor = MaterialTheme.colors.primary
     ) {
         items.forEach { item ->
-            BottomNavigationItem(selected = true, onClick = {
-                onItemClick.invoke(item)
-            }, icon = {
-                Icon(
-                    imageVector = item.icon ?: ImageVector.vectorResource(id = item.drawable!!),
-                    contentDescription = null,
-                )
-            })
+            BottomNavigationItem(selected = item.id == selectedItemId,
+                selectedContentColor = MaterialTheme.colors.primary,
+                unselectedContentColor = MaterialTheme.colors.onBackground.copy(alpha = 0.5f),
+                onClick = {
+                    onItemClick.invoke(item)
+                },
+                icon = {
+                    Icon(
+                        imageVector = item.icon ?: ImageVector.vectorResource(id = item.drawable!!),
+                        contentDescription = null,
+                    )
+                })
         }
     }
 }
@@ -50,6 +55,8 @@ private fun PrimaryBottomAppBarPreview() {
                 id = 1, label = "chat", icon = null, drawable = R.drawable.baseline_chat_24
             )
         )
-        PrimaryBottomAppBar(modifier = Modifier, items = items, onItemClick = {})
+        PrimaryBottomAppBar(
+            modifier = Modifier, items = items, onItemClick = {}, selectedItemId = 0
+        )
     }
 }

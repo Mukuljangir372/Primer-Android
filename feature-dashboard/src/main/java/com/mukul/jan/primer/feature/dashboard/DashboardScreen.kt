@@ -38,6 +38,7 @@ fun DashboardScreen() {
     DashboardScreenContent(
         modifier = Modifier,
         scaffoldState = rememberScaffoldState(),
+        selectedItemId = 1
     )
 }
 
@@ -45,11 +46,12 @@ fun DashboardScreen() {
 private fun DashboardScreenContent(
     modifier: Modifier,
     scaffoldState: ScaffoldState,
+    selectedItemId: Int,
 ) {
     Scaffold(modifier = modifier, scaffoldState = scaffoldState, bottomBar = {
         PrimaryBottomAppBar(modifier = Modifier, items = bottomAppBarItems, onItemClick = {
 
-        })
+        }, selectedItemId = selectedItemId)
     }) { innerPadding ->
         Column(
             modifier = Modifier.padding(innerPadding)
@@ -64,8 +66,7 @@ private fun DashboardScreenContent(
 private fun DashboardScreenPreview() {
     PrimerTheme {
         DashboardScreenContent(
-            modifier = Modifier,
-            scaffoldState = rememberScaffoldState(),
+            modifier = Modifier, scaffoldState = rememberScaffoldState(), selectedItemId = 2
         )
     }
 }
