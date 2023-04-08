@@ -27,7 +27,7 @@ object LoginNav {
         object SignIn : NavScreen(route = "signIn")
     }
 
-    fun addLoginNavAtTopLevel(navController: NavHostController, graph: NavGraphBuilder) {
+    fun addAtTopLevel(navController: NavHostController, graph: NavGraphBuilder) {
         graph.apply {
             navigation(
                 route = root.route,

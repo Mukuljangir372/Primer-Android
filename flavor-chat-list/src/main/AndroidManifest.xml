@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <application>
+        <activity android:name="com.mukul.jan.primer.flavor.chat.list.FlavorActivity" />
+    </application>
 </manifest>

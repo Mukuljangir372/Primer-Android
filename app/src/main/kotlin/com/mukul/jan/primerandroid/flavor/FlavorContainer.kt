@@ -14,10 +14,10 @@ class FlavorContainer {
         Flavor(name = "full", rootEntry = "$base.full.RootEntry"),
         Flavor(name = "login", rootEntry = "$base.login.RootEntry"),
         Flavor(name = "onboarding", rootEntry = "$base.onboarding.RootEntry"),
-        Flavor(name = "chat-list", rootEntry = "$base.chat.list.RootEntry"),
-        Flavor(name = "file-list", rootEntry = "$base.file.list.RootEntry"),
-        Flavor(name = "friend-list", rootEntry = "$base.friend.list.RootEntry"),
-        Flavor(name = "notification-list", rootEntry = "$base.notification.list.RootEntry"),
+        Flavor(name = "chatList", rootEntry = "$base.chat.list.RootEntry"),
+        Flavor(name = "fileList", rootEntry = "$base.file.list.RootEntry"),
+        Flavor(name = "friendList", rootEntry = "$base.friend.list.RootEntry"),
+        Flavor(name = "notificationList", rootEntry = "$base.notification.list.RootEntry"),
         Flavor(name = "settings", rootEntry = "$base.settings.RootEntry"),
     )
 
