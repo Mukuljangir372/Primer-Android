@@ -6,6 +6,8 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.ScaffoldState
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.mu.jan.primer.common.ui.compose.BottomNavItem
@@ -35,23 +37,28 @@ private val bottomAppBarItems: List<BottomNavItem> by lazy {
 
 @Composable
 fun DashboardScreen() {
-    DashboardScreenContent(
-        modifier = Modifier,
+    val selectedBottomItemId = remember {
+        mutableStateOf(bottomAppBarItems.first().id)
+    }
+    DashboardScreenContent(modifier = Modifier,
         scaffoldState = rememberScaffoldState(),
-        selectedItemId = 1
-    )
+        selectedBottomItem = selectedBottomItemId.value,
+        onBottomItemSelect = {
+            selectedBottomItemId.value = it
+        })
 }
 
 @Composable
 private fun DashboardScreenContent(
     modifier: Modifier,
     scaffoldState: ScaffoldState,
-    selectedItemId: Int,
+    selectedBottomItem: Int,
+    onBottomItemSelect: (Int) -> Unit,
 ) {
     Scaffold(modifier = modifier, scaffoldState = scaffoldState, bottomBar = {
         PrimaryBottomAppBar(modifier = Modifier, items = bottomAppBarItems, onItemClick = {
-
-        }, selectedItemId = selectedItemId)
+            onBottomItemSelect.invoke(it.id)
+        }, selectedItemId = selectedBottomItem)
     }) { innerPadding ->
         Column(
             modifier = Modifier.padding(innerPadding)
@@ -65,8 +72,9 @@ private fun DashboardScreenContent(
 @Composable
 private fun DashboardScreenPreview() {
     PrimerTheme {
-        DashboardScreenContent(
-            modifier = Modifier, scaffoldState = rememberScaffoldState(), selectedItemId = 2
-        )
+        DashboardScreenContent(modifier = Modifier,
+            scaffoldState = rememberScaffoldState(),
+            selectedBottomItem = 2,
+            onBottomItemSelect = {})
     }
 }

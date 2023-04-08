@@ -32,7 +32,7 @@ fun PrimaryBottomAppBar(
         items.forEach { item ->
             BottomNavigationItem(selected = item.id == selectedItemId,
                 selectedContentColor = MaterialTheme.colors.primary,
-                unselectedContentColor = MaterialTheme.colors.onBackground.copy(alpha = 0.5f),
+                unselectedContentColor = MaterialTheme.colors.onBackground.copy(alpha = 0.4f),
                 onClick = {
                     onItemClick.invoke(item)
                 },
