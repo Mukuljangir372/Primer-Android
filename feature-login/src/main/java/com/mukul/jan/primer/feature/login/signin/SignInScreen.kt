@@ -23,9 +23,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.mu.jan.primer.common.Message
+import com.mu.jan.primer.common.ui.compose.PrimaryCircularLoader
 import com.mu.jan.primer.common.ui.compose.PrimaryRoundButton
 import com.mu.jan.primer.common.ui.compose.PrimaryTextField
-import com.mu.jan.primer.common.ui.compose.PrimerCircularLoader
 import com.mukul.jan.primer.base.ui.Dimens
 import com.mukul.jan.primer.base.ui.design.PrimerTheme
 import com.mukul.jan.primer.feature.login.R
@@ -151,7 +151,7 @@ private fun SignInScreenContent(
                     }
                 }
             } else {
-                PrimerCircularLoader(modifier = Modifier)
+                PrimaryCircularLoader(modifier = Modifier)
             }
         }
     }
