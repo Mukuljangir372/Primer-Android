@@ -78,3 +78,6 @@ include(":feature-chat-list")
 
 include(":flavor-friend-list")
 include(":feature-friend-list")
+
+include(":feature-file-list")
+include(":flavor-file-list")
