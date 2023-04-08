@@ -14,6 +14,11 @@ class FlavorContainer {
         Flavor(name = "login", rootEntry = "com.mukul.jan.primer.flavor.login.RootEntry"),
         Flavor(name = "onboarding", rootEntry = "com.mukul.jan.primer.flavor.onboarding.RootEntry"),
         Flavor(name = "chat-list", rootEntry = "com.mukul.jan.primer.flavor.chat.list.RootEntry"),
+        Flavor(name = "file-list", rootEntry = "com.mukul.jan.primer.flavor.file.list.RootEntry"),
+        Flavor(
+            name = "friend-list",
+            rootEntry = "com.mukul.jan.primer.flavor.friend.list.RootEntry"
+        ),
     )
 
     fun startFlavorEntry(activity: Activity) {
