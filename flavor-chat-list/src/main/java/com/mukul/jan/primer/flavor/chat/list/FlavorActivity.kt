@@ -1,4 +1,4 @@
-package com.mukul.jan.primer.flavor.login
+package com.mukul.jan.primer.flavor.chat.list
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.mukul.jan.primer.base.ui.design.PrimerTheme
-import com.mukul.jan.primer.feature.login.navigation.LoginNav
+import com.mukul.jan.primer.feature.chat.list.navigation.ChatNav
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,12 +23,10 @@ class FlavorActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize()
                 ) {
                     NavHost(
-                        navController = navController,
-                        startDestination = LoginNav.root.route
+                        navController = navController, startDestination = ChatNav.root.route
                     ) {
-                        LoginNav.addAtTopLevel(
-                            navController = navController,
-                            graph = this
+                        ChatNav.addAtTopLevel(
+                            navController = navController, graph = this
                         )
                     }
                 }

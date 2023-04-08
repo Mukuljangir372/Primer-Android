@@ -25,7 +25,7 @@ object DashboardNav {
         object Settings : NavScreen(route = "settings")
     }
 
-    fun addDashboardAtTopLevel(
+    fun addAtTopLevel(
         graph: NavGraphBuilder,
         chatListScreen: @Composable () -> Unit,
         friendListScreen: @Composable () -> Unit,

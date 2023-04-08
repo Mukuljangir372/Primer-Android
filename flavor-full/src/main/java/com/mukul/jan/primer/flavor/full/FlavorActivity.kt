@@ -6,7 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.mukul.jan.primer.base.ui.design.PrimerTheme
-import com.mukul.jan.primer.feature.chat.list.ChatListScreen
+import com.mukul.jan.primer.feature.chat.list.PrimaryChatScreen
 import com.mukul.jan.primer.feature.dashboard.DashboardScreen
 import com.mukul.jan.primer.feature.dashboard.navigation.DashboardNav
 import com.mukul.jan.primer.feature.file.store.FileListScreen
@@ -26,8 +26,8 @@ class FlavorActivity : ComponentActivity() {
                     NavHost(
                         navController = navController, startDestination = DashboardNav.root.route
                     ) {
-                        DashboardNav.addDashboardAtTopLevel(graph = this, chatListScreen = {
-                            ChatListScreen()
+                        DashboardNav.addAtTopLevel(graph = this, chatListScreen = {
+                            PrimaryChatScreen()
                         }, friendListScreen = {
                             FriendListScreen()
                         }, fileListScreen = {
