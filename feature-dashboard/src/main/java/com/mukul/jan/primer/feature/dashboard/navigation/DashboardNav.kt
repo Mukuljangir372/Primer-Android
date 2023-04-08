@@ -56,6 +56,8 @@ object DashboardNav {
     }
 
     fun navigate(controller: NavHostController, id: Int) {
+        controller.popBackStack(Screen.Dashboard.route, true)
+
         when (id) {
             DashboardScreenUtils.BottomNav.chat.id -> {
                 controller.navigate(NavScreen.ChatList.createRoute(root))
