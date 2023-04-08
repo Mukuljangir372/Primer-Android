@@ -22,28 +22,27 @@ class FlavorActivity : ComponentActivity() {
         setContent {
             val navController = rememberNavController()
             PrimerTheme {
-                DashboardScreen(
-                    content = {
-                        NavHost(
-                            navController = navController,
-                            startDestination = DashboardNav.root.route
-                        ) {
-                            DashboardNav.addDashboardAtTopLevel(graph = this, chatListScreen = {
-                                ChatListScreen()
-                            }, friendListScreen = {
-                                FriendListScreen()
-                            }, fileListScreen = {
-                                FileListScreen()
-                            }, notificationListScreen = {
-                                NotificationListScreen()
-                            }, settingsScreen = {
-                                SettingsScreen()
-                            })
-                        }
-                    }, onSelectBottomNavItem = {
-
+                DashboardScreen(content = {
+                    NavHost(
+                        navController = navController, startDestination = DashboardNav.root.route
+                    ) {
+                        DashboardNav.addDashboardAtTopLevel(graph = this, chatListScreen = {
+                            ChatListScreen()
+                        }, friendListScreen = {
+                            FriendListScreen()
+                        }, fileListScreen = {
+                            FileListScreen()
+                        }, notificationListScreen = {
+                            NotificationListScreen()
+                        }, settingsScreen = {
+                            SettingsScreen()
+                        })
                     }
-                )
+                }, onSelectBottomNavItem = {
+                    DashboardNav.navigate(
+                        controller = navController, id = it
+                    )
+                })
             }
         }
     }
