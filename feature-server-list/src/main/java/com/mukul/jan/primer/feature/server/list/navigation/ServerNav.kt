@@ -4,13 +4,13 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.mukul.jan.primer.feature.server.list.PrimaryChatScreen
+import com.mukul.jan.primer.feature.server.list.PrimaryServerScreen
 
-object ChatNav {
-    val root = Screen.Chat
+object ServerNav {
+    val root = Screen.Server
 
     sealed class Screen(val route: String) {
-        object Chat : Screen(route = "chat")
+        object Server : Screen(route = "server")
     }
 
     sealed class NavScreen(val route: String) {
@@ -26,7 +26,7 @@ object ChatNav {
                 startDestination = NavScreen.Primary.createRoute(root)
             ) {
                 composable(NavScreen.Primary.createRoute(root)) {
-                    PrimaryChatScreen()
+                    PrimaryServerScreen()
                 }
             }
         }

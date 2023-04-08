@@ -4,6 +4,6 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 
 @Composable
-fun PrimaryChatScreen() {
-    Text(text = "Chats")
+fun PrimaryServerScreen() {
+    Text(text = "Servers")
 }

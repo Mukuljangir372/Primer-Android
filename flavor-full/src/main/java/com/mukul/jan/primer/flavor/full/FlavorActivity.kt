@@ -11,7 +11,7 @@ import com.mukul.jan.primer.feature.dashboard.navigation.DashboardNav
 import com.mukul.jan.primer.feature.file.store.FileListScreen
 import com.mukul.jan.primer.feature.friend.list.FriendListScreen
 import com.mukul.jan.primer.feature.notification.list.NotificationListScreen
-import com.mukul.jan.primer.feature.server.list.PrimaryChatScreen
+import com.mukul.jan.primer.feature.server.list.PrimaryServerScreen
 import com.mukul.jan.primer.feature.settings.SettingsScreen
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,7 +27,7 @@ class FlavorActivity : ComponentActivity() {
                         navController = navController, startDestination = DashboardNav.root.route
                     ) {
                         DashboardNav.addAtTopLevel(graph = this, chatListScreen = {
-                            PrimaryChatScreen()
+                            PrimaryServerScreen()
                         }, friendListScreen = {
                             FriendListScreen()
                         }, fileListScreen = {
