@@ -79,7 +79,11 @@ include(":feature-chat-list")
 include(":flavor-friend-list")
 include(":feature-friend-list")
 
-include(":feature-file-list")
 include(":flavor-file-list")
-include(":feature-notification-list")
+include(":feature-file-list")
+
 include(":flavor-notification-list")
+include(":feature-notification-list")
+
+include(":flavor-settings")
+include(":feature-settings")

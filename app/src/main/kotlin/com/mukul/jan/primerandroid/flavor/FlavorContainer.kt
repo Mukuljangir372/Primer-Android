@@ -18,6 +18,7 @@ class FlavorContainer {
         Flavor(name = "file-list", rootEntry = "$base.file.list.RootEntry"),
         Flavor(name = "friend-list", rootEntry = "$base.friend.list.RootEntry"),
         Flavor(name = "notification-list", rootEntry = "$base.notification.list.RootEntry"),
+        Flavor(name = "settings", rootEntry = "$base.settings.RootEntry"),
     )
 
     fun startFlavorEntry(activity: Activity) {

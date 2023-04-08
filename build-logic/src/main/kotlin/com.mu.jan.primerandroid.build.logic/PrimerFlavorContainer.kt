@@ -44,6 +44,11 @@ class PrimerFlavorContainer {
                 module = ":flavor-notification-list",
                 useSeparatePackage = true,
             ),
+            ProductFlavor(
+                name = "settings",
+                module = ":flavor-settings",
+                useSeparatePackage = true,
+            ),
         )
     }
 }
