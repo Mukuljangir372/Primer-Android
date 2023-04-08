@@ -9,7 +9,7 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun PrimerCircularLoader(modifier: Modifier) {
+fun PrimaryCircularLoader(modifier: Modifier) {
     val strokeWidth = 5.dp
     val color = MaterialTheme.colors.primary
     CircularProgressIndicator(
