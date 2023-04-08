@@ -2,8 +2,10 @@ package com.mukul.jan.primer.feature.dashboard.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import com.mukul.jan.primer.feature.dashboard.DashboardScreenUtils
 
 object DashboardNav {
     val root = Screen.Dashboard
@@ -49,6 +51,26 @@ object DashboardNav {
                 composable(NavScreen.Settings.createRoute(root)) {
                     settingsScreen.invoke()
                 }
+            }
+        }
+    }
+
+    fun navigate(controller: NavHostController, id: Int) {
+        when (id) {
+            DashboardScreenUtils.BottomNav.chat.id -> {
+                controller.navigate(NavScreen.ChatList.createRoute(root))
+            }
+            DashboardScreenUtils.BottomNav.friends.id -> {
+                controller.navigate(NavScreen.FriendList.createRoute(root))
+            }
+            DashboardScreenUtils.BottomNav.files.id -> {
+                controller.navigate(NavScreen.FileList.createRoute(root))
+            }
+            DashboardScreenUtils.BottomNav.notifications.id -> {
+                controller.navigate(NavScreen.NotificationList.createRoute(root))
+            }
+            DashboardScreenUtils.BottomNav.settings.id -> {
+                controller.navigate(NavScreen.Settings.createRoute(root))
             }
         }
     }
