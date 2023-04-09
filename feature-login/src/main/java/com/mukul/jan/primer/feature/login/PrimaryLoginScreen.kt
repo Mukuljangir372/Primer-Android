@@ -50,7 +50,7 @@ private fun PrimaryLoginScreenContent(
         ) {
             Image(
                 modifier = Modifier.size(Dimens.SEVEN.dp),
-                painter = painterResource(id = com.mukul.jan.primer.base.ui.R.drawable.chat),
+                painter = painterResource(id = com.mukul.jan.primer.base.ui.R.drawable.monkey),
                 contentDescription = "Primer"
             )
             Spacer(modifier = Modifier.height(Dimens.ONE.dp))
