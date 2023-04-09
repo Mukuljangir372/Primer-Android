@@ -10,6 +10,7 @@
 ## Teck Stack
 ✅ Kotlin Coroutines\
 ✅ Jetpack Compose\
+✅ Discord Tabs
 ✅ MVVM & Clean Architecture\
 ✅ Modularization\
 ✅ Room Database\
