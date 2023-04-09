@@ -129,7 +129,7 @@ private fun ChannelListItem(modifier: Modifier) {
         Text(
             modifier = Modifier.fillMaxWidth(),
             text = "mobile-apps",
-            style = MaterialTheme.typography.subtitle1,
+            style = MaterialTheme.typography.body1,
         )
     }
 }
