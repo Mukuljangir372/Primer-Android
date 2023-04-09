@@ -158,14 +158,13 @@ fun PrimerPanelContainer(
                         sidePanel.invoke()
                     }
                     Card(
-                        elevation = 1.5.dp,
+                        elevation = 2.dp,
                         shape = MaterialTheme.shapes.medium.copy(
                             topStart = CornerSize(screenPadding),
                             topEnd = CornerSize(screenPadding),
                             bottomEnd = CornerSize(0.dp),
                             bottomStart = CornerSize(0.dp)
                         ),
-                        backgroundColor = MaterialTheme.colors.background,
                         modifier = Modifier
                             .fillMaxHeight()
                             .fillMaxWidth(1f)
@@ -192,7 +191,7 @@ fun PrimerPanelContainer(
                 exit = fadeOut()
             ) {
                 Card(
-                    elevation = 5.dp,
+                    elevation = 2.dp,
                     shape = MaterialTheme.shapes.medium.copy(
                         topStart = CornerSize(centerScreenPadding),
                         topEnd = CornerSize(centerScreenPadding),
