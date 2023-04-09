@@ -69,10 +69,7 @@ private fun ChannelGroupList(
         verticalArrangement = Arrangement.spacedBy(Dimens.ONE.dp),
         state = rememberLazyListState(),
     ) {
-        item {
-            ChannelGroupListItem()
-        }
-        item {
+        items(50) {
             ChannelGroupListItem()
         }
     }
@@ -105,10 +102,6 @@ private fun ChannelGroupListItem() {
             )
         }
 
-        // TODO handle in loop
-        ChannelListItem(modifier = Modifier
-            .fillMaxWidth()
-            .padding(start = Dimens.ONE.dp))
         ChannelListItem(modifier = Modifier
             .fillMaxWidth()
             .padding(start = Dimens.ONE.dp))
