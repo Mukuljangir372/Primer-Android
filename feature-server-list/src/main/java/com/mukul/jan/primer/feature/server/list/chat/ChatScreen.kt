@@ -12,7 +12,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import com.mu.jan.primer.common.ui.compose.PrimerTopAppBar
+import com.mu.jan.primer.common.ui.compose.PrimaryTopAppBar
 import com.mukul.jan.primer.base.ui.R
 import com.mukul.jan.primer.base.ui.design.PrimerTheme
 
@@ -29,7 +29,7 @@ private fun ChatScreenContent(
     onBackPress: () -> Unit,
 ) {
     Scaffold(modifier = Modifier.fillMaxSize(), scaffoldState = scaffoldState, topBar = {
-        PrimerTopAppBar(
+        PrimaryTopAppBar(
             modifier = Modifier.fillMaxWidth(),
             title = {
                 Text(

@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 import com.mukul.jan.primer.base.ui.Dimens
 
 @Composable
-fun PrimerTopAppBar(
+fun PrimaryTopAppBar(
     modifier: Modifier,
     title: @Composable () -> Unit,
     navigationIcon: ImageVector? = null,
