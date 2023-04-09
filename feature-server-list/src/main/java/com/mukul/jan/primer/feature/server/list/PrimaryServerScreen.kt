@@ -32,6 +32,9 @@ private fun PrimaryServerScreenContent(
                 .padding(innerPadding)
         ) {
             PrimerPanelContainer(
+                sidePanel = {
+
+                },
                 leftPanel = {
 
                 },

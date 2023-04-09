@@ -30,6 +30,7 @@ enum class CenterScreenState {
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun PrimerPanelContainer(
+    sidePanel: @Composable () -> Unit,
     leftPanel: @Composable () -> Unit,
     centerPanel: @Composable () -> Unit,
 ) {
@@ -122,11 +123,11 @@ fun PrimerPanelContainer(
             rightSwipeableState.currentValue,
             rightSwipeableState.progress.fraction
         ) {
-            mutableStateOf(if (rightSwipeableState.isAnimationRunning || rightSwipeableState.currentValue == CenterScreenState.CENTER || rightSwipeableState.progress.fraction in 0.05f..0.95f) 0.dp else 10.dp)
+            mutableStateOf(if (rightSwipeableState.isAnimationRunning || rightSwipeableState.currentValue == CenterScreenState.CENTER || rightSwipeableState.progress.fraction in 0.05f..0.95f) 0.dp else 20.dp)
         }
 
         val screenPadding by remember {
-            mutableStateOf(10.dp)
+            mutableStateOf(20.dp)
         }
 
         Box(
@@ -136,22 +137,43 @@ fun PrimerPanelContainer(
                     color = MaterialTheme.colors.onBackground.copy(alpha = 0.05f),
                 ),
         ) {
-            // Left Panel
-            Card(
+            // Left Panel + Side Panel
+            Surface(
                 modifier = leftDrawerModifier
                     .align(Alignment.CenterStart)
                     .fillMaxHeight()
                     .fillMaxWidth(0.87f)
                     .padding(top = screenPadding)
-                    .background(
-                        color = MaterialTheme.colors.background,
-                        shape = MaterialTheme.shapes.medium.copy(
-                            topStart = CornerSize(screenPadding),
-                            topEnd = CornerSize(screenPadding)
-                        )
-                    )
             ) {
-                leftPanel.invoke()
+                Row(
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxHeight()
+                            .fillMaxWidth(0.3f)
+                            .background(color = MaterialTheme.colors.onBackground.copy(alpha = 0.05f))
+                    ) {
+                        sidePanel.invoke()
+                    }
+                    Card(
+                        elevation = 1.5.dp,
+                        modifier = Modifier
+                            .fillMaxHeight()
+                            .fillMaxWidth(1f)
+                            .background(
+                                color = MaterialTheme.colors.background,
+                                shape = MaterialTheme.shapes.medium.copy(
+                                    topStart = CornerSize(screenPadding),
+                                    topEnd = CornerSize(screenPadding),
+                                    bottomEnd = CornerSize(0.dp),
+                                    bottomStart = CornerSize(0.dp)
+                                )
+                            )
+                    ) {
+                        leftPanel.invoke()
+                    }
+                }
             }
 
             // Center Panel
@@ -178,7 +200,9 @@ fun PrimerPanelContainer(
                             color = MaterialTheme.colors.background,
                             shape = MaterialTheme.shapes.medium.copy(
                                 topStart = CornerSize(centerScreenPadding),
-                                topEnd = CornerSize(centerScreenPadding)
+                                topEnd = CornerSize(centerScreenPadding),
+                                bottomEnd = CornerSize(0.dp),
+                                bottomStart = CornerSize(0.dp)
                             )
                         )
                 ) {
