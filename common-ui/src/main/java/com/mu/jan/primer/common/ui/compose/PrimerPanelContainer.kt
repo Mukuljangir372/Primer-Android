@@ -139,7 +139,7 @@ fun PrimerPanelContainer(
                 ),
         ) {
             // Left Panel + Side Panel
-            Surface(
+            Box(
                 modifier = leftDrawerModifier
                     .align(Alignment.CenterStart)
                     .fillMaxHeight()
@@ -154,7 +154,6 @@ fun PrimerPanelContainer(
                         modifier = Modifier
                             .fillMaxHeight()
                             .fillMaxWidth(0.3f)
-                            .background(color = MaterialTheme.colors.onBackground.copy(alpha = 0.05f))
                     ) {
                         sidePanel.invoke()
                     }
