@@ -31,9 +31,9 @@ enum class CenterScreenState {
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun PrimerPanelContainer(
-    sidePanel: @Composable () -> Unit,
-    leftPanel: @Composable () -> Unit,
-    centerPanel: @Composable () -> Unit,
+    sidePanel: @Composable (state: SwipeableState<CenterScreenState>) -> Unit,
+    leftPanel: @Composable (state: SwipeableState<CenterScreenState>) -> Unit,
+    centerPanel: @Composable (state: SwipeableState<CenterScreenState>) -> Unit,
 ) {
     Surface {
         val density = LocalDensity.current
@@ -155,7 +155,7 @@ fun PrimerPanelContainer(
                             .fillMaxHeight()
                             .fillMaxWidth(0.3f)
                     ) {
-                        sidePanel.invoke()
+                        sidePanel.invoke(rightSwipeableState)
                     }
 
                     // Left Panel
@@ -172,7 +172,7 @@ fun PrimerPanelContainer(
                             .fillMaxWidth(1f)
                             .background(color = Color.Transparent)
                     ) {
-                        leftPanel.invoke()
+                        leftPanel.invoke(rightSwipeableState)
                     }
                 }
             }
@@ -205,9 +205,17 @@ fun PrimerPanelContainer(
                         .padding(top = centerScreenPadding)
                         .background(color = Color.Transparent)
                 ) {
-                    centerPanel.invoke()
+                    centerPanel.invoke(rightSwipeableState)
                 }
             }
         }
     }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+suspend fun SwipeableState<CenterScreenState>.navigateTo(
+    screen: CenterScreenState
+) {
+    val state = this
+    state.animateTo(screen)
 }
