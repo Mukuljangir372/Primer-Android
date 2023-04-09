@@ -16,7 +16,7 @@ fun PrimerTopAppBar(
     modifier: Modifier,
     title: @Composable () -> Unit,
     navigationIcon: ImageVector,
-    onNavigationIconClick: () -> Unit,
+    onNavigationIconClick: () -> Unit = {},
     actions: @Composable RowScope.() -> Unit = {}
 ) {
     TopAppBar(
