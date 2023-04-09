@@ -163,7 +163,7 @@ fun PrimerPanelContainer(
                         ),
                         modifier = Modifier
                             .fillMaxHeight()
-                            .width(100.dp)
+                            .width(90.dp)
                             .background(color = Color.Transparent)
                     ) {
                         sidePanel.invoke(rightSwipeableState)
