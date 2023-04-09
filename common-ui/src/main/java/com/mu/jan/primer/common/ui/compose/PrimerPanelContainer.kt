@@ -3,8 +3,10 @@ package com.mu.jan.primer.common.ui.compose
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -115,16 +117,39 @@ fun PrimerPanelContainer(
             }
         }
 
+        val centerScreenPadding by remember(
+            rightSwipeableState.isAnimationRunning,
+            rightSwipeableState.currentValue,
+            rightSwipeableState.progress.fraction
+        ) {
+            mutableStateOf(if (rightSwipeableState.isAnimationRunning || rightSwipeableState.currentValue == CenterScreenState.CENTER || rightSwipeableState.progress.fraction in 0.05f..0.95f) 0.dp else 10.dp)
+        }
+
+        val screenPadding by remember {
+            mutableStateOf(10.dp)
+        }
 
         Box(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize()
+                .background(
+                    color = MaterialTheme.colors.onBackground.copy(alpha = 0.05f),
+                ),
         ) {
             // Left Panel
-            Column(
+            Card(
                 modifier = leftDrawerModifier
                     .align(Alignment.CenterStart)
                     .fillMaxHeight()
-                    .fillMaxWidth(0.85f)
+                    .fillMaxWidth(0.87f)
+                    .padding(top = screenPadding)
+                    .background(
+                        color = MaterialTheme.colors.background,
+                        shape = MaterialTheme.shapes.medium.copy(
+                            topStart = CornerSize(screenPadding),
+                            topEnd = CornerSize(screenPadding)
+                        )
+                    )
             ) {
                 leftPanel.invoke()
             }
@@ -144,8 +169,18 @@ fun PrimerPanelContainer(
                 enter = fadeIn(),
                 exit = fadeOut()
             ) {
-                Column(
-                    modifier = Modifier.fillMaxSize()
+                Card(
+                    elevation = 5.dp,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(top = centerScreenPadding)
+                        .background(
+                            color = MaterialTheme.colors.background,
+                            shape = MaterialTheme.shapes.medium.copy(
+                                topStart = CornerSize(centerScreenPadding),
+                                topEnd = CornerSize(centerScreenPadding)
+                            )
+                        )
                 ) {
                     centerPanel.invoke()
                 }
