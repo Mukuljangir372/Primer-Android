@@ -15,23 +15,29 @@ import com.mukul.jan.primer.base.ui.Dimens
 fun PrimerTopAppBar(
     modifier: Modifier,
     title: @Composable () -> Unit,
-    navigationIcon: ImageVector,
+    navigationIcon: ImageVector? = null,
     onNavigationIconClick: () -> Unit = {},
     actions: @Composable RowScope.() -> Unit = {}
 ) {
+    val navigationIconLambda: @Composable () -> Unit = {
+        navigationIcon?.let {
+            IconButton(onClick = onNavigationIconClick) {
+                Icon(
+                    navigationIcon, contentDescription = null
+                )
+            }
+        }
+    }
+
     TopAppBar(
         modifier = modifier,
         backgroundColor = MaterialTheme.colors.background,
         contentColor = MaterialTheme.colors.onBackground,
         elevation = Dimens.QUARTER.dp,
         title = title,
-        navigationIcon = {
-            IconButton(onClick = onNavigationIconClick) {
-                Icon(
-                    navigationIcon, contentDescription = null
-                )
-            }
-        },
+        navigationIcon = if (navigationIcon != null) {
+            navigationIconLambda
+        } else null,
         actions = actions
     )
 }

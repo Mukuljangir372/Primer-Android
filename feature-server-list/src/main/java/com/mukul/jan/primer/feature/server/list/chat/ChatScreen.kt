@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import com.mu.jan.primer.common.ui.compose.PrimerTopAppBar
 import com.mukul.jan.primer.base.ui.R
@@ -33,7 +34,8 @@ private fun ChatScreenContent(
             title = {
                 Text(
                     text = stringResource(id = R.string.chat),
-                    style = MaterialTheme.typography.subtitle1
+                    style = MaterialTheme.typography.subtitle1,
+                    fontWeight = FontWeight.SemiBold
                 )
             },
             navigationIcon = ImageVector.vectorResource(id = R.drawable.baseline_dehaze_24),
