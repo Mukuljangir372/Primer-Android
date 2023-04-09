@@ -2,8 +2,8 @@
 💬 Primer is a private, secure and end-to-end communication application.
 
 <img align="left" src='docs/login-1.jpeg' width='180'>
-<img align="left" src='docs/login-2.jpeg' width='180'>
-<img src='docs/login-3.jpeg' width='180'>
+<img src='docs/login-2.jpeg' width='180'>
+<img align="left" src='docs/login-3.jpeg' width='180'>
 <img src='docs/dashboard-1.jpeg' width='180'>
 
 
