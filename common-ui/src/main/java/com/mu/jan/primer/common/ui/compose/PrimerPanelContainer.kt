@@ -119,6 +119,13 @@ fun PrimerPanelContainer(
             }
         }
 
+        val centerScreenZIndex by remember {
+            derivedStateOf {
+                if (rightSwipeableState.isAnimationRunning || rightSwipeableState.currentValue == CenterScreenState.CENTER || rightSwipeableState.progress.fraction in 0.05f..0.95f) 1f
+                else 0.5f
+            }
+        }
+
         val centerScreenPadding by remember(
             rightSwipeableState.isAnimationRunning,
             rightSwipeableState.currentValue,
@@ -139,65 +146,59 @@ fun PrimerPanelContainer(
                 ),
         ) {
             // Left Panel + Side Panel
-            Box(
+            Row(
                 modifier = leftDrawerModifier
                     .align(Alignment.CenterStart)
                     .fillMaxHeight()
                     .fillMaxWidth(0.87f)
                     .padding(top = screenPadding)
             ) {
-                Row(
-                    modifier = Modifier.fillMaxSize()
+                // Side Panel
+                Spacer(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .width(10.dp)
+                )
+                Card(
+                    elevation = 2.dp,
+                    shape = MaterialTheme.shapes.medium.copy(
+                        topStart = CornerSize(screenPadding),
+                        topEnd = CornerSize(screenPadding),
+                        bottomEnd = CornerSize(0.dp),
+                        bottomStart = CornerSize(0.dp)
+                    ),
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .width(90.dp)
+                        .background(color = Color.Transparent)
                 ) {
-                    // Side Panel
-                    Spacer(modifier = Modifier
-                        .fillMaxHeight()
-                        .width(10.dp))
-                    Card(
-                        elevation = 2.dp,
-                        shape = MaterialTheme.shapes.medium.copy(
-                            topStart = CornerSize(screenPadding),
-                            topEnd = CornerSize(screenPadding),
-                            bottomEnd = CornerSize(0.dp),
-                            bottomStart = CornerSize(0.dp)
-                        ),
-                        modifier = Modifier
-                            .fillMaxHeight()
-                            .width(90.dp)
-                            .background(color = Color.Transparent)
-                    ) {
-                        sidePanel.invoke(rightSwipeableState)
-                    }
+                    sidePanel.invoke(rightSwipeableState)
+                }
 
-                    // Left Panel
-                    Spacer(modifier = Modifier
+                // Left Panel
+                Spacer(
+                    modifier = Modifier
                         .fillMaxHeight()
-                        .width(10.dp))
-                    Card(
-                        elevation = 2.dp,
-                        shape = MaterialTheme.shapes.medium.copy(
-                            topStart = CornerSize(screenPadding),
-                            topEnd = CornerSize(screenPadding),
-                            bottomEnd = CornerSize(0.dp),
-                            bottomStart = CornerSize(0.dp)
-                        ),
-                        modifier = Modifier
-                            .fillMaxHeight()
-                            .fillMaxWidth(1f)
-                            .background(color = Color.Transparent)
-                    ) {
-                        leftPanel.invoke(rightSwipeableState)
-                    }
+                        .width(10.dp)
+                )
+                Card(
+                    elevation = 2.dp,
+                    shape = MaterialTheme.shapes.medium.copy(
+                        topStart = CornerSize(screenPadding),
+                        topEnd = CornerSize(screenPadding),
+                        bottomEnd = CornerSize(0.dp),
+                        bottomStart = CornerSize(0.dp)
+                    ),
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .fillMaxWidth(1f)
+                        .background(color = Color.Transparent)
+                ) {
+                    leftPanel.invoke(rightSwipeableState)
                 }
             }
 
             // Center Panel
-            val centerScreenZIndex by remember {
-                derivedStateOf {
-                    if (rightSwipeableState.isAnimationRunning || rightSwipeableState.currentValue == CenterScreenState.CENTER || rightSwipeableState.progress.fraction in 0.05f..0.95f) 1f
-                    else 0.5f
-                }
-            }
             AnimatedVisibility(
                 modifier = rightSwipeableModifier
                     .zIndex(centerScreenZIndex)
