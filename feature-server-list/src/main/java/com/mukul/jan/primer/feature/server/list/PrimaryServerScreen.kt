@@ -17,6 +17,7 @@ import com.mu.jan.primer.common.ui.compose.navigateTo
 import com.mukul.jan.primer.base.ui.design.PrimerTheme
 import com.mukul.jan.primer.feature.server.list.channel.ChannelListScreen
 import com.mukul.jan.primer.feature.server.list.chat.ChatScreen
+import com.mukul.jan.primer.feature.server.list.server.ServerDrawerScreen
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -42,7 +43,7 @@ private fun PrimaryServerScreenContent(
                 .padding(innerPadding)
         ) {
             PrimerPanelContainer(sidePanel = { _ ->
-
+                ServerDrawerScreen()
             }, leftPanel = { _ ->
                 ChannelListScreen()
             }, centerPanel = { state ->

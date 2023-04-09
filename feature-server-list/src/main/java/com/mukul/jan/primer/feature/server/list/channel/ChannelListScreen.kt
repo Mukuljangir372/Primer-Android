@@ -17,14 +17,13 @@ import com.mukul.jan.primer.base.ui.design.PrimerTheme
 
 @Composable
 fun ChannelListScreen() {
-    ChannelListScreenContent(
-        scaffoldState = rememberScaffoldState()
-    )
+    ChannelListScreenContent(scaffoldState = rememberScaffoldState(), onInfoClick = {})
 }
 
 @Composable
 private fun ChannelListScreenContent(
-    scaffoldState: ScaffoldState
+    scaffoldState: ScaffoldState,
+    onInfoClick: () -> Unit,
 ) {
     Scaffold(modifier = Modifier.fillMaxSize(), scaffoldState = scaffoldState, topBar = {
         PrimerTopAppBar(modifier = Modifier.fillMaxWidth(),
@@ -35,8 +34,13 @@ private fun ChannelListScreenContent(
                 )
             },
             navigationIcon = ImageVector.vectorResource(id = R.drawable.baseline_server_24),
-            onNavigationIconClick = {
-
+            actions = {
+                IconButton(onClick = onInfoClick) {
+                    Icon(
+                        ImageVector.vectorResource(id = R.drawable.baseline_more_vert_24),
+                        contentDescription = null
+                    )
+                }
             })
     }) { innerPadding ->
         Column(
@@ -51,8 +55,6 @@ private fun ChannelListScreenContent(
 @Composable
 private fun ChannelListScreenPreview() {
     PrimerTheme {
-        ChannelListScreenContent(
-            scaffoldState = rememberScaffoldState()
-        )
+        ChannelListScreenContent(scaffoldState = rememberScaffoldState(), onInfoClick = {})
     }
 }
