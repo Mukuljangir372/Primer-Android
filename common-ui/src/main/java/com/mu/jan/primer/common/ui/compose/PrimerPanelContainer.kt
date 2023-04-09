@@ -12,6 +12,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.IntOffset
@@ -123,11 +124,11 @@ fun PrimerPanelContainer(
             rightSwipeableState.currentValue,
             rightSwipeableState.progress.fraction
         ) {
-            mutableStateOf(if (rightSwipeableState.isAnimationRunning || rightSwipeableState.currentValue == CenterScreenState.CENTER || rightSwipeableState.progress.fraction in 0.05f..0.95f) 0.dp else 20.dp)
+            mutableStateOf(if (rightSwipeableState.isAnimationRunning || rightSwipeableState.currentValue == CenterScreenState.CENTER || rightSwipeableState.progress.fraction in 0.05f..0.95f) 0.dp else 10.dp)
         }
 
         val screenPadding by remember {
-            mutableStateOf(20.dp)
+            mutableStateOf(10.dp)
         }
 
         Box(
@@ -138,7 +139,7 @@ fun PrimerPanelContainer(
                 ),
         ) {
             // Left Panel + Side Panel
-            Surface(
+            Box(
                 modifier = leftDrawerModifier
                     .align(Alignment.CenterStart)
                     .fillMaxHeight()
@@ -148,28 +149,28 @@ fun PrimerPanelContainer(
                 Row(
                     modifier = Modifier.fillMaxSize()
                 ) {
+                    // Side Panel
                     Column(
                         modifier = Modifier
                             .fillMaxHeight()
                             .fillMaxWidth(0.3f)
-                            .background(color = MaterialTheme.colors.onBackground.copy(alpha = 0.05f))
                     ) {
                         sidePanel.invoke()
                     }
+
+                    // Left Panel
                     Card(
-                        elevation = 1.5.dp,
+                        elevation = 2.dp,
+                        shape = MaterialTheme.shapes.medium.copy(
+                            topStart = CornerSize(screenPadding),
+                            topEnd = CornerSize(screenPadding),
+                            bottomEnd = CornerSize(0.dp),
+                            bottomStart = CornerSize(0.dp)
+                        ),
                         modifier = Modifier
                             .fillMaxHeight()
                             .fillMaxWidth(1f)
-                            .background(
-                                color = MaterialTheme.colors.background,
-                                shape = MaterialTheme.shapes.medium.copy(
-                                    topStart = CornerSize(screenPadding),
-                                    topEnd = CornerSize(screenPadding),
-                                    bottomEnd = CornerSize(0.dp),
-                                    bottomStart = CornerSize(0.dp)
-                                )
-                            )
+                            .background(color = Color.Transparent)
                     ) {
                         leftPanel.invoke()
                     }
@@ -192,19 +193,17 @@ fun PrimerPanelContainer(
                 exit = fadeOut()
             ) {
                 Card(
-                    elevation = 5.dp,
+                    elevation = 2.dp,
+                    shape = MaterialTheme.shapes.medium.copy(
+                        topStart = CornerSize(centerScreenPadding),
+                        topEnd = CornerSize(centerScreenPadding),
+                        bottomEnd = CornerSize(0.dp),
+                        bottomStart = CornerSize(0.dp)
+                    ),
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(top = centerScreenPadding)
-                        .background(
-                            color = MaterialTheme.colors.background,
-                            shape = MaterialTheme.shapes.medium.copy(
-                                topStart = CornerSize(centerScreenPadding),
-                                topEnd = CornerSize(centerScreenPadding),
-                                bottomEnd = CornerSize(0.dp),
-                                bottomStart = CornerSize(0.dp)
-                            )
-                        )
+                        .background(color = Color.Transparent)
                 ) {
                     centerPanel.invoke()
                 }
