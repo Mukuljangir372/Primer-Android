@@ -150,15 +150,29 @@ fun PrimerPanelContainer(
                     modifier = Modifier.fillMaxSize()
                 ) {
                     // Side Panel
-                    Column(
+                    Spacer(modifier = Modifier
+                        .fillMaxHeight()
+                        .width(10.dp))
+                    Card(
+                        elevation = 2.dp,
+                        shape = MaterialTheme.shapes.medium.copy(
+                            topStart = CornerSize(screenPadding),
+                            topEnd = CornerSize(screenPadding),
+                            bottomEnd = CornerSize(0.dp),
+                            bottomStart = CornerSize(0.dp)
+                        ),
                         modifier = Modifier
                             .fillMaxHeight()
                             .fillMaxWidth(0.3f)
+                            .background(color = Color.Transparent)
                     ) {
                         sidePanel.invoke(rightSwipeableState)
                     }
 
                     // Left Panel
+                    Spacer(modifier = Modifier
+                        .fillMaxHeight()
+                        .width(10.dp))
                     Card(
                         elevation = 2.dp,
                         shape = MaterialTheme.shapes.medium.copy(
