@@ -31,9 +31,9 @@ enum class CenterScreenState {
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun PrimerPanelContainer(
-    sidePanel: @Composable () -> Unit,
-    leftPanel: @Composable () -> Unit,
-    centerPanel: @Composable () -> Unit,
+    sidePanel: @Composable (state: SwipeableState<CenterScreenState>) -> Unit,
+    leftPanel: @Composable (state: SwipeableState<CenterScreenState>) -> Unit,
+    centerPanel: @Composable (state: SwipeableState<CenterScreenState>) -> Unit,
 ) {
     Surface {
         val density = LocalDensity.current
@@ -150,15 +150,29 @@ fun PrimerPanelContainer(
                     modifier = Modifier.fillMaxSize()
                 ) {
                     // Side Panel
-                    Column(
+                    Spacer(modifier = Modifier
+                        .fillMaxHeight()
+                        .width(10.dp))
+                    Card(
+                        elevation = 2.dp,
+                        shape = MaterialTheme.shapes.medium.copy(
+                            topStart = CornerSize(screenPadding),
+                            topEnd = CornerSize(screenPadding),
+                            bottomEnd = CornerSize(0.dp),
+                            bottomStart = CornerSize(0.dp)
+                        ),
                         modifier = Modifier
                             .fillMaxHeight()
                             .fillMaxWidth(0.3f)
+                            .background(color = Color.Transparent)
                     ) {
-                        sidePanel.invoke()
+                        sidePanel.invoke(rightSwipeableState)
                     }
 
                     // Left Panel
+                    Spacer(modifier = Modifier
+                        .fillMaxHeight()
+                        .width(10.dp))
                     Card(
                         elevation = 2.dp,
                         shape = MaterialTheme.shapes.medium.copy(
@@ -172,7 +186,7 @@ fun PrimerPanelContainer(
                             .fillMaxWidth(1f)
                             .background(color = Color.Transparent)
                     ) {
-                        leftPanel.invoke()
+                        leftPanel.invoke(rightSwipeableState)
                     }
                 }
             }
@@ -205,9 +219,17 @@ fun PrimerPanelContainer(
                         .padding(top = centerScreenPadding)
                         .background(color = Color.Transparent)
                 ) {
-                    centerPanel.invoke()
+                    centerPanel.invoke(rightSwipeableState)
                 }
             }
         }
     }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+suspend fun SwipeableState<CenterScreenState>.navigateTo(
+    screen: CenterScreenState
+) {
+    val state = this
+    state.animateTo(screen)
 }
