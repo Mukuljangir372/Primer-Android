@@ -18,7 +18,7 @@ object DashboardNav {
     sealed class NavScreen(val route: String) {
         fun createRoute(root: Screen) = "${root.route}/$route"
 
-        object ChatList : NavScreen(route = "chatList")
+        object Server : NavScreen(route = "server")
         object FriendList : NavScreen(route = "friendList")
         object FileList : NavScreen(route = "fileList")
         object NotificationList : NavScreen(route = "notificationList")
@@ -27,7 +27,7 @@ object DashboardNav {
 
     fun addAtTopLevel(
         graph: NavGraphBuilder,
-        chatListScreen: @Composable () -> Unit,
+        serverScreen: @Composable () -> Unit,
         friendListScreen: @Composable () -> Unit,
         fileListScreen: @Composable () -> Unit,
         notificationListScreen: @Composable () -> Unit,
@@ -35,10 +35,10 @@ object DashboardNav {
     ) {
         graph.apply {
             navigation(
-                route = root.route, startDestination = NavScreen.ChatList.createRoute(root)
+                route = root.route, startDestination = NavScreen.Server.createRoute(root)
             ) {
-                composable(NavScreen.ChatList.createRoute(root)) {
-                    chatListScreen.invoke()
+                composable(NavScreen.Server.createRoute(root)) {
+                    serverScreen.invoke()
                 }
                 composable(NavScreen.FriendList.createRoute(root)) {
                     friendListScreen.invoke()
@@ -66,7 +66,7 @@ object DashboardNav {
         }
         when (id) {
             DashboardScreenUtils.BottomNav.chat.id -> {
-                controller.navigate(NavScreen.ChatList.createRoute(root)) {
+                controller.navigate(NavScreen.Server.createRoute(root)) {
                     popStack()
                 }
             }

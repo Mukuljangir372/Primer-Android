@@ -26,7 +26,7 @@ class FlavorActivity : ComponentActivity() {
                     NavHost(
                         navController = navController, startDestination = DashboardNav.root.route
                     ) {
-                        DashboardNav.addAtTopLevel(graph = this, chatListScreen = {
+                        DashboardNav.addAtTopLevel(graph = this, serverScreen = {
                             PrimaryServerScreen()
                         }, friendListScreen = {
                             FriendListScreen()
