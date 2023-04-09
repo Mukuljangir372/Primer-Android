@@ -1,6 +1,11 @@
 # Primer-Android
 💬 Primer is a private, secure and end-to-end communication application.
 
+<img align="left" src='docs/login-1.jpeg' width='200'>
+<img align="left" src='docs/login-2.jpeg' width='200'>
+<img src='docs/login-3.jpeg' width='200'>
+
+
 ## Teck Stack
 ✅ Kotlin Coroutines\
 ✅ Jetpack Compose\
