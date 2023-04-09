@@ -149,6 +149,7 @@ fun PrimerPanelContainer(
                 Row(
                     modifier = Modifier.fillMaxSize()
                 ) {
+                    // Side Panel
                     Column(
                         modifier = Modifier
                             .fillMaxHeight()
@@ -157,6 +158,8 @@ fun PrimerPanelContainer(
                     ) {
                         sidePanel.invoke()
                     }
+
+                    // Left Panel
                     Card(
                         elevation = 2.dp,
                         shape = MaterialTheme.shapes.medium.copy(
