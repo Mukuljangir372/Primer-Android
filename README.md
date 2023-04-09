@@ -3,8 +3,8 @@
 
 <img align="left" src='docs/login-1.jpeg' width='100'>
 <img align="left" src='docs/login-2.jpeg' width='100'>
-<img src='docs/login-3.jpeg' width='100'>
-<img src='docs/dashboard-1.jpeg' width='100'>
+<img align="left" src='docs/login-3.jpeg' width='100'>
+<img  src='docs/dashboard-1.jpeg' width='100'>
 
 
 ## Teck Stack
