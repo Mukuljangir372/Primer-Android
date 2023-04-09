@@ -13,7 +13,7 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.mu.jan.primer.common.ui.compose.PrimerTopAppBar
+import com.mu.jan.primer.common.ui.compose.PrimaryTopAppBar
 import com.mukul.jan.primer.base.ui.Dimens
 import com.mukul.jan.primer.base.ui.R
 import com.mukul.jan.primer.base.ui.design.PrimerTheme
@@ -29,7 +29,8 @@ private fun ChannelListScreenContent(
     onInfoClick: () -> Unit,
 ) {
     Scaffold(modifier = Modifier.fillMaxSize(), scaffoldState = scaffoldState, topBar = {
-        PrimerTopAppBar(modifier = Modifier.fillMaxWidth(),
+        PrimaryTopAppBar(
+            modifier = Modifier.fillMaxWidth(),
             title = {
                 Text(
                     text = stringResource(id = R.string.server),
@@ -68,10 +69,7 @@ private fun ChannelGroupList(
         verticalArrangement = Arrangement.spacedBy(Dimens.ONE.dp),
         state = rememberLazyListState(),
     ) {
-        item {
-            ChannelGroupListItem()
-        }
-        item {
+        items(50) {
             ChannelGroupListItem()
         }
     }
@@ -104,10 +102,6 @@ private fun ChannelGroupListItem() {
             )
         }
 
-        // TODO handle in loop
-        ChannelListItem(modifier = Modifier
-            .fillMaxWidth()
-            .padding(start = Dimens.ONE.dp))
         ChannelListItem(modifier = Modifier
             .fillMaxWidth()
             .padding(start = Dimens.ONE.dp))
@@ -129,7 +123,7 @@ private fun ChannelListItem(modifier: Modifier) {
         Text(
             modifier = Modifier.fillMaxWidth(),
             text = "mobile-apps",
-            style = MaterialTheme.typography.subtitle1,
+            style = MaterialTheme.typography.body1,
         )
     }
 }

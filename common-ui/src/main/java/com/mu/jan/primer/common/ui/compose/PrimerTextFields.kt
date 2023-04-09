@@ -1,5 +1,6 @@
 package com.mu.jan.primer.common.ui.compose
 
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
@@ -39,7 +40,7 @@ fun PrimaryTextField(
             disabledLabelColor = MaterialTheme.colors.primary,
             disabledTextColor = LocalContentColor.current
         ),
-        shape = RoundedCornerShape(Dimens.HALF.dp),
+        shape = RoundedCornerShape(Dimens.ONE.dp),
         keyboardOptions = keyboardOptions,
         visualTransformation = visualTransformation,
         leadingIcon = leadingIcon,
@@ -51,14 +52,27 @@ fun PrimaryTextField(
 @Composable
 private fun PrimaryTextFieldPreview() {
     PrimerTheme(darkTheme = false) {
-        PrimaryTextField(
-            modifier = Modifier,
+        PrimaryTextField(modifier = Modifier,
             value = "Value",
             onValueChange = {},
             enabled = true,
             label = {
                 Text(text = "Label")
-            }
-        )
+            })
     }
+}
+
+@Composable
+fun ChatTextField(
+    modifier: Modifier, value: String, onValueChange: (String) -> Unit
+) {
+    TextField(
+        modifier = modifier, value = value, onValueChange = onValueChange
+    )
+}
+
+@Preview
+@Composable
+private fun ChatTextFieldPreview() {
+    ChatTextField(modifier = Modifier.fillMaxWidth(), value = "", onValueChange = {})
 }

@@ -1,18 +1,16 @@
 package com.mukul.jan.primer.feature.server.list.chat
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import com.mu.jan.primer.common.ui.compose.PrimerTopAppBar
+import com.mu.jan.primer.common.ui.compose.PrimaryTopAppBar
 import com.mukul.jan.primer.base.ui.R
 import com.mukul.jan.primer.base.ui.design.PrimerTheme
 
@@ -29,7 +27,7 @@ private fun ChatScreenContent(
     onBackPress: () -> Unit,
 ) {
     Scaffold(modifier = Modifier.fillMaxSize(), scaffoldState = scaffoldState, topBar = {
-        PrimerTopAppBar(
+        PrimaryTopAppBar(
             modifier = Modifier.fillMaxWidth(),
             title = {
                 Text(
@@ -43,7 +41,9 @@ private fun ChatScreenContent(
         )
     }) { innerPadding ->
         Column(
-            modifier = Modifier.padding(innerPadding)
+            modifier = Modifier.padding(innerPadding),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
         }
