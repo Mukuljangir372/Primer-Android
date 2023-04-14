@@ -24,7 +24,7 @@
 We encourage you to participate in this open source project. We love Pull Requests, Bug Reports, ideas, (security) code reviews or any other kind of positive contribution.
 
 ### Step 1. Fork & Clone
-First, just fork it in your account. Then, run this command in your terminal to clone.\
+First, just fork it in your account. Then, run this command in your terminal to clone.
 ```groovy
 git clone https://github.com/<username>/Primer-Android.git
 ```
